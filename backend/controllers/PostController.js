@@ -88,3 +88,14 @@ exports.post_getById = async (req, res) =>{
         res.send({message: "Id does not exists."})
     }
 }
+
+exports.post_getByCategory = async (req, res) =>{
+    const { body } = req.params;
+    const data = await Post.find({'_category': {$in: body._category}}); // Busca posts basándonos en el id de una categoría
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Id does not exists."})
+    }
+}
