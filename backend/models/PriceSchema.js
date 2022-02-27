@@ -18,6 +18,11 @@ const PriceSchema = new mongoose.Schema({
         maxlength: 200, // Máximo de caracteres.
         required: true
     },
+    _post:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"posts",
+        required: true
+    },
     created_at:{
         type: Date,
         required: false

@@ -32,10 +32,10 @@ exports.rate_register = async (req, res) =>{
 
             res.send(rate); // Regreso el objeto creado.
         }else{
-            res.send({message: "The user/sender does not exists"});
+            res.send({message: "The post does not exists"});
         }
     }else{
-        res.send({message: "The user/receiver does not exists"});
+        res.send({message: "The user does not exists"});
     }
 }
 
@@ -48,8 +48,8 @@ exports.rate_update = async (req, res) => {
     const postdb = await Post.findById(body._post);
     // Esto me sirve para revisar si existe un post con el id que recibo
 
-    if(userdb){
-        if(postdb){
+    if(!userdb){
+        if(!postdb){
             try{
                 const ratedb = await Rate.findById(id); // Hago una consulta basándome en el id. 
 
@@ -70,10 +70,10 @@ exports.rate_update = async (req, res) => {
                 res.send(err);
             }
         }else{
-            res.send({message: "The user/sender does not exists"});
+            res.send({message: "You can not edit the user"});
         }
     }else{
-        res.send({message: "The user/receiver does not exists"});
+        res.send({message: "You can not edit the post"});
     }
 }
 

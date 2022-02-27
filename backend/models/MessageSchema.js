@@ -8,12 +8,10 @@ const MessageSchema = new mongoose.Schema({
     },
     _sender:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"users",
         required: true
     }],
     _receiver:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"users",
         required: true
     },
     created_at:{

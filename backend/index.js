@@ -34,8 +34,8 @@ app.use('/api', purchase_router);
 app.use('/api', message_router);
 
 
-app.get("/api/holamundo", async (req, res) =>{
-    const { query } = req; // destructuring: descompone una variable en varias partes.
-    console.log(query.param1); // con esto le decimos que imprima el parámetro 1.
-    res.send({message: "Mi primer API REST"});
-});
+// app.get("/api/holamundo", async (req, res) =>{
+//     const { query } = req; // destructuring: descompone una variable en varias partes.
+//     console.log(query.param1); // con esto le decimos que imprima el parámetro 1.
+//     res.send({message: "Mi primer API REST"});
+// });

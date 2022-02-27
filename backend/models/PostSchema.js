@@ -10,18 +10,14 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true
     }],
-    _price:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"prices",
-        required: true
-    }],
     _user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"users",
+        ref:"vendors",
         required: true
     },
     _category:{
         type: mongoose.Schema.Types.ObjectId,
+        ref:"categories",
         required: true
     },
     created_at:{

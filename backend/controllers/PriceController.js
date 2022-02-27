@@ -1,7 +1,7 @@
 const Post = require("../models/PostSchema");
 const Price = require("../models/PriceSchema"); // Traigo mi modelo User.
 
-// Obtener todos los usuarios 
+// Obtener todos los posts 
 exports.price_getall = async (req, res) =>{
     const data = await Price.find();
 
@@ -12,9 +12,9 @@ exports.price_getall = async (req, res) =>{
 exports.price_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
-    const postdb = await Post.findById(body._post); // Valio si existe un usuario con el id recibido
+    const postdb = await Post.findById(body._post); // Valio si existe un post con el id recibido
 
-    if(postdb){ // Si el usuario existe, entonces creo el post 
+    if(postdb){ // Si el post existe, entonces creo el post 
         // Validación de información 
         let newPrice = new Price(body); // Creo un objeto tipo post basado en mi modelo User.
         await newPrice
@@ -23,7 +23,7 @@ exports.price_register = async (req, res) =>{
         .catch((err) => {
             console.error("An error in the Post register has occurred.", err);
             res.send(err.errors);
-        }); // Aquí guardo el nuevo usuario.
+        }); // Aquí guardo el nuevo post.
 
         res.send(newPrice); // Regreso el objeto creado.
     }else{
@@ -36,9 +36,9 @@ exports.price_update = async (req, res) => {
     const { id } = req.params; // Los params son los que se envían en el URL.
     const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
 
-    const postdb = await body._post; // Valio si mandé un usuario como parámetro
+    const postdb = await body._post; // Valio si mandé un post como parámetro
 
-    if(!postdb){ // Si no mandé un usuario, entonces hago un update, debido a que no me interesa cambiar el id del post al que pertenece el precio.
+    if(!postdb){ // Si no mandé un post, entonces hago un update, debido a que no me interesa cambiar el id del post al que pertenece el precio.
     try{
         const pricedb = await Price.findById(id); // Hago una consulta basándome en el id. 
 
