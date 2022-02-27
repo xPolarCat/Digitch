@@ -1,13 +1,13 @@
 const Vendor = require("../models/VendorSchema"); // Traigo mi modelo vendor.
 
-// Obtener todos los usuarios 
+// Obtener todos los vendedores 
 exports.vendor_getall = async (req, res) =>{
     const data = await Vendor.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar vendedores 
 exports.vendor_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
@@ -20,7 +20,7 @@ exports.vendor_register = async (req, res) =>{
     .catch((err) => {
         console.error("An error in the Vendor register has occurred.", err)
         res.send(err.errors);
-    }); // Aquí guardo el nuevo usuario.
+    }); // Aquí guardo el nuevo vendedor.
 
     res.send(newVendor); // Regreso el objeto creado.
 }

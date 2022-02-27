@@ -1,7 +1,7 @@
 const Post = require("../models/PostSchema");
-const Price = require("../models/PriceSchema"); // Traigo mi modelo User.
+const Price = require("../models/PriceSchema"); // Traigo mi modelo Price.
 
-// Obtener todos los posts 
+// Obtener todos los precios 
 exports.price_getall = async (req, res) =>{
     const data = await Price.find();
 
@@ -16,14 +16,14 @@ exports.price_register = async (req, res) =>{
 
     if(postdb){ // Si el post existe, entonces creo el post 
         // Validación de información 
-        let newPrice = new Price(body); // Creo un objeto tipo post basado en mi modelo User.
+        let newPrice = new Price(body); // Creo un objeto tipo Price basado en mi modelo Price.
         await newPrice
         .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
         .then((newPrice) => console.log("New post succesfully registered!", newPrice))
         .catch((err) => {
             console.error("An error in the Post register has occurred.", err);
             res.send(err.errors);
-        }); // Aquí guardo el nuevo post.
+        }); // Aquí guardo el nuevo precio.
 
         res.send(newPrice); // Regreso el objeto creado.
     }else{

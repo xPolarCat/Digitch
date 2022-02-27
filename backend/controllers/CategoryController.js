@@ -1,26 +1,26 @@
-const Category = require("../models/CategorySchema"); // Traigo mi modelo User.
+const Category = require("../models/CategorySchema"); // Traigo mi modelo Category.
 
-// Obtener todos los usuarios 
+// Obtener todas las categorías 
 exports.category_getall = async (req, res) =>{
-    const data = await User.find();
+    const data = await Category.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar categorías 
 exports.category_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
     // Validación de información 
-    let newCategory = new Category(body); // Creo un objeto tipo User basado en mi modelo User.
+    let newCategory = new Category(body); // Creo un objeto tipo Category basado en mi modelo Category.
 
     await newCategory
-    .save() // si newUser es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+    .save() // si newCategory es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
     .then((newCategory) => console.log("New user succesfully registered!", newCategory))
     .catch((err) => {
         console.error("An error in the User register has occurred.", err)
         res.send(err.errors);
-    }); // Aquí guardo el nuevo usuario.
+    }); // Aquí guardo la nueva categoría.
 
     res.send(newCategory); // Regreso el objeto creado.
 }
@@ -35,7 +35,7 @@ exports.category_update = async (req, res) => {
 
         if(categorydb){
             // Actualizar el contenido de mi fila.
-            const data = await User.findOneAndUpdate(  
+            const data = await Category.findOneAndUpdate(  
             // El id en mi base de datos se guarda con un _
                 {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
                 body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
@@ -67,7 +67,7 @@ exports.category_delete = async (req, res) => {
 exports.category_getById = async (req, res) =>{
     const { id } = req.params;
     // Método optimizado para buscar por ids.
-    const data = await User.findById(id); // Encuentra el primer registro que coincide con la condición. 
+    const data = await Category.findById(id); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
 
     if(data){

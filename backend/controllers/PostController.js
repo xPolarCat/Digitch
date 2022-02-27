@@ -1,7 +1,7 @@
-const Post = require("../models/PostSchema"); // Traigo mi modelo User.
+const Post = require("../models/PostSchema"); // Traigo mi modelo Post.
 const Vendor = require("../models/VendorSchema");
 
-// Obtener todos los usuarios 
+// Obtener todos los posts 
 exports.post_getall = async (req, res) =>{
     const data = await Post.find();
 
@@ -16,14 +16,14 @@ exports.post_register = async (req, res) =>{
 
     if(userdb){ // Si el usuario existe, entonces creo el post 
         // Validación de información 
-        let newPost = new Post(body); // Creo un objeto tipo post basado en mi modelo User.
+        let newPost = new Post(body); // Creo un objeto tipo post basado en mi modelo post.
         await newPost
         .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
         .then((newPost) => console.log("New post succesfully registered!", newPost))
         .catch((err) => {
             console.error("An error in the Post register has occurred.", err);
             res.send(err.errors);
-        }); // Aquí guardo el nuevo usuario.
+        }); // Aquí guardo el nuevo post.
 
         res.send(newPost); // Regreso el objeto creado.
     }else{

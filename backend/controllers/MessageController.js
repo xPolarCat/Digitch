@@ -1,14 +1,16 @@
 const Message = require("../models/MessageSchema");
+const User = require("../models/UserSchema");
+const Post = require("../models/PostSchema");
 
 
-// Obtener todos los usuarios 
+// Obtener todos los mensajes 
 exports.message_getall = async (req, res) =>{
     const data = await Message.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar mensajes 
 exports.message_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
@@ -19,15 +21,15 @@ exports.message_register = async (req, res) =>{
     if(senderdb){
         if(receiverdb){
             // Validación de información 
-            let message = new Message(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
+            let message = new Message(body); // Creo un objeto tipo message basado en mi modelo Message.
 
             await message
-            .save() // si newComment es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+            .save() // si message es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
             .then((message) => console.log("New message succesfully registered!", message))
             .catch((err) => {
                 console.error("An error in the message register has occurred.", err)
                 res.send(err.errors);
-            }); // Aquí guardo el nuevo usuario.
+            }); // Aquí guardo el nuevo mensaje.
 
             res.send(message); // Regreso el objeto creado.
         }else{

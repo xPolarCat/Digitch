@@ -2,14 +2,14 @@ const Post = require('../models/PostSchema');
 const Rate = require('../models/RateSchema');
 const User = require('../models/UserSchema');
 
-// Obtener todos los usuarios 
+// Obtener todas las calificaciones 
 exports.rate_getall = async (req, res) =>{
     const data = await Rate.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar calificaciones 
 exports.rate_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
@@ -20,15 +20,15 @@ exports.rate_register = async (req, res) =>{
     if(userdb){
         if(postdb){
             // Validación de información 
-            let rate = new Rate(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
+            let rate = new Rate(body); // Creo un objeto tipo Rate basado en mi modelo Rate.
 
             await rate
-            .save() // si newComment es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+            .save() // si rate es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
             .then((rate) => console.log("New message succesfully registered!", rate))
             .catch((err) => {
                 console.error("An error in the message register has occurred.", err)
                 res.send(err.errors);
-            }); // Aquí guardo el nuevo usuario.
+            }); // Aquí guardo la nueva calificación.
 
             res.send(rate); // Regreso el objeto creado.
         }else{

@@ -1,16 +1,16 @@
-const Comment = require("../models/CommentSchema"); // Traigo mi modelo User.
+const Comment = require("../models/CommentSchema"); // Traigo mi modelo Comment.
 const User = require("../models/UserSchema");
 const Post = require("../models/PostSchema");
 const { post } = require("../routes/UserRoutes");
 
-// Obtener todos los usuarios 
+// Obtener todos los comentarios 
 exports.comment_getall = async (req, res) =>{
     const data = await Comment.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar comentarios 
 exports.comment_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 

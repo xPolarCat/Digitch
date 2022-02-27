@@ -3,33 +3,33 @@ const User = require("../models/UserSchema");
 const Vendor = require("../models/VendorSchema");
 
 
-// Obtener todos los usuarios 
+// Obtener todos los vendedores favoritos 
 exports.favorite_getall = async (req, res) =>{
     const data = await Favorite.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar vendedores favoritos 
 exports.favorite_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
     const userdb = await User.findById(body._sender); // Esto me sirve para revisar si existe un usuario con el id que recibo
     const favoritedb = await Vendor.findById(body._receiver);
-    // Esto me sirve para revisar si existe un post con el id que recibo
+    // Esto me sirve para revisar si existe un vendedor con el id que recibo
 
     if(userdb){
         if(favoritedb){
             // Validación de información 
-            let favorite = new Favorite(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
+            let favorite = new Favorite(body); // Creo un objeto tipo Favorite basado en mi modelo Favorite.
 
             await favorite
-            .save() // si newComment es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+            .save() // si favorite es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
             .then((favorite) => console.log("New favorite succesfully registered!", favorite))
             .catch((err) => {
                 console.error("An error in the favorite register has occurred.", err)
                 res.send(err.errors);
-            }); // Aquí guardo el nuevo usuario.
+            }); // Aquí guardo el nuevo vendedor favorito.
 
             res.send(favorite); // Regreso el objeto creado.
         }else{

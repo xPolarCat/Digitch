@@ -2,14 +2,14 @@ const Post = require('../models/PostSchema');
 const Purchase = require('../models/PurchaseSchema');
 const User = require('../models/UserSchema');
 
-// Obtener todos los usuarios 
+// Obtener todas las compras 
 exports.purchase_getall = async (req, res) =>{
-    const data = await Message.find();
+    const data = await Purchase.find();
 
     res.send(data);
 }
 
-// Mi método para registrar usuarios 
+// Mi método para registrar compras 
 exports.purchase_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
@@ -20,7 +20,7 @@ exports.purchase_register = async (req, res) =>{
     if(userdb){
         if(postdb){
             // Validación de información 
-            let purchase = new Purchase(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
+            let purchase = new Purchase(body); // Creo un objeto tipo Purchase basado en mi modelo Purchase.
 
             await purchase
             .save() // si newComment es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
@@ -51,11 +51,11 @@ exports.purchase_update = async (req, res) => {
     if(userdb){
         if(postdb){
             try{
-                const messagedb = await Message.findById(id); // Hago una consulta basándome en el id. 
+                const messagedb = await Purchase.findById(id); // Hago una consulta basándome en el id. 
 
                 if(messagedb){
                     // Actualizar el contenido de mi fila.
-                    const data = await Message.findOneAndUpdate(  
+                    const data = await Purchase.findOneAndUpdate(  
                     // El id en mi base de datos se guarda con un _
                         {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
                         body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
