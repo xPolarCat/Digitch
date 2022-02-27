@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const passwordValidator = require('password-validator');
+//const passwordValidator = require('password-validator');
 
 // // Validación de password 
 // var password = new passwordValidator();
@@ -14,11 +14,6 @@ const passwordValidator = require('password-validator');
 
 // Mi esquema recibe como parámetro los atributos que tendrá. Este hace referencia a mi tabla Users de la DB
 const UserSchema = new mongoose.Schema({
-    id: {
-        type: mongoose.Types.ObjectId, // Mi id va a ser tipo ObjectId 
-        default: new mongoose.Types.ObjectId(), // Genero un ObjectId como valor default.
-        unique: true
-    },
     name:{  // Podemos poner las características de cada atributo de la siguiente manera y funcionan como validaciones.
         type: String, // Tipo de dato.
         required: true, // Es requerido. 
@@ -40,11 +35,13 @@ const UserSchema = new mongoose.Schema({
             message: '{VALUE} is not a valid email!'
         }
     },
-
     password:{
-        type: String
+        type: String,
+        required: true,
+        minlength: 8, // Mínimo de caracteres. 
+        maxlength: 30, // Máximo de caracteres.
+        trim: true, // Sin espacios en blanco.
     },
-
     phone:{
         type: String,
         trim: true,
@@ -55,9 +52,24 @@ const UserSchema = new mongoose.Schema({
           message: '{VALUE} is not a valid 10 digit number!'
         }
     },
-
+    photo:{
+        type: Buffer,
+        required: false
+    },
+    created_at:{
+        type: Date,
+        required: false
+    },
+    updated_at:{
+        type:Date, 
+        required: false
+    },
+    deleted_at:{
+        type:Date, 
+        required: false
+    },
 }); 
 
 // Este es el modelo, el cual tendrá las funcionalidades que requiero. 
-const User = mongoose.model("user", UserSchema);  // El primer parámetro "user" es cómo quiero que se llame el collection en mi BD
+const User = mongoose.model("users", UserSchema);  // El primer parámetro "user" es cómo quiero que se llame el collection en mi BD
 module.exports = User; // Exporto mi modelo User
