@@ -76,3 +76,16 @@ exports.user_getById = async (req, res) =>{
         res.send({message: "Id does not exists."})
     }
 }
+
+exports.user_login = async (req, res) =>{
+    const { body } = req;
+    // Método optimizado para buscar por ids.
+    const data = await User.find({email: body.email, password: body.password}); // Encuentra el primer registro que coincide con la condición. 
+    //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "incorrect user or password."})
+    }
+}

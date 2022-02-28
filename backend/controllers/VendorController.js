@@ -63,7 +63,6 @@ exports.vendor_delete = async (req, res) => {
     }
 }
 
-
 exports.vendor_getById = async (req, res) =>{
     const { id } = req.params;
     // Método optimizado para buscar por ids.

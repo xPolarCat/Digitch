@@ -102,3 +102,17 @@ exports.message_getById = async (req, res) =>{
         res.send({message: "Message does not exists."})
     }
 }
+
+exports.message_getByUsers = async (req, res) =>{
+    const { users } = req.params;
+
+    const data = await Message.find( 
+        { $or: [{_receiver: users._receiver}, {_sender: users._sender}]}, // Donde mi usuario 1 es el que envía y el 2 el que recibe 
+        { $or: [{_receiver: users._sender}, {_sender: users._receiver}]}) // Donde mi usuario 2 es el que envía y el 2 el que recibe
+    
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Message does not exists."})
+    }
+}

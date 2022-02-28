@@ -88,3 +88,16 @@ exports.price_getById = async (req, res) =>{
         res.send({message: "Price does not exists."})
     }
 }
+
+exports.price_getByPost = async (req, res) =>{
+    const { post } = req.params;
+    // Método optimizado para buscar por ids.
+    const data = await Price.find({_post: post}); // Encuentra el primer registro que coincide con la condición. 
+    //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Comments do not exist in this post."})
+    }
+}

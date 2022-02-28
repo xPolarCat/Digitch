@@ -3,7 +3,7 @@ const Vendor = require("../models/VendorSchema");
 
 // Obtener todos los posts 
 exports.post_getall = async (req, res) =>{
-    const data = await Post.find({ sort:{created_at: -1} });
+    const data = await Post.find({sort:{created_at: -1} });
 
     res.send(data);
 }
