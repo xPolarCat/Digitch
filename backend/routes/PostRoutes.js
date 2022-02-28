@@ -9,4 +9,5 @@ router.put("/post/:id", PostController.post_update); // Cuando vamos a mandar un
 router.delete("/post/:id", PostController.post_delete); // Ruta para borrar un post.
 router.get("/post/:id", PostController.post_getById); // Búsqueda por Id
 router.get("/posts/category/:id", PostController.post_getByCategory)
+router.get("/posts/search/:name", PostController.post_getByName)
 module.exports = router;

@@ -1,10 +1,17 @@
 const mongoose = require('mongoose');
 
 const PostSchema = new mongoose.Schema({
+    name:{
+        type: String,
+        minlength: 20, // Mínimo de caracteres. 
+        maxlength: 150, // Máximo de caracteres.
+        required: true
+    },
     content:{
         type: String,
         minlength: 150, // Mínimo de caracteres. 
         maxlength: 500, // Máximo de caracteres.
+        required: true
     },
     images:[{
         type: String,

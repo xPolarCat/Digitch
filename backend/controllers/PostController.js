@@ -3,7 +3,7 @@ const Vendor = require("../models/VendorSchema");
 
 // Obtener todos los posts 
 exports.post_getall = async (req, res) =>{
-    const data = await Post.find();
+    const data = await Post.find({ sort:{created_at: -1} });
 
     res.send(data);
 }
@@ -16,7 +16,7 @@ exports.post_register = async (req, res) =>{
 
     if(userdb){ // Si el usuario existe, entonces creo el post 
         // Validación de información 
-        let newPost = new Post(body); // Creo un objeto tipo post basado en mi modelo post.
+        let newPost = new Post({created_at: Date.now(), body}); // Creo un objeto tipo post basado en mi modelo post.
         await newPost
         .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
         .then((newPost) => console.log("New post succesfully registered!", newPost))
@@ -91,7 +91,18 @@ exports.post_getById = async (req, res) =>{
 
 exports.post_getByCategory = async (req, res) =>{
     const { category } = req.params;
-    const data = await Post.find({'_category': {$in: category}}); // Busca posts basándonos en el id de una categoría
+    const data = await Post.find({'_category': {$in: category} , sort:{created_at: -1}}); // Busca posts basándonos en el id de una categoría
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Category does not exists."})
+    }
+}
+
+exports.post_getByName = async (req, res) =>{
+    const { name } = req.params;
+    const data = await Post.find({name: { $regex: '.*' + name + '.*' }, sort:{created_at: -1} }); // Filtra por nombres de post similares al escrito
 
     if(data){
         res.send(data);
