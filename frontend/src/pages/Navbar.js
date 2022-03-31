@@ -121,6 +121,7 @@ export default function Navbar() {
   const ColorStyle= {backgroundColor:"#001B2E"}
   const ColorStyle2= {backgroundColor:"#294C60"}
   const ColorStyle3= {backgroundColor:"#ADB6C4", height:"55px"}
+  const Categories={color:"#636363"}
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" style={ColorStyle}>
@@ -159,27 +160,27 @@ export default function Navbar() {
         <Toolbar>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Gráficas y Diseño</h6>
+          <Button variant="text" style={Categories}>Gráficas y Diseño</Button>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Animación</h6>
+          <Button variant="text" style={Categories}>Animación</Button>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Video</h6>
+          <Button variant="text" style={Categories}>Video</Button>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Programación</h6>
+          <Button variant="text" style={Categories}>Programación</Button>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Produccion Audivisual</h6>
+          <Button variant="text" style={Categories}>Producción Audiovisual</Button>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Base de Datos</h6>
+          <Button variant="text" style={Categories}>Base de Datos</Button>
           </Box>
         </Toolbar>
       </AppBar>
