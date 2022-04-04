@@ -1,18 +1,20 @@
-import logo from './logo.svg';
+import React, {Fragment} from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-import {Fragment} from "react";
-import Navbar from './pages/Navbar';
-import Footer from './pages/Footer';
-import Payment from './pages/Payment.js'
-
+import Login from './pages/login';
+import Register from './pages/register';
 function App() {
   return (
-   <Fragment>
-     <Navbar/>
-     <Payment/>
-     <Footer/>
-   </Fragment>
+    <Fragment>
+      <Routes>
+        <Route exact path="/login" element={<Login />}/>
+        <Route exact path="/register" element={<Register />}/>
+      </Routes>
+    </Fragment>
+  // <div className="App">
+  // <Login />
+  // </div>
   );
 }
 
