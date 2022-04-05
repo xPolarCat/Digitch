@@ -62,11 +62,13 @@ export default function Payment () {
 
     const ImagesStyle={
         width:"150px",
-        height:"70px",
+        height:"80px",
         borderRadius:"10px"
     }
 
-
+    const PaddingStyle={
+        padding :10
+    }
     return (
 
     <Grid container style={BackgroundStyle}>
@@ -94,8 +96,9 @@ export default function Payment () {
                     <Grid item xs={3.5} style={GridStyle}>
                     <Container maxWidth="sm" style={BorderStyle}>
                     <Toolbar>
+                    <Box spacing={1} style={PaddingStyle}>
                     <img src="https://www.latevaweb.com/diseno-web/programacion-web-para-cuando-el-html5.jpg" style={ImagesStyle}/>
-                    <Box sx={{ flexGrow: .3 }} />
+                    </Box>
                     <h4 style={TextStyle}>Voy a crear el diseño de tu pagina web.</h4>
                     </Toolbar>
                     </Container>
