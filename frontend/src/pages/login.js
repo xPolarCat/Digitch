@@ -32,7 +32,7 @@ const Login=()=>{
                     <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Iniciar sesión</Button>
 
                     <Typography style={loginTextStyle}> ¿Ya tienes una cuenta? 
-                        <Link href="#" style={registerStyle}>
+                        <Link href="/register" style={registerStyle}>
                             Regístrate
                     </Link>
                     </Typography>
