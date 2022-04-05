@@ -13,10 +13,7 @@ import Button from '@mui/material/Button';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.25),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
+  backgroundColor: "#FFC49B",
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: '100%',
@@ -26,18 +23,12 @@ const Search = styled('div')(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
+  backgroundColor: theme.palette.common.white,
+  height:"48px",
+  width:"300px",
+  borderBottomLeftRadius: "3px",
+  borderTopLeftRadius: "3px",
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -45,8 +36,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '35ch',
+      width: '20ch',
     },
+
   },
 }));
 
@@ -121,7 +113,7 @@ export default function Navbar() {
   const ColorStyle= {backgroundColor:"#001B2E"}
   const ColorStyle2= {backgroundColor:"#294C60"}
   const ColorStyle3= {backgroundColor:"#ADB6C4", height:"55px"}
-  const Categories={color:"#636363"}
+  const ColorStyle4= {color:"#EDEDED"}
   return (
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static" style={ColorStyle}>
@@ -131,7 +123,7 @@ export default function Navbar() {
           />
           <Search>
             <StyledInputBase
-              placeholder="Buscar un servicio"
+              placeholder="Busca un servicio"
               inputProps={{ 'aria-label': 'search' }}
             />
             <IconButton
@@ -144,11 +136,11 @@ export default function Navbar() {
           </Search>
           <Box sx={{ flexGrow: .4 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>VENDE TUS SERVICIOS</h6>
+            <h6 style={ColorStyle4}>VENDE TUS SERVICIOS</h6>
           </Box>
           <Box sx={{ flexGrow: .8 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>INICIA SESIÓN</h6>
+            <h6 style={ColorStyle4}>INICIA SESIÓN</h6>
           </Box>
           <Box sx={{ flexGrow: .05 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
@@ -160,27 +152,27 @@ export default function Navbar() {
         <Toolbar>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Gráficas y Diseño</Button>
+            <h6>Gráficas y Diseño</h6>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Animación</Button>
+            <h6>Animación</h6>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Video</Button>
+            <h6>Video</h6>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Programación</Button>
+            <h6>Programación</h6>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Producción Audiovisual</Button>
+            <h6>Produccion Audivisual</h6>
           </Box>
           <Box sx={{ flexGrow: .15 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="text" style={Categories}>Base de Datos</Button>
+            <h6>Base de Datos</h6>
           </Box>
         </Toolbar>
       </AppBar>

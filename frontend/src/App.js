@@ -1,20 +1,17 @@
 import React, {Fragment} from 'react';
-import { Routes, Route } from 'react-router-dom';
 import './App.css';
+import Navbar from './pages/Navbar';
+import Footer from './pages/Footer';
+import Payment from './pages/Payment';
+import Login from './pages/Login';
 
-import Login from './pages/login';
-import Register from './pages/register';
 function App() {
   return (
-    <Fragment>
-      <Routes>
-        <Route exact path="/login" element={<Login />}/>
-        <Route exact path="/register" element={<Register />}/>
-      </Routes>
-    </Fragment>
-  // <div className="App">
-  // <Login />
-  // </div>
+   <Fragment>
+     <Navbar/>
+     <Payment/>
+     <Footer/>
+   </Fragment>
   );
 }
 
