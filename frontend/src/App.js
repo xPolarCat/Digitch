@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import './App.css';
+import './index.css';
 import Navbar from './pages/Navbar';
 import Footer from './pages/Footer';
 import Payment from './pages/Payment';
