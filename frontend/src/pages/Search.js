@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react'
 import {Container, FormControl, InputLabel, Select, MenuItem} from '@mui/material'
-import Subnavbar from './components/Subnavbar'
-import CardServices from './components/CardServices'
+//import Subnavbar from '../Search/components/Subnavbar'
+import CardServices from '../components/Search/CardServices'
 import { AppBar, Grid, Pagination, Typography} from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
@@ -27,9 +27,9 @@ export default function CreateService() {
   return (
 
     <Grid  container spacing={0} style={background.style}>
-    <AppBar position="sticky">
+    {/* <AppBar position="sticky">
       <Subnavbar/>
-    </AppBar>
+    </AppBar> */}
     <Container>
       <div id="resultLegend">
           <Typography variant="h4" style={{padding: "10px", marginTop: "20px", color: "white" }}>
@@ -38,7 +38,7 @@ export default function CreateService() {
       </div>
       <div style={{marginTop: "30px", marginBottom: "30px"}}>
           <FormControl variant='filled' style={{width: "200px", marginRight: "20px", marginBottom: "30px"}} >
-          <InputLabel id="demo-simple-select-label" style={{color: "white"}}>Categoría</InputLabel>
+          <InputLabel id="demo-" style={{color: "white"}}>Categoría</InputLabel>
           <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -62,6 +62,7 @@ export default function CreateService() {
               value={age}
               label="Precios"
               onChange={handleChange}
+              style={{color:"white"}}
           >
               <MenuItem value={10}>Arte</MenuItem>
               <MenuItem value={20}>Programacion</MenuItem>

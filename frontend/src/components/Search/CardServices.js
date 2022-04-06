@@ -4,7 +4,6 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia"
 import CardContent from "@mui/material/CardContent";
 import {Typography, Avatar, CardHeader, CardActions, Button} from "@mui/material"; 
-import img from "./imagen.jpg";
 import StarIcon from '@mui/icons-material/Star';
 
 const useStyles = makeStyles({

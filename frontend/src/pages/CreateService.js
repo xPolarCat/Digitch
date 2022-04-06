@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { TextField, FormControl, Paper,  Box, Grid} from '@mui/material'
 import { makeStyles } from '@mui/styles';
-import CreateServiceForm from './components/CreateServiceForm';
+import CreateServiceForm from '../components/CreateService/CreateServiceForm';
 import { padding } from '@mui/system';
 
 const useStyles = makeStyles({
