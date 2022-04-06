@@ -6,6 +6,7 @@ import Footer from './pages/Footer';
 import Payment from './pages/Payment';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Chat from './pages/Chat';
 import { Routes, Route } from 'react-router-dom';
 
 
@@ -15,6 +16,7 @@ function App() {
      <Navbar/>
      <Routes>
         <Route exact path="/login" element={<Login/>}/>
+        <Route exact path="/Chat" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment" element={<Payment/>} />     
       </Routes>
