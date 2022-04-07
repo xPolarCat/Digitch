@@ -148,34 +148,7 @@ export default function Navbar() {
           </Box>
         </Toolbar>
       </AppBar>
-      <AppBar position="static" style={ColorStyle3}>
-        <Toolbar>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Gráficas y Diseño</h6>
-          </Box>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Animación</h6>
-          </Box>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Video</h6>
-          </Box>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Programación</h6>
-          </Box>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Produccion Audivisual</h6>
-          </Box>
-          <Box sx={{ flexGrow: .15 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6>Base de Datos</h6>
-          </Box>
-        </Toolbar>
-      </AppBar>
+      
       {renderMobileMenu}
       {renderMenu}
     </Box>
