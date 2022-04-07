@@ -1,29 +1,133 @@
-import React, {Component, Fragment} from 'react'
-import { Grid,Paper, Avatar, TextField, Button, Typography,Link } from '@material-ui/core'
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import PersonIcon from '@material-ui/icons/Person';
-import BackgroundImage from '../resources/login-background.jpg';
-//import { makeStyles } from "@material-ui/core/styles";
+import React,  {Fragment}  from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import ReactPlayer from 'react-player';
+import backgroundVideo from '../resources/HeroVideo.mp4';
+import {Grid} from '@material-ui/core';
+import Image from 'mui-image';
+import logo from '../resources/logo.png';
+import { shadows } from '@mui/system';
+const useStyles = makeStyles(theme => ({
+	root: {
+		width: '100%',
+		height: '100vh',
+		position: 'relative',
+		'& video': {
+			objectFit: 'cover',
+		},
+	},
+	overlay: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		width: '100%',
+		height: '100%',
+		backgroundColor: 'rgba(0, 0, 0, 0.5)',
+	},
+	title: {
+		paddingBottom: theme.spacing(4),
+	},
+}));
 
-//import FormControlLabel from '@material-ui/core/FormControlLabel';
-//import Checkbox from '@material-ui/core/Checkbox';
-const Home=()=>{
-    //opacity: 0.7
-    const backgroundStyle =  {minHeight:'100vh', backgroundColor: '#282c34', backgroundSize: 'cover'}
-    const homeStyle = {minHeight:'100vh', backgroundColor: '#202020'}
-    return(
-        <Fragment>
-            <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={backgroundStyle}> 
-                
-            </Grid>
-
-            <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={homeStyle}> 
-                
-            </Grid>
-        </Fragment>
-
-
-    )
+const Home = () => {
+	const classes = useStyles();
+    const btnstyle={backgroundColor: 'rgb(41, 76, 96, .8)'}
+    const boxesStyle = {color: 'white', 
+        backgroundColor: 'rgb(41, 76, 96, .6)', 
+        marginTop: '6vh',
+        marginLeft: '15px',
+        textAlign: 'center', 
+        borderRadius: '15px', 
+		height: '100%',
+		width: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		border: '1px solid black',
+		textAlign: 'center',
+        minHeight: '30vh'
 }
+    const secondSectionStyle = { justifyContent: 'center', minHeight: '50vh',  backgroundSize: 'cover'}
 
-export default Home
+    const thirdSectionStyle = { marginTop: '5vh'}
+	return (
+        <Fragment>
+		<section className={classes.root}>
+			<ReactPlayer
+				url={backgroundVideo}
+				playing
+				loop
+				muted
+				width="100%"
+				height="100%"
+			/>
+			<div className={classes.overlay}>
+				<Box
+					height="100%"
+					display="flex"
+					flexDirection="column"
+					justifyContent="center"
+					alignItems="center"
+					color="#fff"
+				>
+					<Typography variant="h3" component="h1" className={classes.title}>
+                        <Image  sx={{ boxShadow: 2 }} src={logo} />
+					</Typography>
+					<Button style={btnstyle} color="primary" variant="contained" size="large">
+						Descubre más
+					</Button>
+				</Box>
+			</div>
+		</section>
+	<Grid  style = {
+		{
+			backgroundColor: '#001B2E'
+		}
+	} >
+
+        {/* Acá puedes poner otra sección o como quieras */}
+	   <section  >
+	 <Grid container spacing = {0} style={secondSectionStyle} >
+	   <Grid style={boxesStyle} xs={9} sm={3} >
+		<Box
+		component = "img"
+		sx = {{width: 70,height: 70,}}
+		alt = "Icono1"
+		src = "https://cdn-icons-png.flaticon.com/512/15/15659.png" />
+	   <h3>Sobre nosotros</h3>
+	   <h5>Descubre más de nuestra historia</h5>
+	   </Grid>
+	   <Grid style={boxesStyle} xs={9} sm={3}>
+		<Box
+		component = 'img' 
+		sx = {{width: 70, height: 70}}
+		alt='Icono2'
+		src=''
+		/>
+		<h3>Supremacía</h3>
+	   </Grid>
+	   <Grid  style = {boxesStyle} xs={9} sm={3} >
+		<Box
+		component= 'img'
+		sx = {{width: 70, height: 70}}
+		alt= 'Icono3'
+		src=''
+		/>
+		<h3>Compra tus proyectos</h3>
+	   </Grid>
+			
+		</Grid>
+	   </section>
+
+	   <section style={thirdSectionStyle}>
+		< Image src = 'https://cdn.discordapp.com/attachments/703461155401760819/961487114673979412/back_5_final_1.png' />
+		   
+	   </section>
+	</Grid>
+        </Fragment>
+	);
+};
+
+export default Home;
