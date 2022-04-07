@@ -84,10 +84,6 @@ const theme = createTheme({
 
   }
 
-  const ColorStyle={
-      color:"#FFC49B"
-  }
-
     return (
         <Grid container style={BackgroundStyle}>       
         <ThemeProvider theme={theme}>
@@ -155,14 +151,14 @@ const theme = createTheme({
                 </table>
                 <Divider/>
                 <Grid container justifyContent="flex-start">
-                <IconButton aria-label="contact">
+                <IconButton aria-label="contact" href="/Chat">
                 <LocalPhoneIcon style={IconStyle2} />
                 <p style={TextStyle}>Contactar</p>
                 </IconButton>
                 <Box sx={{ flexGrow: .5 }} />
                 <Divider orientation="vertical" flexItem />
                 <Box sx={{ flexGrow: .3 }} />
-                <IconButton aria-label="buy">
+                <IconButton aria-label="buy" href="/payment">
                 <PaidOutlinedIcon style={IconStyle2} />
                 <p style={TextStyle}>Comprar</p>
                 </IconButton>
