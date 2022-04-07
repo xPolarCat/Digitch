@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ed-pudin/Digitch.git"
+    "url": "git+https://github.com/xPolarCat/Digitch.git"
   },
   "author": "Salvador Pazos",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ed-pudin/Digitch/issues"
+    "url": "https://github.com/xPolarCat/Digitchissues"
   },
-  "homepage": "https://github.com/ed-pudin/Digitch#readme",
+  "homepage": "https://github.com/xPolarCat/Digitch#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
