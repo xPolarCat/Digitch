@@ -52,6 +52,9 @@ const Home = () => {
     const secondSectionStyle = { justifyContent: 'center', minHeight: '50vh',  backgroundSize: 'cover'}
 
     const thirdSectionStyle = { marginTop: '5vh'}
+
+	const textStyle = {margin: '2vh', textAlign: 'justify', textJustify: 'inter-word'}
+
 	return (
         <Fragment>
 		<section className={classes.root}>
@@ -93,30 +96,32 @@ const Home = () => {
 	   <Grid style={boxesStyle} xs={9} sm={3} >
 		<Box
 		component = "img"
-		sx = {{width: 70,height: 70,}}
+		sx = {{width: 70,height: 70, marginTop: '1vh' }}
 		alt = "Icono1"
-		src = "https://cdn-icons-png.flaticon.com/512/15/15659.png" />
-	   <h3>Sobre nosotros</h3>
-	   <h5>Descubre más de nuestra historia</h5>
-	   </Grid>
-	   <Grid style={boxesStyle} xs={9} sm={3}>
+		src = "https://cdn-icons-png.flaticon.com/512/93/93618.png" />
+		<h3>Sitio web</h3>
+	   	<h4 style={textStyle}>Somos una página web especializada en servicios freelancer de nivel internacional con un enfoque en tecnologías multimedia.</h4>
+	   	</Grid>
+	   	<Grid style={boxesStyle} xs={9} sm={3}>
 		<Box
 		component = 'img' 
 		sx = {{width: 70, height: 70}}
 		alt='Icono2'
 		src=''
 		/>
-		<h3>Supremacía</h3>
-	   </Grid>
-	   <Grid  style = {boxesStyle} xs={9} sm={3} >
+		<h3>Servicios</h3>
+		<h4 style={textStyle}>Contrata a cualquiera de nuestros profesionales que más se acople a tus necesidades.</h4>
+	   	</Grid>
+	   	<Grid  style = {boxesStyle} xs={9} sm={3} >
 		<Box
 		component= 'img'
 		sx = {{width: 70, height: 70}}
 		alt= 'Icono3'
 		src=''
 		/>
-		<h3>Compra tus proyectos</h3>
-	   </Grid>
+		<h3>Trabajo</h3>
+		<h4 style={textStyle}>Regístrate como desarrollador freelancer en nuestra página y publica tu trabajo para que otros puedan contratarte.</h4>
+	   	</Grid>
 			
 		</Grid>
 	   </section>
