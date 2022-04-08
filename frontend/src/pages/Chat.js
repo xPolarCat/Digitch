@@ -12,14 +12,9 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import BackImage from "../images/backImageChat.jpg";
 import SendIcon from '@material-ui/icons/Send';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
-import Stack from "@mui/material/Stack";
 import { styled } from '@mui/material/styles';
-
-import Toolbar from '@mui/material/Toolbar';
 
 const useStyles = makeStyles({
   table: {

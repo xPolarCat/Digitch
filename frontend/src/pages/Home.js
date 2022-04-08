@@ -8,7 +8,9 @@ import backgroundVideo from '../resources/HeroVideo.mp4';
 import {Grid} from '@material-ui/core';
 import Image from 'mui-image';
 import logo from '../resources/logo.png';
-import { shadows } from '@mui/system';
+import webIcon from '../resources/web.png';
+import servicesIcon from '../resources/services.png';
+import workIcon from '../resources/work.png';
 const useStyles = makeStyles(theme => ({
 	root: {
 		width: '100%',
@@ -91,46 +93,46 @@ const Home = () => {
 	} >
 
         {/* Acá puedes poner otra sección o como quieras */}
-	   <section  >
-	 <Grid container spacing = {0} style={secondSectionStyle} >
-	   <Grid style={boxesStyle} xs={9} sm={3} >
-		<Box
-		component = "img"
-		sx = {{width: 70,height: 70, marginTop: '1vh' }}
-		alt = "Icono1"
-		src = "https://cdn-icons-png.flaticon.com/512/93/93618.png" />
-		<h3>Sitio web</h3>
-	   	<h4 style={textStyle}>Somos una página web especializada en servicios freelancer de nivel internacional con un enfoque en tecnologías multimedia.</h4>
-	   	</Grid>
-	   	<Grid style={boxesStyle} xs={9} sm={3}>
-		<Box
-		component = 'img' 
-		sx = {{width: 70, height: 70}}
-		alt='Icono2'
-		src=''
-		/>
-		<h3>Servicios</h3>
-		<h4 style={textStyle}>Contrata a cualquiera de nuestros profesionales que más se acople a tus necesidades.</h4>
-	   	</Grid>
-	   	<Grid  style = {boxesStyle} xs={9} sm={3} >
-		<Box
-		component= 'img'
-		sx = {{width: 70, height: 70}}
-		alt= 'Icono3'
-		src=''
-		/>
-		<h3>Trabajo</h3>
-		<h4 style={textStyle}>Regístrate como desarrollador freelancer en nuestra página y publica tu trabajo para que otros puedan contratarte.</h4>
-	   	</Grid>
-			
-		</Grid>
-	   </section>
+		<section  >
+     <Grid container spacing = {0} style={secondSectionStyle} >
+       <Grid style={boxesStyle} xs={9} sm={3} >
+        <Box
+        component = "img"
+        sx = {{width: 70,height: 70, marginTop: '1vh'}}
+        alt = "Icono1"
+        src = {webIcon} />
+        <h3>Sitio web</h3>
+           <h4 style={textStyle}>Somos una página web especializada en servicios freelancer de nivel internacional con un enfoque en tecnologías multimedia.</h4>
+           </Grid>
+           <Grid style={boxesStyle} xs={9} sm={3}>
+        <Box
+        component = 'img' 
+        sx = {{width: 70, height: 70, marginTop: '1vh'}}
+        alt='Icono2'
+        src={servicesIcon}
+        />
+        <h3>Servicios</h3>
+        <h4 style={textStyle}>Contrata a cualquiera de nuestros profesionales que más se acople a tus necesidades.</h4>
+           </Grid>
+           <Grid  style = {boxesStyle} xs={9} sm={3} >
+        <Box
+        component= 'img'
+        sx = {{width: 70, height: 70, marginTop: '1vh'}}
+        alt= 'Icono3'
+        src= {workIcon}
+        />
+        <h3>Trabajo</h3>
+        <h4 style={textStyle}>Regístrate como desarrollador freelancer en nuestra página y publica tu trabajo para que otros puedan contratarte.</h4>
+           </Grid>
+            
+        </Grid>
+       </section>
 
-	   <section style={thirdSectionStyle}>
-		< Image src = 'https://cdn.discordapp.com/attachments/703461155401760819/961487114673979412/back_5_final_1.png' />
-		   
-	   </section>
-	</Grid>
+       <section style={thirdSectionStyle}>
+        < Image src = 'https://cdn.discordapp.com/attachments/703461155401760819/961487114673979412/back_5_final_1.png' />
+           
+       </section>
+    </Grid>
         </Fragment>
 	);
 };

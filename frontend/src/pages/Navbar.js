@@ -9,6 +9,9 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
+
+const LoginStyle = {margin: '5px', color: 'white'};
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -140,11 +143,13 @@ export default function Navbar() {
           </Box>
           <Box sx={{ flexGrow: .8 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <h6 style={ColorStyle4}>INICIA SESIÓN</h6>
+          <Link href="/login" style={LoginStyle}>
+                            Inicia Sesion
+                    </Link>
           </Box>
           <Box sx={{ flexGrow: .05 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-          <Button variant="contained" style={ColorStyle2}>Regístrate</Button>
+          <Button href="/register" variant="contained" style={ColorStyle2}>Regístrate</Button>
           </Box>
         </Toolbar>
       </AppBar>

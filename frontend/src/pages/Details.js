@@ -5,7 +5,8 @@ import Divider from '@material-ui/core/Divider';
 import Container from '@mui/material/Container';
 import Toolbar from '@mui/material/Toolbar';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -28,11 +29,35 @@ const Spacing2={margin: '10px'}
 const theme = createTheme({
     spacing: 4,
   });
+
+  function LinearProgressWithLabel(props) {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          
+        <Box sx={{ minWidth: 30 }}>
+          <Toolbar>
+          <Typography variant="body2" color="white">{`${Math.round(
+            props.value2,
+          )}`}</Typography>
+          <StarIcon sx={{color:"#FFC49B"}}/>
+          </Toolbar>
+        </Box>
+        <Box sx={{ width: '100%', mr: 1 }}>
+          <LinearProgress variant="determinate" {...props} />
+        </Box>
+        <Box sx={{ minWidth: 35 }}>
+          <Typography variant="body2" color="white">{`${Math.round(
+            props.value,
+          )}%`}</Typography>
+        </Box>
+      </Box>
+    );
+  }
   
   const ImageStyle={
     width: '750px',
     height: '350px'
-}
+  }
 
   const GridStyle={ 
     backgroundColor: "rgba(173, 182, 196,0.8)"
@@ -55,6 +80,7 @@ const theme = createTheme({
     width:"120px",
     height:"250px",
     borderRadius:"45%"
+
 
   }
 
@@ -125,14 +151,14 @@ const theme = createTheme({
                 </table>
                 <Divider/>
                 <Grid container justifyContent="flex-start">
-                <IconButton aria-label="contact">
+                <IconButton aria-label="contact" href="/Chat">
                 <LocalPhoneIcon style={IconStyle2} />
                 <p style={TextStyle}>Contactar</p>
                 </IconButton>
                 <Box sx={{ flexGrow: .5 }} />
                 <Divider orientation="vertical" flexItem />
                 <Box sx={{ flexGrow: .3 }} />
-                <IconButton aria-label="buy">
+                <IconButton aria-label="buy" href="/payment">
                 <PaidOutlinedIcon style={IconStyle2} />
                 <p style={TextStyle}>Comprar</p>
                 </IconButton>
@@ -165,11 +191,40 @@ const theme = createTheme({
                 <Grid item xs={7}>
                 <h2 style={TextStyle}>Reseñas</h2>
                 <Grid container>
-                <Grid item xs={3}>
-                      </Grid>
-                <Grid item xs={8.5}>
+                    <Grid item xs={5}>
+                        <LinearProgressWithLabel color="inherit" value={0} value2={5}/>
+                        <LinearProgressWithLabel color="inherit" value={50} value2={4}/>
+                        <LinearProgressWithLabel color="inherit" value={0} value2={3}/>
+                        <LinearProgressWithLabel color="inherit" value={50} value2={2}/>
+                        <LinearProgressWithLabel color="inherit" value={0} value2={1}/>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <p align="center" style={TextStyle}>Numero de reseñas: 2 </p>
+                    </Grid>
                 </Grid>
-                </Grid>
+                <Box style={Spacing}>
+                <Divider sx={{color:"#FFC49B"}}/>
+                </Box>
+                <Toolbar>
+                <h4 style={TextStyle}>Marian Solis</h4>
+                <Box sx={{ flexGrow: .07 }} />
+                <p style={TextStyle}>2.00</p>
+                <StarIcon  sx={{color:"#FFC49B"}}/>
+                </Toolbar>
+                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
+                <Box style={Spacing}>
+                <Divider sx={{color:"#FFC49B"}}/>
+                </Box>
+                <Toolbar>
+                <h4 style={TextStyle}>Marian Solis</h4>
+                <Box sx={{ flexGrow: .07 }} />
+                <p style={TextStyle}>4.00</p>
+                <StarIcon  sx={{color:"#FFC49B"}}/>
+                </Toolbar>
+                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
+                <Box style={Spacing}>
+                <Divider sx={{color:"#FFC49B"}}/>
+                </Box>
                 </Grid>
             </Grid>
         </ThemeProvider>      
