@@ -78,7 +78,7 @@ function LinearProgressWithLabel(props) {
           
         <Box sx={{ minWidth: 30 }}>
           <Toolbar>
-          <Typography variant="body2" color="black">{`${Math.round(
+          <Typography variant="body2" color="white">{`${Math.round(
             props.value2,
           )}`}</Typography>
           <StarIcon sx={{color:"#FFC49B"}}/>
@@ -88,7 +88,7 @@ function LinearProgressWithLabel(props) {
           <LinearProgress variant="determinate" {...props} />
         </Box>
         <Box sx={{ minWidth: 35 }}>
-          <Typography variant="body2" color="black">{`${Math.round(
+          <Typography variant="body2" color="white">{`${Math.round(
             props.value,
           )}%`}</Typography>
         </Box>
@@ -96,8 +96,13 @@ function LinearProgressWithLabel(props) {
     );
   }
 
-  const cards = [1];
 
+  const GridStyle={ 
+    backgroundColor: "rgba(173, 182, 196,0.8)",
+    maxHeight: "300px",
+    borderRadius: "10px"
+
+  }
 
 function PricingContent() {
   return (
@@ -111,42 +116,26 @@ function PricingContent() {
             component="h4"
             variant="h4"
             align="center"
-            color="text.primary"
+            color="white"
             gutterBottom
             >Acerca de este servicio
             </Typography>
-            <Typography variant="p" color="text.secondary" component="p">
+            <Typography variant="p" 
+            color="white" component="p">
             Si estas buscando un desarrollador de sitios web HTML, CCS de WordPress
             profesional para  desarrollar el sitio web de su empresa, entonces esta en el 
             lugar correcto. Mi objetivo es ofrecer soluciones que causen una excelente  
             primera impresion. Ya he desarrollado mas de 50 sitios. Encontraras que si
             tengo confianza, trabajo duro, excelente para comunicarme, confiable y lista.
             </Typography>
+            <Typography variant="p" 
+            color="white"component="p">
+            Estás en el lugar ideal. Con mi licenciatura en publicidad y publicidad, estoy bien calificado para ayudarlo a asegurar un sitio web bien planificado. Actualmente soy diseñador de UI/UX que trabaja con el diseño de sitios web.
+
+
+Me especializo en crear diseños para sitios web que comuniquen sus servicios de manera efectiva. Si necesita un nuevo diseño de maquetación que comunique de manera más efectiva lo que ofrece a sus clientes, puedo hacerlo por usted. Si tiene alguna pregunta, póngase en contacto conmigo en cualquier momento.
+            </Typography>
         </Container>
-        <Divider />
-        <Container disableGutters maxWidth="lg" component="main" sx={{ margin:"20px" }}>
-            <Grid container>
-                    <Grid item xs={3}>
-                        <img style={ImageVStyle} src="https://st.depositphotos.com/2069323/2156/i/600/depositphotos_21568765-stock-photo-casual-businessman-pointing.jpg"/>
-                    </Grid>
-                    <Grid item xs={8.5}>
-                            <Typography
-                            component="h4"
-                            variant="h4"
-                            align="center"
-                            color="text.primary"
-                            gutterBottom
-                            >Vendedor
-                            </Typography> 
-                        <Typography variant="p" color="text.secondary" component="p"> Soy Juan Portillo. Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.</Typography>
-                        <IconButton aria-label="contact">
-                        <ChatBubbleIcon style={IconStyle2} />
-                        <p style={TextStyle}>Contactame</p>
-                        </IconButton>
-                    </Grid>
-            </Grid>
-        </Container>
-        <Divider/>
         </Grid>
         <Grid item xs={5} >
           {tiers.map((tier) => (
@@ -201,9 +190,11 @@ function PricingContent() {
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions sx={{
-                    backgroundColor:"#294C60", 
-                  }} >
+                <CardActions 
+                  sx={{
+                    backgroundColor: (theme) =>
+                     "#ADB6C4",
+                  }}>
                   <Button fullWidth variant={tier.buttonVariant}>
                     {tier.buttonText}
                   </Button>
@@ -213,11 +204,16 @@ function PricingContent() {
           ))}
         </Grid>
       </Grid>
-      <Grid>
-          
       <Grid container spacing={2} columnSpacing={2}>
-        <Grid item xs={6}>
-                <h2 style={TextStyle}>Reseñas</h2>
+        <Grid item xs={7}>
+        <Typography
+            component="h4"
+            variant="h4"
+            align="center"
+            color="white"
+            gutterBottom
+            >Reseñas
+            </Typography>
                 <Grid container>
                     <Grid item xs={10}>
                         <LinearProgressWithLabel color="inherit" value={0} value2={5}/>
@@ -229,10 +225,53 @@ function PricingContent() {
                 </Grid>
        </Grid>
        <Grid item xs={5}>
+       <Card sx={{ maxWidth: 500, marginTop:"50px"}}>
+      <CardMedia
+        component="img"
+        height="140"
+        image="https://images.ecestaticos.com/DGokxoLjR8N_3GIdyO5vuCBd68I=/0x88:1694x1039/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F1fe%2F160%2Fe7d%2F1fe160e7dd58d20124b71fb653c66c1d.jpg"
+      />
+      <CardContent sx={{backgroundColor:"#001B2E"}}>
+        <Typography gutterBottom variant="h5" component="div" sx={{color:"white"}}>
+          Juan Portillo
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
+        Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+        </Typography>
+      </CardContent>
+      <CardActions 
+                  sx={{
+                    backgroundColor: (theme) =>
+                     "#ADB6C4",
+                  }}>
+        <Button fullWidth size="small"> Contactame</Button>
+      </CardActions>
+    </Card>
        </Grid>
-     </Grid>
-      <Divider />
       </Grid>
+      <Grid container>
+      <Divider/>
+        <Grid style={GridStyle} sx={{margin:"10px", padding:"10px"}} >
+                <Toolbar>
+                <h4 style={TextStyle}>Marian Solis</h4>
+                <Box sx={{ flexGrow: .01 }} />
+                <p style={TextStyle}>2.00</p>
+                <StarIcon  sx={{color:"#FFC49B"}}/>
+                </Toolbar>
+                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
+        </Grid>  
+        <Divider/>
+        <Grid  style={GridStyle} sx={{margin:"10px", padding:"10px"}} >
+                <Toolbar>
+                <h4 style={TextStyle}>Marian Solis</h4>
+                <Box sx={{ flexGrow: .01 }} />
+                <p style={TextStyle}>2.00</p>
+                <StarIcon  sx={{color:"#FFC49B"}}/>
+                </Toolbar>
+                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
+        </Grid>     
+       </Grid>
+
     </React.Fragment>
   );
 }
