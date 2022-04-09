@@ -15,6 +15,7 @@ import Details from './pages/Details'
 import Home from './pages/Home';
 // import Details from './pages/Details';
 import CreateService from './pages/CreateService';
+import EditService from './pages/EditService';
 import Search from './pages/Search';
 import UserProfile from './pages/UserProfile';
 import Info from './pages/MainFeaturedPost';
@@ -34,6 +35,7 @@ function App() {
      <Routes>
         <Route exact path="/userProfile" element={<UserProfile/>}/>
         <Route exact path="/createService" element={<CreateService/>}/>
+        <Route exact path="/editService" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/details" element={<Details/>}/>
