@@ -17,6 +17,14 @@ export default function Review() {
           InputLabelProps= {textFieldStyle}
           InputProps={textFieldStyle}
         />
+        <TextField 
+            type="number"
+            InputProps={textFieldStyle}
+            inputProps={{max: 4, min: 1}}
+            label="Califica el servicio"
+            InputLabelProps= {textFieldStyle}
+            sx={{mb: 2}}
+        />
         <Button variant="contained" style={{backgroundColor: "#001B2E"}}>Enviar</Button>
         </FormControl>
    </Fragment>

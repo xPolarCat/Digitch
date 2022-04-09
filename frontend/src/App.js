@@ -12,6 +12,7 @@ import Register from './pages/register';
 import Chat from './pages/Chat';
 import Home from './pages/Home';
 import CreateService from './pages/CreateService';
+import EditService from './pages/EditService';
 import Search from './pages/Search';
 import UserProfile from './pages/UserProfile';
 import { Routes, Route } from 'react-router-dom';
@@ -29,6 +30,7 @@ function App() {
      <Routes>
         <Route exact path="/userProfile" element={<UserProfile/>}/>
         <Route exact path="/createService" element={<CreateService/>}/>
+        <Route exact path="/editService" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/Chat" element={<Chat/>}/>

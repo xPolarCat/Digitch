@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import {Container, FormControl, InputLabel, Select, MenuItem} from '@mui/material'
+import {Container, FormControl, InputLabel, Select, MenuItem, FormLabel, TextField} from '@mui/material'
 //import Subnavbar from '../Search/components/Subnavbar'
 import CardServices from '../components/Search/CardServices'
 import { AppBar, Grid, Pagination, Typography} from '@mui/material'
@@ -31,8 +31,19 @@ export default function CreateService() {
       <Subnavbar/>
     </AppBar> */}
     <Container>
+      <div>
+          <FormControl fullWidth sx={{my: 2}}>
+                <TextField
+                  id="inputTitulo"
+                  InputLabelProps= {textFieldStyle}
+                  InputProps={textFieldStyle}
+                  autoComplete
+                  label="Buscar"
+                />
+              </FormControl>
+      </div>
       <div id="resultLegend">
-          <Typography variant="h4" style={{padding: "10px", marginTop: "20px", color: "white" }}>
+          <Typography variant="h4" style={{padding: "10px", color: "white" }}>
           Resultados para: Diseño
           </Typography>
       </div>

@@ -18,7 +18,7 @@ export default function CreateServiceForm() {
     <Fragment>
         <Container>
             <form>
-              <Typography variant="h4" style={textFieldStyle.style} sx={{my:1}}>Creación de servicio</Typography>
+              <Typography variant="h4" style={textFieldStyle.style} sx={{my:1}}>Edición de servicio</Typography>
               <Divider style={dividerStyle}/>
               <FormControl fullWidth sx={{my: 1}}>
               <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Título</FormLabel>
