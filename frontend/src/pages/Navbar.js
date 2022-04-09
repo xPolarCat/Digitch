@@ -113,23 +113,24 @@ export default function Navbar() {
     </Menu>
   );
 
-  const ColorStyle= {backgroundColor:"#001B2E"}
+  const ColorStyle= {backgroundColor:"#001B2E", }
   const ColorStyle2= {backgroundColor:"#294C60"}
   const ColorStyle3= {backgroundColor:"#ADB6C4", height:"55px"}
   const ColorStyle4= {color:"#EDEDED"}
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static" style={ColorStyle}>
+    <Box sx={{ flexGrow: 1}} >
+      <AppBar position="static" style={ColorStyle} >
         <Toolbar>
           <img style={imageStyle}
           src="https://cdn.discordapp.com/attachments/930575800229576754/939289332777386004/digitch.whitelogosd.png"
           />
-          <Search style = {{marginLeft: '5vh'}}>
+          <Search style = {{marginLeft: '5vh', maxWidth: '45vh', minWidth: '30vh'}}>
             <StyledInputBase style = {{width: '25vh',}}
               placeholder="Busca un servicio"
               inputProps={{ 'aria-label': 'search' }}
             />
-            <IconButton
+            <IconButton 
+              style = {{maxWidth: '5vh', minWidth: '1vh'}}
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
@@ -142,13 +143,13 @@ export default function Navbar() {
             <h6 style={ColorStyle4}>VENDE TUS SERVICIOS</h6>
           </Box> */}
           <Box sx={{ flexGrow: .8 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display:'flex'}}>
           <Link href="/login" style={LoginStyle}>
                             Iniciar sesión
                     </Link>
           </Box>
           <Box sx={{ flexGrow: .05 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: 'flex'}}>
           <Button href="/register" variant="contained" style={ColorStyle2}>Regístrate</Button>
           </Box>
         </Toolbar>

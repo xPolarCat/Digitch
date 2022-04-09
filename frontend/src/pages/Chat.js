@@ -26,10 +26,11 @@ const useStyles = makeStyles({
     backgroundColor: "rgba(173, 182, 196,0.8)"
   },
   headBG: {
-      backgroundColor: '#e0e0e0'
+      backgroundColor: '#e0e0e0',
   },
   borderRight500: {
-      borderRight: '1px solid #e0e0e0'
+      borderRight: '1px solid #e0e0e0',
+      minWidth: '20vh'
   },
   messageArea: {
     height: '70vh',
@@ -37,13 +38,15 @@ const useStyles = makeStyles({
   }
 });
 
-const Spacing={margin: '60px'}
+const Spacing={margin: '60px', minWidth: '90%'}
 
 const BackgroundStyle={ backgroundImage: `url(${BackImage})`,
 height: "100%", 
 backgroundPosition: "center",
 backgroundRepeat: "no-repeat",
-backgroundSize: "cover"}
+backgroundSize: "cover"
+// //minWidth: '100vh'
+}
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -129,9 +132,9 @@ const Chat = () => {
                     </ListItem>
                 </List>
             </Grid>
-            <Grid item xs={9}>
-                <List>
-                <ListItem button key="SantiangoOrtiz">
+            <Grid item xs={9} style={{ width: '100%' }}>
+                <List >
+                <ListItem button key="SantiangoOrtiz" >
                         <ListItemIcon>
                             <Avatar alt="Santiango Ortiz" src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
@@ -139,7 +142,7 @@ const Chat = () => {
                     </ListItem>
                 </List>
                 <Divider/>
-                <List className={classes.messageArea}>
+                <List className={classes.messageArea} >
                     <ListItem key="1">
                             <Grid container justifyContent="flex-end">
                             <Box style={BoxMessageOneStyle}>
