@@ -124,18 +124,18 @@ export default function Navbar() {
           <img style={imageStyle}
           src="https://cdn.discordapp.com/attachments/930575800229576754/939289332777386004/digitch.whitelogosd.png"
           />
-          <Search style = {{marginLeft: '5vh', maxWidth: '45vh', minWidth: '30vh'}}>
+          <Search style = {{marginLeft: '5vh', maxWidth: '45vh', minWidth: '15vh'}}>
             <StyledInputBase style = {{width: '25vh',}}
               placeholder="Busca un servicio"
               inputProps={{ 'aria-label': 'search' }}
             />
             <IconButton 
-              style = {{maxWidth: '5vh', minWidth: '1vh'}}
+              style = {{maxWidth: '10vh', minWidth: '1vh'}}
               size="large"
               aria-label="show 17 new notifications"
               color="inherit"
             >
-                <SearchIcon/>
+                <SearchIcon />
             </IconButton>
           </Search>
           <Box sx={{ flexGrow: .4 }} />
