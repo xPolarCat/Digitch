@@ -70,15 +70,104 @@ export default function CreateServiceForm() {
                     autoComplete
                   />
               </FormControl>
-              <FormControl fullWidth sx={{my: 1}}>
-              <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Precio</FormLabel>
-                <TextField
-                  id="inputTitulo"
-                  InputLabelProps= {textFieldStyle}
-                  InputProps={textFieldStyle}
-                  autoComplete= "false"
-                />
-              </FormControl>
+              <Divider style={{backgroundColor:"white"}}/>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={4}>
+                  <Box>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Nombre paquete 1</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Descripcion paquete 1</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Precio paquete 1</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  </Box>
+                </Grid>
+
+                <Grid item xs={12} md={4} >
+                  <Box>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Nombre paquete 2</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Descripcion paquete 2</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Precio paquete 2</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Box>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Nombre paquete 3</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Descripcion paquete 3</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  <FormControl fullWidth sx={{my: 1}}>
+                  <FormLabel id="labelTituloService" style={textFieldStyle.style} sx={{my:1}}>Precio paquete 3</FormLabel>
+                    <TextField
+                      id="inputTitulo"
+                      InputLabelProps= {textFieldStyle}
+                      InputProps={textFieldStyle}
+                      autoComplete= "false"
+                    />
+                  </FormControl>
+                  </Box>
+                </Grid>
+              </Grid>
+
               <FormControl>
               <Button
                   variant="contained"

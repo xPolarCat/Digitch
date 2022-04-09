@@ -20,7 +20,7 @@ export default function UserProfile() {
                     <CardDescription/>
                 </Box>
             </Grid>
-            <Grid item lg={6} xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
+            <Grid item lg={5.9} xs={12} sx={{marginTop: "50px", marginBottom: "50px", marginLeft: "10px"}}>
                 <Typography variant="h5" style={{color: "white"}}>
                 Servicios de SamanthaP
                 </Typography>
@@ -40,7 +40,7 @@ export default function UserProfile() {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
+            <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px", marginLeft: "20px", marginRight: "20px"}}>
 
                 <Container style={{padding: "0px"}}>
                 <Typography variant="h5" style={{color : 'white'}}>

@@ -100,7 +100,7 @@ const Chat = () => {
   return (
       <div>
         <Grid container style={BackgroundStyle}>
-        <Grid container component={Paper} className={classes.chatSection} style={Spacing}>
+        <Grid container component={Paper} className={classes.chatSection} style={Spacing} >
             <Grid item xs={3} className={classes.borderRight500}>
                 <List>
                     <ListItem button key="RemySharp">
