@@ -7,14 +7,11 @@ export default function FavoriteUsers() {
   return (
     <Fragment>
      
-        <Grid container spacing={2}>
+        <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
           <Grid item>
             <CardFavoriteUsers/>
           </Grid>
           <Grid item>
-            <CardFavoriteUsers/>
-          </Grid>
-          <Grid item >
             <CardFavoriteUsers/>
           </Grid>
           <Grid item >

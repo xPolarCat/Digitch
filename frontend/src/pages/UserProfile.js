@@ -27,14 +27,14 @@ export default function UserProfile() {
                 <UserServices/>
             </Grid>
                
-            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}} alignItems="center" justifyContent="center">
+            <Grid item xs={12} direction="row" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
                 <Grid item xs={12}>
                     <Typography variant="h5" textAlign="center" style={{color : 'white', paddingBottom: "10px" }}>
                         Favoritos de SamanthaP
                     </Typography>   
                 </Grid>
-                <Grid item xs={12} alignItems="center" justifyContent="center" align="center">
-                    <Box sx={{justifyContent: "center", display: 'flex' }}>
+                <Grid item lg={6} >
+                    <Box sx={{display: 'flex' }}>
                         <FavoriteUsers/>
                     </Box>
                 </Grid>
