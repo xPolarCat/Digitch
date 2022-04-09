@@ -18,6 +18,8 @@ import CreateService from './pages/CreateService';
 import EditService from './pages/EditService';
 import Search from './pages/Search';
 import UserProfile from './pages/UserProfile';
+import Info from './pages/MainFeaturedPost';
+import EditProfile from './pages/EditProfile';
 import { Routes, Route } from 'react-router-dom';
 import { AppBar } from '@mui/material';
 
@@ -37,11 +39,12 @@ function App() {
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/details" element={<Details/>}/>
-        {/* <Route exact path="/chat" element={<Chat/>}/> */}
         <Route exact path="/Details2" element={<Details2/>}/>
         <Route exact path="/Chat" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment" element={<Payment/>} /> 
+        <Route exact path="/info" element={<Info/>} />
+        <Route exact path="/editprofile" element= {<EditProfile />}/>  
         <Route exact path="/" element= {<Home />}/>  
       </Routes>
      <Footer/>

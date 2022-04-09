@@ -4,7 +4,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import PersonIcon from '@material-ui/icons/Person';
 import BackgroundImage from '../resources/login-background.jpg';
 //import { makeStyles } from "@material-ui/core/styles";
-
+// import logo from '../resources/logo.png';
+// import Image from 'mui-image';
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
 const Login=()=>{
