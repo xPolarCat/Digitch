@@ -6,4 +6,4 @@ Integrantes:
 1841237 Miguel Angel Villanueva Infante
 1941484 Karla Giovana Oyervides Miguel
 
-
+Página web diseñada con la arquitectura MERN para servicios Freelancer de TI. 
