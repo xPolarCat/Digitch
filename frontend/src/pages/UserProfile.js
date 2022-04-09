@@ -27,8 +27,8 @@ export default function UserProfile() {
                 <UserServices/>
             </Grid>
                
-            <Grid item xs={12} direction="row" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
-                <Grid item xs={12}>
+            <Grid item xs={12} direction="column" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
+                <Grid item lg={6} >
                     <Typography variant="h5" textAlign="center" style={{color : 'white', paddingBottom: "10px" }}>
                         Favoritos de SamanthaP
                     </Typography>   
