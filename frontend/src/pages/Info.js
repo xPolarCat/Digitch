@@ -216,11 +216,11 @@ Me especializo en crear diseños para sitios web que comuniquen sus servicios de
             </Typography>
                 <Grid container>
                     <Grid item xs={10}>
-                        <LinearProgressWithLabel color="inherit" value={0} value2={5}/>
-                        <LinearProgressWithLabel color="inherit" value={50} value2={4}/>
-                        <LinearProgressWithLabel color="inherit" value={0} value2={3}/>
-                        <LinearProgressWithLabel color="inherit" value={50} value2={2}/>
-                        <LinearProgressWithLabel color="inherit" value={0} value2={1}/>
+                        <LinearProgressWithLabel color="primary" value={0} value2={5}/>
+                        <LinearProgressWithLabel color="primary" value={50} value2={4}/>
+                        <LinearProgressWithLabel color="primary" value={0} value2={3}/>
+                        <LinearProgressWithLabel color="primary" value={50} value2={2}/>
+                        <LinearProgressWithLabel color="primary" value={0} value2={1}/>
                     </Grid>
                 </Grid>
        </Grid>
@@ -244,7 +244,7 @@ Me especializo en crear diseños para sitios web que comuniquen sus servicios de
                     backgroundColor: (theme) =>
                      "#ADB6C4",
                   }}>
-        <Button fullWidth size="small"> Contactame</Button>
+        <Button fullWidth size="small"> Contáctame</Button>
       </CardActions>
     </Card>
        </Grid>
