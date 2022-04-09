@@ -128,10 +128,10 @@ const Home = () => {
         </Grid>
        </section>
 
-       <section style={thirdSectionStyle}>
+       {/* <section style={thirdSectionStyle}>
         < Image src = 'https://cdn.discordapp.com/attachments/703461155401760819/961487114673979412/back_5_final_1.png' />
            
-       </section>
+       </section> */}
     </Grid>
         </Fragment>
 	);
