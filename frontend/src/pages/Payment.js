@@ -29,7 +29,7 @@ export default function Payment () {
 
     const GridStyle={ 
       backgroundColor: "rgba(173, 182, 196,0.8)",
-      maxHeight: "60vh",
+      maxHeight: "70vh",
       minHeight: "50vh",
       minWidth: "30vh",
       borderRadius: "10px"
