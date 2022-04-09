@@ -1,27 +1,24 @@
 import React, { Fragment } from 'react'
 import Typography from '@mui/material/Typography'
-import CardServicesProfile from './CardServicesProfile'
+import CardFavoriteUsers from './CardFavoriteUsers'
 import Grid from '@mui/material/Grid'
 
-export default function UserServices() {
+export default function FavoriteUsers() {
   return (
     <Fragment>
      
-        <Grid container spacing={2}>
+        <Grid container spacing={2} direction="row" alignItems="center" justifyContent="center">
           <Grid item>
-            <CardServicesProfile/>
+            <CardFavoriteUsers/>
           </Grid>
           <Grid item>
-            <CardServicesProfile/>
+            <CardFavoriteUsers/>
           </Grid>
           <Grid item >
-            <CardServicesProfile/>
+            <CardFavoriteUsers/>
           </Grid>
           <Grid item >
-            <CardServicesProfile/>
-          </Grid>
-          <Grid item >
-            <CardServicesProfile/>
+            <CardFavoriteUsers/>
           </Grid>
         </Grid>
     </Fragment>

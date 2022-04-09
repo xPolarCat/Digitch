@@ -124,8 +124,8 @@ export default function Navbar() {
           <img style={imageStyle}
           src="https://cdn.discordapp.com/attachments/930575800229576754/939289332777386004/digitch.whitelogosd.png"
           />
-          <Search>
-            <StyledInputBase
+          <Search style = {{marginLeft: '5vh'}}>
+            <StyledInputBase style = {{width: '25vh',}}
               placeholder="Busca un servicio"
               inputProps={{ 'aria-label': 'search' }}
             />
@@ -138,13 +138,13 @@ export default function Navbar() {
             </IconButton>
           </Search>
           <Box sx={{ flexGrow: .4 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <h6 style={ColorStyle4}>VENDE TUS SERVICIOS</h6>
-          </Box>
+          </Box> */}
           <Box sx={{ flexGrow: .8 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Link href="/login" style={LoginStyle}>
-                            Inicia Sesion
+                            Iniciar sesión
                     </Link>
           </Box>
           <Box sx={{ flexGrow: .05 }} />

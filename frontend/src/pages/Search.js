@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => ({
 
 export default function CreateService() {
   const classes = useStyles();
-  const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
+  const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh', paddingLeft: "20px"} }
   const textFieldStyle = {style: {color : 'white'} }
  
     const [age, setAge] = useState('');
@@ -26,11 +26,11 @@ export default function CreateService() {
 
   return (
 
-    <Grid  container spacing={0} style={background.style}>
+    <Grid  spacing={0} style={background.style}>
     {/* <AppBar position="sticky">
       <Subnavbar/>
     </AppBar> */}
-    <Container>
+
       <div>
           <FormControl fullWidth sx={{my: 2}}>
                 <TextField
@@ -82,53 +82,50 @@ export default function CreateService() {
           </FormControl>
       </div>
       <div id="cardsServicesLayout">
-          <Grid container spacing={2}>
-            <Grid item md={3} xs={12} >
+          <Grid container spacing={3} style={{display: "flex", justifyContent: "center"}}>
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item >
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item >
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
+            <Grid item>
               <CardServices/>
             </Grid>
-            <Grid item md={3} xs={12} >
-              <CardServices/>
-            </Grid>
+           
           </Grid>
           
       </div>
       <div id="paginationServices" >
-          <Pagination count={10} shape="rounded"classes={{ ul: classes.ul }}sx={{alignItems: "center", justifyContent: "center", display: 'flex', marginTop: "50px", marginBottom: "50px"}}></Pagination>
+          <Pagination count={10} shape="rounded"classes={{ ul: classes.ul }}sx={{alignItems: "center", justifyContent: "center", display: 'flex', marginTop: "50px", paddingBottom: "20px"}}></Pagination>
       </div>
-    </Container>
     </Grid>
   )
 }

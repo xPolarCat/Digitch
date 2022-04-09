@@ -6,15 +6,15 @@ import CardDescription from '../components/UserProfile/CardDescription'
 import UserServices from '../components/UserProfile/UserServices'
 import CardReview from '../components/UserProfile/CardReview'
 import Review from '../components/UserProfile/Review'
-import FavoriteServices from '../components/UserProfile/FavoriteServices'
+import FavoriteUsers from '../components/UserProfile/FavoriteUsers'
 
 export default function UserProfile() {
-    const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh', paddingLeft: "20px"} }
+    const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
 
   return (
     <Grid container spacing={0} style={background.style}>
             
-        <Grid container spacing={2} sx={{paddingRight: "25px"}}>
+        <Grid container spacing={2} sx={{paddingRight: "0px"}}>
             <Grid item lg={6} xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
                 <Box sx={{justifyContent: "center", display: 'flex' }}>
                     <CardDescription/>
@@ -26,12 +26,18 @@ export default function UserProfile() {
                 </Typography>
                 <UserServices/>
             </Grid>
-
-            <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
-                <Typography variant="h5" style={{color : 'white'}}>
-                    Favoritos de SamanthaP
-                </Typography>
-                <FavoriteServices/>
+               
+            <Grid item xs={12} direction="row" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
+                <Grid item xs={12}>
+                    <Typography variant="h5" textAlign="center" style={{color : 'white', paddingBottom: "10px" }}>
+                        Favoritos de SamanthaP
+                    </Typography>   
+                </Grid>
+                <Grid item lg={6} >
+                    <Box sx={{display: 'flex' }}>
+                        <FavoriteUsers/>
+                    </Box>
+                </Grid>
             </Grid>
 
             <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
@@ -47,7 +53,7 @@ export default function UserProfile() {
                 <CardReview/>
                 <CardReview/>
                 <Container style={{padding: "0px"}}>
-                <Review/>
+                    <Review/>
                 </Container>
             </Grid>
 

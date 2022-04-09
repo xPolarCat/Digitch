@@ -4,6 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import MainFeaturedPost from './MainFeaturedPost';
 import Info from './Info';
+import Grid from '@mui/material/Grid';
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -27,12 +28,14 @@ export default function Blog() {
   return (
     <React.Fragment>
       <CssBaseline />
+      <Grid container sx={{backgroundColor:"#294C60"}}>
       <Container maxWidth="lg">
-        <main>
+        <main >
           <MainFeaturedPost post={mainFeaturedPost} />
           <Info />
         </main>
       </Container>
+      </Grid>
     </React.Fragment>
   );
 }

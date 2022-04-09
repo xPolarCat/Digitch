@@ -1,4 +1,4 @@
-import { Divider, Container } from '@mui/material'
+import { Divider, Container, Card } from '@mui/material'
 import React, { Fragment } from 'react'
 import Typography from '@mui/material/Typography'
 import StarIcon from '@mui/icons-material/Star';
@@ -9,9 +9,8 @@ export default function CardReview() {
   return (
     <Fragment>
  
-        <Container style={{padding: "0px", marginBottom: "15px"}}>
-            <Divider style={dividerStyle}/>
-            <Typography variant="h6" style={{marginTop: "15px", color: "white"}}>
+        <Container style={{padding: "0px", marginBottom: "15px", backgroundColor: "#001B2E", padding: "15px", borderRadius: "10px"}}>
+            <Typography variant="h6" style={{color: "white"}}>
                 Mariana Solis
             </Typography>
             <Typography  style={{color: "white"}}>
