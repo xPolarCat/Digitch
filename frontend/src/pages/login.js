@@ -10,7 +10,7 @@ import BackgroundImage from '../resources/login-background.jpg';
 const Login=()=>{
     //opacity: 0.7
     const backgroundStyle =  {minHeight:'100vh', backgroundColor: '#282c34', backgroundImage: `url(${BackgroundImage})`, backgroundSize: 'cover'}
-    const paperStyle={opacity: '95%' , padding :20, margin:"20px auto", backgroundColor: '#001B2E', minHeight: "40vh", minWidth: "55vh", align: 'center', justify: "center" }
+    const paperStyle={opacity: '95%' , padding :20, margin:"20px auto", backgroundColor: '#001B2E', minHeight: "35vh", minWidth: "55vh", align: 'center', justify: "center" }
     const avatarStyle={backgroundColor:'#1bbd7e'}
     const btnstyle={margin:'25px 0', backgroundColor: '#294C60'}
     const registerStyle = {margin: '5px'}

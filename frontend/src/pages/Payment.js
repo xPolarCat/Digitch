@@ -14,22 +14,25 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 export default function Payment () {
 
     const BackgroundStyle={ backgroundImage: `url(${BackImage})`,
-    height: "100%", 
+    height: "100vh", 
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"}
 
     const GridPayStyle={ 
       backgroundColor: "rgba(173, 182, 196,0.8)",
-      maxHeight: "300px",
+      maxHeight: "30vh",
+      minWidth: "30vh",
       borderRadius: "10px"
 
     }
 
     const GridStyle={ 
       backgroundColor: "rgba(173, 182, 196,0.8)",
+      maxHeight: "60vh",
+      minHeight: "50vh",
+      minWidth: "30vh",
       borderRadius: "10px"
-
     }
 
     const BorderStyle={
@@ -46,7 +49,8 @@ export default function Payment () {
       }
 
     const TextStyle={
-      color:"white"
+      color:"white",
+      textAlign: 'center'
     }
 
     const PaypalStyle={
@@ -69,13 +73,20 @@ export default function Payment () {
     const PaddingStyle={
         padding :10
     }
+
+    const buyButtonStyle={
+        align: "right",
+        marginTop: "1vh",
+        backgroundColor:"#294C60"
+    }
+
     return (
 
     <Grid container style={BackgroundStyle}>
         <ThemeProvider theme={theme}>
-            <Grid container spacing={2} columnSpacing={2} style={Spacing}>
+            <Grid container spacing={2} columnSpacing={2} style={Spacing} direction="row" justifyContent="center">
                 <Box sx={{ flexGrow: .4 }} />
-                    <Grid item xs={6} style={GridPayStyle}>
+                    <Grid item xs={6} style={GridPayStyle} direction="row" justifyContent="center" >
                         <Container maxWidth="sm" style={BorderStyle}>
                             <Toolbar>
                             <CreditScoreIcon style={IconStyle}/>
@@ -93,7 +104,7 @@ export default function Payment () {
                         </Box>
                     </Grid>
                 <Box sx={{ flexGrow: .15 }} />
-                    <Grid item xs={3.5} style={GridStyle}>
+                    <Grid item xs={3.5} style={GridStyle} container spacing={2} columnSpacing={2} >
                     <Container maxWidth="sm" style={BorderStyle}>
                     <Toolbar>
                     <Box spacing={1} style={PaddingStyle}>
@@ -153,6 +164,7 @@ export default function Payment () {
                             </tr>
                             </tbody>
                     </table>  
+                    <Button variant="contained" style={buyButtonStyle}>Realizar compra</Button> 
                     </Container>  
                     </Grid>
             </Grid>
