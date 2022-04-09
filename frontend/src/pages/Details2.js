@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 import MainFeaturedPost from './MainFeaturedPost';
 import Info from './Info';
 import Grid from '@mui/material/Grid';
+import BackImage from '../images/fondo_UserProfile_.png'
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -14,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 const mainFeaturedPost = {
-  title: 'Voy a crear el diseño de tu pagina web.',
+  title: 'Voy a crear el diseño de tu página web.',
   description:
     "Diseñaré una interfaz de usuario de sitio web impresionante, moderna y única.",
   image: 'https://source.unsplash.com/random',
@@ -28,7 +29,10 @@ export default function Blog() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container sx={{backgroundColor:"#294C60"}}>
+      <Grid container sx={{backgroundImage: `url(${BackImage})`,
+    height: "100%", 
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"}}>
       <Container maxWidth="lg">
         <main >
           <MainFeaturedPost post={mainFeaturedPost} />
