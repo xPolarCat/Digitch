@@ -14,7 +14,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 export default function Payment () {
 
     const BackgroundStyle={ backgroundImage: `url(${BackImage})`,
-    height: "100vh", 
+    height: "100%", 
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"}
@@ -23,14 +23,15 @@ export default function Payment () {
       backgroundColor: "rgba(173, 182, 196,0.8)",
       maxHeight: "30vh",
       minWidth: "30vh",
-      borderRadius: "10px"
+      borderRadius: "10px",
+      marginBottom: '70px'
 
     }
 
     const GridStyle={ 
       backgroundColor: "rgba(173, 182, 196,0.8)",
       maxHeight: "60vh",
-      minHeight: "50vh",
+      minHeight: "80vh",
       minWidth: "30vh",
       borderRadius: "10px"
     }
@@ -55,7 +56,8 @@ export default function Payment () {
 
     const PaypalStyle={
       color:"white",
-      backgroundColor:"#294C60"
+      backgroundColor:"#294C60",
+      marginTop: '-20px'
     }
 
     const theme = createTheme({
@@ -86,7 +88,7 @@ export default function Payment () {
         <ThemeProvider theme={theme}>
             <Grid container spacing={2} columnSpacing={2} style={Spacing} direction="row" justifyContent="center">
                 <Box sx={{ flexGrow: .4 }} />
-                    <Grid item xs={6} style={GridPayStyle} direction="row" justifyContent="center" >
+                    <Grid item xs={11} lg={6} style={GridPayStyle} direction="row" justifyContent="center" >
                         <Container maxWidth="sm" style={BorderStyle}>
                             <Toolbar>
                             <CreditScoreIcon style={IconStyle}/>
@@ -104,7 +106,7 @@ export default function Payment () {
                         </Box>
                     </Grid>
                 <Box sx={{ flexGrow: .15 }} />
-                    <Grid item xs={3.5} style={GridStyle} container spacing={2} columnSpacing={2} >
+                    <Grid item xs={10} lg={4} style={GridStyle} container spacing={2} columnSpacing={2} >
                     <Container maxWidth="sm" style={BorderStyle}>
                     <Toolbar>
                     <Box spacing={1} style={PaddingStyle}>
@@ -164,7 +166,7 @@ export default function Payment () {
                             </tr>
                             </tbody>
                     </table>  
-                    <Button variant="contained" style={buyButtonStyle}>Realizar compra</Button> 
+                    <Button variant="contained" sx={{float:'right'}}  style={buyButtonStyle}>Realizar compra</Button> 
                     </Container>  
                     </Grid>
             </Grid>
