@@ -93,7 +93,7 @@ const Register=()=>{
                     />
                     </Grid>
                 </Grid>
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Registrarse</Button>
+                <Button type='button' color='primary' variant="contained" style={btnstyle} fullWidth href="/Login">Registrarse</Button>
 
                 <Typography style={loginTextStyle} > ¿Ya tienes una cuenta? 
                     <Link href="/login" style={registerStyle}>

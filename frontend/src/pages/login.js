@@ -30,7 +30,7 @@ const Login=()=>{
                     <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
                     <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
                     
-                    <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Iniciar sesión</Button>
+                    <Button type='button' color='primary' variant="contained" style={btnstyle} fullWidth href="/">Iniciar sesión</Button>
 
                     <Typography style={loginTextStyle}> ¿Ya tienes una cuenta? 
                         <Link href="/register" style={registerStyle}>

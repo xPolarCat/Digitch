@@ -23,13 +23,13 @@ const useStyles = makeStyles({
   chatSection: {
     width: '90%',
     minHeight: '80vh',
-    backgroundColor: "rgba(173, 182, 196,0.8)"
+    backgroundColor: "#00121f"
   },
   headBG: {
-      backgroundColor: '#e0e0e0',
+      backgroundColor: 'white',
   },
   borderRight500: {
-      borderRight: '1px solid #e0e0e0',
+      border: '1px solid white',
       minWidth: '20vh'
   },
   messageArea: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles({
 
 const Spacing={margin: '60px', minWidth: '90%'}
 
-const BackgroundStyle={ backgroundImage: `url(${BackImage})`,
+const BackgroundStyle={ backgroundColor: "#294C60",
 height: "100%", 
 backgroundPosition: "center",
 backgroundRepeat: "no-repeat",
@@ -84,7 +84,8 @@ const Search = styled('div')(({ theme }) => ({
       backgroundColor: "#FFFFFF",
       padding:"5px",
       borderRadius:"12px",
-      maxWidth:"250px"
+      maxWidth:"250px",
+      color: "black"
   }
 
   
@@ -92,8 +93,11 @@ const Search = styled('div')(({ theme }) => ({
     backgroundColor: "#FFC49B",
     padding:"5px",
     borderRadius:"12px",
-    maxWidth:"250px"
+    maxWidth:"250px",
+    color: "black"
 }
+const textFieldStyle = {style: {color : 'white'} }
+
 const Chat = () => {
   const classes = useStyles();
 
@@ -101,7 +105,7 @@ const Chat = () => {
       <div>
         <Grid container style={BackgroundStyle}>
         <Grid container component={Paper} className={classes.chatSection} style={Spacing} >
-            <Grid item xs={3} className={classes.borderRight500}>
+            <Grid item xs={12} md={3} className={classes.borderRight500} style={{color: "white"}}>
                 <List>
                     <ListItem button key="RemySharp">
                         <ListItemIcon>
@@ -110,7 +114,7 @@ const Chat = () => {
                         <ListItemText primary="Juan Portillo"></ListItemText>
                     </ListItem>
                 </List>
-                <Divider />
+                <Divider style={{backgroundColor: "white"}}/>
                 <List>
                     <ListItem button key="SantiangoOrtiz">
                         <ListItemIcon>
@@ -132,7 +136,7 @@ const Chat = () => {
                     </ListItem>
                 </List>
             </Grid>
-            <Grid item xs={9} style={{ width: '100%' }}>
+            <Grid item xs={12} md={9} style={{ width: '100%', color: "white", border: '1px solid white'}}>
                 <List >
                 <ListItem button key="SantiangoOrtiz" >
                         <ListItemIcon>
@@ -141,7 +145,7 @@ const Chat = () => {
                         <ListItemText primary="Santiango Ortiz">Santiango Ortiz</ListItemText>
                     </ListItem>
                 </List>
-                <Divider/>
+                <Divider  style={{backgroundColor: "white"}}/>
                 <List className={classes.messageArea} >
                     <ListItem key="1">
                             <Grid container justifyContent="flex-end">
@@ -195,7 +199,8 @@ const Chat = () => {
                 <Divider />
                 <Grid container style={{padding: '10px'}}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Escribe tu mensaje..." fullWidth />
+                        <TextField id="outlined-basic-email" InputLabelProps= {textFieldStyle}
+                    InputProps={textFieldStyle} label="Escribe tu mensaje..." fullWidth />
                     </Grid>
                     <Grid xs={1} align="right">
                         <Fab color="primary" aria-label="add"><SendIcon /></Fab>

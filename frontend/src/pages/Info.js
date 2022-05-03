@@ -8,7 +8,7 @@ import CardHeader from '@mui/material/CardHeader';
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
 import Grid from '@mui/material/Grid';
-import StarIcon from '@mui/icons-material/StarBorder';
+import StarIcon from '@mui/icons-material/Star';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
@@ -17,6 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import Divider from '@material-ui/core/Divider';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import CardMedia from '@material-ui/core/CardMedia';
+import CardReview from '../components/UserProfile/CardReview';
 
 
 const Spacing={margin: '30px'}
@@ -71,8 +72,10 @@ const cardContent= {
 const cardMedia= {
     paddingTop: '56.25%', // 16:9
   }
-
+const dividerStyle= {backgroundColor: 'white'}
 function LinearProgressWithLabel(props) {
+
+
     return (
       <Box sx={{ display: 'flex', alignItems: 'center' }}>
           
@@ -81,7 +84,7 @@ function LinearProgressWithLabel(props) {
           <Typography variant="body2" color="white">{`${Math.round(
             props.value2,
           )}`}</Typography>
-          <StarIcon sx={{color:"#FFC49B"}}/>
+          <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Toolbar>
         </Box>
         <Box sx={{ width: '100%', mr: 1 }}>
@@ -109,8 +112,9 @@ function PricingContent() {
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
+
       <Grid container spacing={2} columnSpacing={2}>
-        <Grid item xs={7}>  
+        <Grid>  
         <Container disableGutters maxWidth="lg" component="main" sx={{ margin:"20px" }}>
             <Typography
             component="h4"
@@ -130,21 +134,41 @@ function PricingContent() {
             </Typography>
             <Typography variant="p" 
             color="white"component="p">
-            Estás en el lugar ideal. Con mi licenciatura en publicidad y publicidad, estoy bien calificado para ayudarlo a asegurar un sitio web bien planificado. Actualmente soy diseñador de UI/UX que trabaja con el diseño de sitios web.
-
-
-Me especializo en crear diseños para sitios web que comuniquen sus servicios de manera efectiva. Si necesita un nuevo diseño de maquetación que comunique de manera más efectiva lo que ofrece a sus clientes, puedo hacerlo por usted. Si tiene alguna pregunta, póngase en contacto conmigo en cualquier momento.
+            Estás en el lugar ideal. Con mi licenciatura en publicidad y publicidad, estoy bien calificado para ayudarlo a asegurar un sitio web bien planificado. Actualmente soy diseñador de UI/UX que trabaja con el diseño de sitios web. Me especializo en crear diseños para sitios web que comuniquen sus servicios de manera efectiva. Si necesita un nuevo diseño de maquetación que comunique de manera más efectiva lo que ofrece a sus clientes, puedo hacerlo por usted. Si tiene alguna pregunta, póngase en contacto conmigo en cualquier momento.
             </Typography>
         </Container>
+        <Divider style={dividerStyle}/>
+        <Box my={3}>
+
+            <CardMedia
+              component="img"
+              height="140"
+              image="https://images.ecestaticos.com/DGokxoLjR8N_3GIdyO5vuCBd68I=/0x88:1694x1039/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F1fe%2F160%2Fe7d%2F1fe160e7dd58d20124b71fb653c66c1d.jpg"
+            />
+    
+              <Typography gutterBottom variant="h5" component="div" style={{color:"white", marginTop: "15px"}}>
+                Juan Portillo
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
+              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+              </Typography>
+              <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href="/UserProfile"> Contáctame</Button>
+             
+        </Box>
         </Grid>
-        <Grid item xs={5} >
+      </Grid>
+
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
           {tiers.map((tier) => (
-            <Grid
+            <Grid fullWidth
               item
               key={tier.title}
               xs={12}
-              sm={tier.title === 'Enterprise' ? 12 : 6}
               md={12}
+
             >
               <Card>
                 <CardHeader
@@ -190,86 +214,45 @@ Me especializo en crear diseños para sitios web que comuniquen sus servicios de
                     ))}
                   </ul>
                 </CardContent>
-                <CardActions 
+                <CardActions style={{ backgroundColor: "#ADB6C4"}}
                   sx={{
                     backgroundColor: (theme) =>
                      "#ADB6C4",
                   }}>
-                  <Button fullWidth variant={tier.buttonVariant}>
-                    {tier.buttonText}
+                  <Button fullWidth href="/Payment">
+                    Comprar
                   </Button>
                 </CardActions>
               </Card>
             </Grid>
           ))}
         </Grid>
+        <Grid item xs={12} md={6}>
+          <Typography
+              component="h4"
+              variant="h4"
+              align="center"
+              color="white"
+              gutterBottom
+              >Reseñas
+          </Typography>
+          <Grid container>
+              <Grid item xs={12}>
+                  <LinearProgressWithLabel color="primary" value={0} value2={5}/>
+                  <LinearProgressWithLabel color="primary" value={50} value2={4}/>
+                  <LinearProgressWithLabel color="primary" value={0} value2={3}/>
+                  <LinearProgressWithLabel color="primary" value={50} value2={2}/>
+                  <LinearProgressWithLabel color="primary" value={0} value2={1}/>
+              </Grid>
+          </Grid>
+        </Grid>
       </Grid>
-      <Grid container spacing={2} columnSpacing={2}>
-        <Grid item xs={7}>
-        <Typography
-            component="h4"
-            variant="h4"
-            align="center"
-            color="white"
-            gutterBottom
-            >Reseñas
-            </Typography>
-                <Grid container>
-                    <Grid item xs={10}>
-                        <LinearProgressWithLabel color="primary" value={0} value2={5}/>
-                        <LinearProgressWithLabel color="primary" value={50} value2={4}/>
-                        <LinearProgressWithLabel color="primary" value={0} value2={3}/>
-                        <LinearProgressWithLabel color="primary" value={50} value2={2}/>
-                        <LinearProgressWithLabel color="primary" value={0} value2={1}/>
-                    </Grid>
-                </Grid>
-       </Grid>
-       <Grid item xs={5}>
-       <Card sx={{ maxWidth: 500, marginTop:"50px"}}>
-      <CardMedia
-        component="img"
-        height="140"
-        image="https://images.ecestaticos.com/DGokxoLjR8N_3GIdyO5vuCBd68I=/0x88:1694x1039/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F1fe%2F160%2Fe7d%2F1fe160e7dd58d20124b71fb653c66c1d.jpg"
-      />
-      <CardContent sx={{backgroundColor:"#001B2E"}}>
-        <Typography gutterBottom variant="h5" component="div" sx={{color:"white"}}>
-          Juan Portillo
-        </Typography>
-        <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
-        Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
-        </Typography>
-      </CardContent>
-      <CardActions 
-                  sx={{
-                    backgroundColor: (theme) =>
-                     "#ADB6C4",
-                  }}>
-        <Button fullWidth size="small"> Contáctame</Button>
-      </CardActions>
-    </Card>
-       </Grid>
-      </Grid>
-      <Grid container>
+
+      <Grid container mt={3}> 
       <Divider/>
-        <Grid style={GridStyle} sx={{margin:"10px", padding:"10px"}} >
-                <Toolbar>
-                <h4 style={TextStyle}>Marian Solis</h4>
-                <Box sx={{ flexGrow: .01 }} />
-                <p style={TextStyle}>2.00</p>
-                <StarIcon  sx={{color:"#FFC49B"}}/>
-                </Toolbar>
-                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
-        </Grid>  
+        <CardReview/>  
         <Divider/>
-        <Grid  style={GridStyle} sx={{margin:"10px", padding:"10px"}} >
-                <Toolbar>
-                <h4 style={TextStyle}>Marian Solis</h4>
-                <Box sx={{ flexGrow: .01 }} />
-                <p style={TextStyle}>2.00</p>
-                <StarIcon  sx={{color:"#FFC49B"}}/>
-                </Toolbar>
-                <p style={TextStyle}>Impresionante e increible. Es muy profesional y es muy facil hablar con el. Te hace saber como si fueras competente con la tecnologia. Esta desarolladora web supero mis expectativas.</p>
-        </Grid>     
+        <CardReview/>   
        </Grid>
 
     </React.Fragment>

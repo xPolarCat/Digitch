@@ -10,6 +10,9 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Avatar } from '@mui/material';
 
 const LoginStyle = {margin: '5px', color: 'white'};
 
@@ -121,29 +124,51 @@ export default function Navbar() {
     <Box sx={{ flexGrow: 1}} >
       <AppBar position="static" style={ColorStyle} >
         <Toolbar>
+          <a href="/">
           <img style={imageStyle}
           src="https://cdn.discordapp.com/attachments/930575800229576754/939289332777386004/digitch.whitelogosd.png"
           />
-          <Search style = {{marginLeft: '5vh', maxWidth: '45vh', minWidth: '15vh'}}>
-            <StyledInputBase style = {{width: '25vh',}}
-              placeholder="Busca un servicio"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-            <IconButton 
-              style = {{maxWidth: '10vh', minWidth: '1vh'}}
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-                <SearchIcon />
-            </IconButton>
-          </Search>
+          </a>
+          
           <Box sx={{ flexGrow: .4 }} />
           {/* <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <h6 style={ColorStyle4}>VENDE TUS SERVICIOS</h6>
           </Box> */}
           <Box sx={{ flexGrow: .8 }} />
+          <IconButton 
+              style = {{ marginRight: "10px"}}
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              href="/search"
+            >
+                <SearchIcon />
+          </IconButton>
+          <IconButton 
+              style = {{marginRight: "10px"}}
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              href="/createService"
+            >
+                <AddCircleIcon />
+          </IconButton>
+          <Button href="/UserProfile">
+            <Avatar>
+
+            </Avatar>
+          </Button>
+          <IconButton 
+              style = {{marginRight: "10px"}}
+              size="large"
+              aria-label="show 17 new notifications"
+              color="inherit"
+              href="/"
+            >
+                <LogoutIcon />
+          </IconButton>
           <Box sx={{ display:'flex'}}>
+            
           <Link href="/login" style={LoginStyle}>
                             Iniciar sesión
                     </Link>
