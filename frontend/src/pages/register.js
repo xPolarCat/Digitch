@@ -20,6 +20,12 @@ const Register=()=>{
     const textFieldStyle = {style: {color : 'white'}}
     const switchStyle = {align: 'right'}
 
+    const onSubmitRegister = (event) => { // Este event es un parámetro que se puede recibir en todas las funciones que sean desencadenadas por un evento de React.
+        event.preventDefault() // Lo que hace es evitar el refresh que hace el form.
+
+        console.log("Oal :wave:")
+    }
+
     return(
         // Los grids sirven para centrar mi login. 
         <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center" style={backgroundStyle}> 
@@ -29,8 +35,9 @@ const Register=()=>{
                 <Image  style={{height: '50%', width: '50%'}} src={logo} />
                     <h2 style={loginTextStyle}>Registro</h2>
                 </Grid>
-
+                <form onSubmit={onSubmitRegister}>
                 <Grid container direction={"column"} spacing={5}>
+                
                     <Grid item>
                     <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
                     </Grid>
@@ -92,9 +99,10 @@ const Register=()=>{
                                     label=  "He leído y acepto los términos y condiciones."
                     />
                     </Grid>
+                
                 </Grid>
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Registrarse</Button>
-
+                </form>
                 <Typography style={loginTextStyle} > ¿Ya tienes una cuenta? 
                     <Link href="/login" style={registerStyle}>
                         Inicia sesión
