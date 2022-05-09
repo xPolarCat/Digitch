@@ -55,7 +55,7 @@ export default function CardServices() {
       </CardContent>
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
-        <Button variant="contained" style={cardActionStyle} fullWidth >Ver detalle</Button>
+        <Button variant="contained" style={cardActionStyle} fullWidth href="../Details">Ver detalle</Button>
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>

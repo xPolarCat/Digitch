@@ -29,7 +29,7 @@ export default function Blog() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container sx={{backgroundImage: `url(${BackImage})`,
+      <Grid container sx={{ backgroundColor : '#294C60',
     height: "100%", 
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover"}}>

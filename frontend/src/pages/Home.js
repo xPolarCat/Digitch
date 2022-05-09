@@ -80,7 +80,7 @@ const Home = () => {
 					<Typography variant="h3" component="h1" className={classes.title}>
                         <Image  sx={{ boxShadow: 2 }} src={logo} />
 					</Typography>
-					<Button style={btnstyle} color="primary" variant="contained" size="large">
+					<Button href="/Login" style={btnstyle} color="primary" variant="contained" size="large">
 						Descubre más
 					</Button>
 				</Box>

@@ -42,10 +42,17 @@ const useStyles = makeStyles({
             Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Typography>
           <Box textAlign='center' sx={{m: 1}} >
-            <Button variant='contained'style={{backgroundColor: "#294C60"}}>
+            <Button variant='contained'style={{backgroundColor: "#294C60"}} href="/chat">
               Enviar mensaje
             </Button>
           </Box>
+
+          <Box textAlign='center' sx={{m: 1}} >
+          <Button variant='contained'style={{backgroundColor: "#294C60"}} href="/editProfile">
+              Editar perfil
+            </Button>
+          </Box>
+
           <Divider sx={{m:2}}/>
           <Typography component="p" textAlign="center" style={{color: "white"}}>
           Soy una desarrolladora Front End con experiencia en HTML, CSS y Javascript además de la utilización de diversos frameworks como Bootstrap, ReactJS y VueJS.
