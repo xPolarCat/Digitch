@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react'
+import React,  {Component, Fragment, useState} from 'react'
 import { Grid,Paper, Avatar, TextField, Button, Typography,Link, Switch, FormControlLabel, Checkbox} from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import PersonIcon from '@material-ui/icons/Person';
@@ -20,11 +20,34 @@ const Register=()=>{
     const textFieldStyle = {style: {color : 'white'}}
     const switchStyle = {align: 'right'}
 
-    const onSubmitRegister = (event) => { // Este event es un parámetro que se puede recibir en todas las funciones que sean desencadenadas por un evento de React.
+
+    const [user, setUser] = useState({  // Inicializo estas variables de estado con valores vacíos 
+        name: "",
+        email: "",
+        password: "",
+        photo: "https://penworthy.com/Image/Getimage?id=ContactUs\Penworthy%20Group%20Photo.jpg"
+    });
+
+    const handleOnSubmitRegister = (event) => { // Este event es un parámetro que se puede recibir en todas las funciones que sean desencadenadas por un evento de React.
         event.preventDefault() // Lo que hace es evitar el refresh que hace el form.
 
-        console.log("Oal :wave:")
+        console.log("Oal :wave:");
     }
+
+    const handleOnChangeInput = (event) => { // Esto se agrega porque al utilizar un valor como user.name, este no puede cambiar. Hay que utilizar el onChange para poder cambiar el valor de mi variable name
+        const {name, value} = event.target; // Utilizo Destructuring, obtengo el name del input y el valor 
+        setUser({
+            ...user, // Esto es Destructuring, pone todos los atributos que estén contenidos en User, así sobreescribe la información con base en el name de mi input. 
+            [name]: value
+        }) // No tengo idea de por qué funciona si no hace referencia a los otros valores como email, password y photo D: 
+    }   
+
+    // const onChangeEmail = (event) => { // Podría hacer esto uno por uno, pero es mejor utilizar la opción anterior 
+    //     setUser({
+    //         ...user,
+    //         email: event.target.value
+    //     })
+    // }
 
     return(
         // Los grids sirven para centrar mi login. 
@@ -35,20 +58,20 @@ const Register=()=>{
                 <Image  style={{height: '50%', width: '50%'}} src={logo} />
                     <h2 style={loginTextStyle}>Registro</h2>
                 </Grid>
-                <form onSubmit={onSubmitRegister}>
+                <form onSubmit={handleOnSubmitRegister}>
                 <Grid container direction={"column"} spacing={5}>
                 
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="name" name="name" value={user.name} onChange={handleOnChangeInput} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Correo electrónico' placeholder='Ingresa tu correo electrónico' type='email' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="email" name="email" value={user.email} onChange={handleOnChangeInput} InputLabelProps= {textFieldStyle} label='Correo electrónico' placeholder='Ingresa tu correo electrónico' type='email' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="password" name="password" value={user.password} onChange={handleOnChangeInput} minLength={8} maxLength={30} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Confirmar contraseña' placeholder='Confirma tu contraseña' type='password' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Confirmar contraseña' minLength={8} maxLength={30} placeholder='Confirma tu contraseña' type='password' fullWidth required/>
                     </Grid>
                    
                     <Grid item style= {{color : 'white'}}>
@@ -74,7 +97,7 @@ const Register=()=>{
                 </Button>
                 </Grid> 
                 <Grid item>
-                <img width="150px" src="https://penworthy.com/Image/Getimage?id=ContactUs\Penworthy%20Group%20Photo.jpg"/>
+                <img width="150px" value={user.photo} htmlFor="photo" src={user.photo}/>
                 </Grid>
                     <Grid item>
                     <FormControlLabel
@@ -97,17 +120,13 @@ const Register=()=>{
                                     }
                                     style= {{color : 'white'}}
                                     label=  "He leído y acepto los términos y condiciones."
+                                    required
                     />
                     </Grid>
                 
                 </Grid>
-<<<<<<< HEAD
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Registrarse</Button>
                 </form>
-=======
-                <Button type='button' color='primary' variant="contained" style={btnstyle} fullWidth href="/Login">Registrarse</Button>
-
->>>>>>> 35f6ccf5cb4ba548bf0cf25fa52b9c85e1afb694
                 <Typography style={loginTextStyle} > ¿Ya tienes una cuenta? 
                     <Link href="/login" style={registerStyle}>
                         Inicia sesión
