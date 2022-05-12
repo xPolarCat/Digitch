@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import {
   Container,
   FormControl,
@@ -12,9 +12,9 @@ import {
 import CardServices from "../components/Search/CardServices";
 import { AppBar, Grid, Pagination, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import SendIcon from '@mui/icons-material/Send';
-import IconButton from '@mui/material/IconButton';
-
+import SendIcon from "@mui/icons-material/Send";
+import IconButton from "@mui/material/IconButton";
+import {Post_GetByName} from "../services/Post"
 
 const useStyles = makeStyles(() => ({
   ul: {
@@ -36,41 +36,69 @@ export default function CreateService() {
   };
   const textFieldStyle = { style: { color: "white" } };
 
-  const [age, setAge] = useState("");
+  // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
+  //----------Search state-------
+  const [search, setSearch] = useState({
+    inputSearch: ""
+  });
 
+  const onChangeSearch=(event)=>{
+
+    setSearch({
+      ...search,
+      inputSearch : event.target.value
+    });
+  }
+  //----------Category state-------
+  const [age, setAge] = useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+  //----------Price state-------
+  //----------Submit state-------
+  const onSubmitSearch=(event)=>{
+    event.preventDefault();
+    console.log(search.inputSearch)
+
+  }
+ 
 
   return (
     <Grid spacing={0} style={background.style}>
-      {/* <AppBar position="sticky">
-      <Subnavbar/>
-    </AppBar> */}
-
       <div>
-        <FormControl fullWidth sx={{ my: 2 }}>
-          <Grid container alignItems="center">
-            <Grid item xs={10}>
-            <TextField
-              id="inputTitulo"
-              InputLabelProps={textFieldStyle}
-              InputProps={textFieldStyle}
-              autoComplete
-              label="Buscar"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={2}>
-          <IconButton
-            style={{ maxWidth: "10vh", minWidth: "1vh", color: "white", backgroundColor: "#001B2E"}}
-            size="large"           
-          >
-            <SendIcon />
-          </IconButton>
-          </Grid>
-          </Grid>
-        </FormControl>
+        <form onSubmit={onSubmitSearch}>
+          <FormControl fullWidth sx={{ my: 2 }}>
+            <Grid container alignItems="center">
+              <Grid item xs={10}>
+                <TextField
+                  id="inputSearch"
+                  name="inputSearch"
+                  InputLabelProps={textFieldStyle}
+                  InputProps={textFieldStyle}
+                  autoComplete="false"
+                  label="Buscar"
+                  fullWidth
+                  value={search.inputSearch}
+                  onChange={onChangeSearch}
+                />
+              </Grid>
+              <Grid item xs={2}>
+                <IconButton
+                  style={{
+                    maxWidth: "10vh",
+                    minWidth: "1vh",
+                    color: "white",
+                    backgroundColor: "#001B2E",
+                  }}
+                  size="large"
+                  type="submit"
+                >
+                  <SendIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </FormControl>
+        </form>
       </div>
       <div id="resultLegend">
         <Typography variant="h4" style={{ padding: "10px", color: "white" }}>
@@ -78,44 +106,7 @@ export default function CreateService() {
         </Typography>
       </div>
       <div style={{ marginTop: "30px", marginBottom: "30px" }}>
-        <FormControl
-          variant="filled"
-          style={{ width: "200px", marginRight: "20px", marginBottom: "30px" }}
-        >
-          <InputLabel id="demo-" style={{ color: "white" }}>
-            Categoría
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Categoría"
-            onChange={handleChange}
-            style={{ color: "white" }}
-          >
-            <MenuItem value={10}>Seleccionar</MenuItem>
-            <MenuItem value={20}>Programacion</MenuItem>
-            <MenuItem value={30}>Llorar por las noches</MenuItem>
-          </Select>
-        </FormControl>
 
-        <FormControl variant="filled" style={{ width: "200px" }}>
-          <InputLabel id="demo-simple-select-label" style={{ color: "white" }}>
-            Precios
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            label="Precios"
-            onChange={handleChange}
-            style={{ color: "white" }}
-          >
-            <MenuItem value={10}>Arte</MenuItem>
-            <MenuItem value={20}>Programacion</MenuItem>
-            <MenuItem value={30}>Llorar por las noches</MenuItem>
-          </Select>
-        </FormControl>
       </div>
       <div id="cardsServicesLayout">
         <Grid
