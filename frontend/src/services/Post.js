@@ -18,6 +18,7 @@ export const Post_GetAll = async () => {
 }
 
 export const Post_Register = async (post) => {
+
     try{
         let data = new FormData();
         data.set('name', post.name);
@@ -28,8 +29,8 @@ export const Post_Register = async (post) => {
         data.set('images', post.images);
 
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/post", data)
-        console.log("My response: ", response); //trae objeto creado
+        const response = await axios.post("/post", post)
+        console.log("My response0: ", response); //trae objeto creado
         return response;
     }catch(err){
         console.error(err);

@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     },
     content:{
         type: String,
-        minlength: 20, // Mínimo de caracteres. 
+        //minlength: 20, // Mínimo de caracteres. 
         maxlength: 500, // Máximo de caracteres.
         required: true
     },

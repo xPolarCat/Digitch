@@ -14,7 +14,7 @@ const PriceSchema = new mongoose.Schema({
     },
     description:{
         type: String,
-        minlength: 10, // Mínimo de caracteres. 
+        //minlength: 10, // Mínimo de caracteres. 
         maxlength: 200, // Máximo de caracteres.
         required: true
     },

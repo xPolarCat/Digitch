@@ -17,6 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import {Price_Register} from '../../services/Price'
 import {Post_Register} from '../../services/Post'
+import { useNavigate } from 'react-router'
 
 export default function CreateServiceForm() {
   const textFieldStyle = { style: { color: "white" } };
@@ -150,24 +151,33 @@ export default function CreateServiceForm() {
     event.preventDefault();
    
     service.images = image;
-    service._user = "6216f6c95f824a4804b26d73";
+    service._user = '6281727fd938c62622a1471a';
+    service._category = '6281864dea063144676f6195';
     const obj = await Post_Register(service);
 
-    console.log("my object:", obj.data);
+    console.log("my object0:", obj.data);
 
-    price._post = obj._id;
-    price2._post = obj._id;
-    price3._post = obj._id;
+    price._post = obj.data._id;
+    price2._post = obj.data._id;
+    price3._post = obj.data._id;
 
-    const pObj = Price_Register(price);
-    const pObj2 = Price_Register(price2);
-    const pObj3 = Price_Register(price3);
+    console.log("paquete 1", price);
+    console.log("paquete 2", price2);
+    console.log("paquete 3", price3);
+    
+    const pObj = await Price_Register(price);
+    const pObj2 = await Price_Register(price2);
+    const pObj3 = await Price_Register(price3);
 
-    console.log("servicio", obj);
-    console.log("paquete 1", pObj);
-    console.log("paquete 2", pObj2);
-    console.log("paquete 3", pObj3);
+    if(pObj.data != null && pObj2.data != null && pObj3.data != null){
+      CONSOLE.LOG("SI SE PUDO")
+      let navigate = useNavigate();
+      navigate('/');
+    }else{
+      CONSOLE.LOG("NO SE PUDO")
 
+    }
+    
   };
 
   return (
