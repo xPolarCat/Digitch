@@ -11,7 +11,7 @@ const CategorySchema = new mongoose.Schema({
     description:{
         type: String, // Tipo de dato.
         required: true, // Es requerido. 
-        minlength: 40, // Mínimo de caracteres. 
+        minlength: 10, // Mínimo de caracteres. 
         maxlength: 300, // Máximo de caracteres.
     },
     created_at:{

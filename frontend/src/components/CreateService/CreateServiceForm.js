@@ -15,6 +15,8 @@ import {
 import React, { Fragment, useState } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
+import {Price_Register} from '../../services/Price'
+import {Post_Register} from '../../services/Post'
 
 export default function CreateServiceForm() {
   const textFieldStyle = { style: { color: "white" } };
@@ -36,7 +38,7 @@ export default function CreateServiceForm() {
 
     setService({
       ...service,
-      category: event.target.value,
+      _category: event.target.value,
     });
   };
   // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
@@ -126,8 +128,8 @@ export default function CreateServiceForm() {
     name: "",
     content: "",
     images: "0",
-    user: 1,
-    category: 1,
+    _user: 1,
+    _category: 1,
     created_at: new Date().toString(),
   });
 
@@ -146,10 +148,19 @@ export default function CreateServiceForm() {
   //----------Submit state-------
   const onSubmitCreateService = (event) => {
     event.preventDefault();
+   
+    service.images = image;
+    service._user = '6281727fd938c62622a1471a';
+    const obj = Post_Register(service);
+    price._post = obj._id;
+    price2._post = obj._id;
+    price3._post = obj._id;
+
     console.log("servicio", service);
     console.log("paquete 1", price);
     console.log("paquete 2", price2);
     console.log("paquete 3", price3);
+
   };
 
   return (

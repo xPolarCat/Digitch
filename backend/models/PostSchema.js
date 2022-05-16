@@ -9,7 +9,7 @@ const PostSchema = new mongoose.Schema({
     },
     content:{
         type: String,
-        minlength: 150, // Mínimo de caracteres. 
+        minlength: 20, // Mínimo de caracteres. 
         maxlength: 500, // Máximo de caracteres.
         required: true
     },
@@ -19,13 +19,13 @@ const PostSchema = new mongoose.Schema({
     }],
     _user:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"vendors",
-        required: true
+        ref:"user",
+        //required: true
     },
     _category:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"categories",
-        required: true
+        //required: true
     },
     created_at:{
         type: Date,
