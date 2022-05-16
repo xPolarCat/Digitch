@@ -150,21 +150,11 @@ export default function CreateServiceForm() {
     event.preventDefault();
    
     service.images = image;
-<<<<<<< HEAD
     service._user = "6216f6c95f824a4804b26d73";
     const obj = await Post_Register(service);
 
     console.log("my object:", obj.data);
 
-=======
-    service._user = '6281727fd938c62622a1471a';
-    service._category = '6281864dea063144676f6195';
-
-    console.log("servicio", service);
-
-    const obj = Post_Register(service);
-   console.log("ID DEL POST " + obj.__id);
->>>>>>> b95f0304aa11bd4e81367caa8af5d6346aaa6cdb
     price._post = obj._id;
     price2._post = obj._id;
     price3._post = obj._id;
