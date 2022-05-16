@@ -7,7 +7,7 @@ import './index.css';
 import Navbar from './pages/Navbar';
 import Footer from './pages/Footer';
 import Payment from './pages/Payment';
-import Login from './pages/login';
+import Login from './pages/Login';
 import Register from './pages/register';
 import Chat from './pages/Chat';
 import Details from './pages/Details'

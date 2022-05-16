@@ -1,5 +1,6 @@
 const Post = require("../models/PostSchema"); // Traigo mi modelo Post.
 const Vendor = require("../models/VendorSchema");
+const User = require("../models/UserSchema");
 
 // Obtener todos los posts 
 exports.post_getall = async (req, res) =>{
@@ -12,7 +13,7 @@ exports.post_getall = async (req, res) =>{
 exports.post_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
-    const userdb = await Vendor.findById(body._user); // Valio si existe un usuario con el id recibido
+    const userdb = await User.findById(body._user); // Valio si existe un usuario con el id recibido
 
     if(userdb){ // Si el usuario existe, entonces creo el post 
         // Validación de información 

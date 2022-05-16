@@ -11,11 +11,11 @@ export const Price_GetAll= async () => {
     }
 }
 
-export const Price_Register= async () => {
+export const Price_Register= async (price) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/price")
-        console.log(response);
+        const response = await axios.post("/price", price)
+        console.log("success");
     }catch(err){
         console.error(err);
         return err;
