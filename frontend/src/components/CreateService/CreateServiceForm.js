@@ -151,15 +151,24 @@ export default function CreateServiceForm() {
    
     service.images = image;
     service._user = '6281727fd938c62622a1471a';
+    service._category = '6281864dea063144676f6195';
+
+    console.log("servicio", service);
+
     const obj = Post_Register(service);
+   console.log("ID DEL POST " + obj.__id);
     price._post = obj._id;
     price2._post = obj._id;
     price3._post = obj._id;
 
-    console.log("servicio", service);
-    console.log("paquete 1", price);
-    console.log("paquete 2", price2);
-    console.log("paquete 3", price3);
+    const pObj = Price_Register(price);
+    const pObj2 = Price_Register(price2);
+    const pObj3 = Price_Register(price3);
+
+    console.log("servicio", obj);
+    console.log("paquete 1", pObj);
+    console.log("paquete 2", pObj2);
+    console.log("paquete 3", pObj3);
 
   };
 
