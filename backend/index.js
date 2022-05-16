@@ -1,5 +1,4 @@
 const bodyParser = require("body-parser");
-const cors= require("cors");
 const express = require("express"); // Mando a llamar el contenido de mi librería.
 const cors = require("cors"); //Se pueden tener solicitudes desde otros puertos
 const app = express(); // Con la constante express creamos la aplicación y app representa nuestro servicio.
