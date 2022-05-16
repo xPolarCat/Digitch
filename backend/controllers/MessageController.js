@@ -46,7 +46,7 @@ exports.message_update = async (req, res) => {
     const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
 
     const senderdb = await User.findById(body._sender); // Esto me sirve para revisar si existe un usuario con el id que recibo
-    const receiverdb = await Post.findById(body._receiver); 
+    const receiverdb = await Post.findById(body._receiver); // * NOTA: Cambiar a User
     // Esto me sirve para revisar si existe un post con el id que recibo
 
     if(senderdb){

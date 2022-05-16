@@ -27,6 +27,7 @@ exports.post_register = async (req, res) =>{
         }); // Aquí guardo el nuevo post.
 
         res.send(newPost); // Regreso el objeto creado.
+        return newPost;
     }else{
         res.send({message: "The user does not exist"});
     }
