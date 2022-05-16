@@ -17,7 +17,7 @@ exports.post_register = async (req, res) =>{
 
     if(userdb){ // Si el usuario existe, entonces creo el post 
         // Validación de información 
-        let newPost = new Post({created_at: Date.now(), body}); // Creo un objeto tipo post basado en mi modelo post.
+        let newPost = new Post({created_at: Date.now(), name: body.name, content: body.content, images: body.images, _user: body._user, _category: body._category}); // Creo un objeto tipo post basado en mi modelo post.
         await newPost
         .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
         .then((newPost) => console.log("New post succesfully registered!", newPost))
