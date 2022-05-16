@@ -6,7 +6,7 @@ import './index.css';
 import Navbar from './pages/Navbar';
 import Footer from './pages/Footer';
 import Payment from './pages/Payment';
-import Login from './pages/Login';
+import Login from './pages/login';
 import Register from './pages/register';
 import Chat from './pages/Chat';
 import Details from './pages/Details'
@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/editService" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
-        <Route exact path="details/:serviceId" element={<Details/>}/>
+        <Route exact path="/details" element={<Details/>}/>
         <Route exact path="/chat" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment" element={<Payment/>} /> 

@@ -4,7 +4,7 @@ export const Price_GetAll= async () => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get("/price")
-        console.log("id: ", id);
+        //console.log("id: ", id);
     }catch(err){
         console.error(err);
         return err;

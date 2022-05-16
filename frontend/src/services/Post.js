@@ -5,7 +5,11 @@ export const Post_GetAll = async () => {
         //Respuesta de un await con la ruta del api
         const response = await axios.get("/post")
         
-        console.log("getAllPosts: ", response);
+        if(response.status==200) {
+            return response.data;
+        }else{
+            return[]
+        }
 
     }catch(err){
         console.error(err);
@@ -57,8 +61,13 @@ export const Post_Delete = async (id) => {
 export const Post_GetById = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/post/:id",  id)
-        console.log(response);
+        const response = await axios.get(`/post/${id}`)
+        if(response.status==200) {
+          return response.data;
+        }else{
+            return {}
+        }
+
     }catch(err){
         console.error(err);
         return err;
