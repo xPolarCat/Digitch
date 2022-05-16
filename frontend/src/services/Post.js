@@ -19,12 +19,18 @@ export const Post_Register = async (post) => {
         data.set('name', post.name);
         data.set('content', post.content);
         data.set('_user', post._user);
-        data.set('_category', post._category);
+        data.set('_category', "6281864dea063144676f6195");
         data.set('created_at', post.created_at);
-        data.set('images', post.image);
+        data.set('images', post.images);
 
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/post", data)
+        const response = await axios.post("/post", post)
+
+        /*const response = await axios.post("/post", data, {
+            headers: {
+                "Content-Type": "multipart/form-data"
+            }
+        })*/
         console.log(response); //trae objeto creado
     }catch(err){
         console.error(err);

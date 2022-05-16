@@ -16,7 +16,7 @@ exports.price_register = async (req, res) =>{
 
     if(postdb){ // Si el post existe, entonces creo el post 
         // Validación de información 
-        let newPrice = new Price(body); // Creo un objeto tipo Price basado en mi modelo Price.
+        let newPrice = new Price({name: body.name, price: body.price, description: body.description, _post: body.post, created_at: body.created_at}); // Creo un objeto tipo Price basado en mi modelo Price.
         await newPrice
         .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
         .then((newPrice) => console.log("New post succesfully registered!", newPrice))
