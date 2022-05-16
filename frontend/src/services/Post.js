@@ -90,8 +90,13 @@ export const Post_GetByCategory= async (id) => {
 export const Post_GetByName= async (name) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/posts/search:name/" , `${name}`)
-        console.log(response);
+        console.log(name);
+        const response = await axios.get(`/posts/search/${name}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
     }catch(err){
         console.error(err);
         return err;

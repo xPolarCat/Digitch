@@ -16,7 +16,7 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import {Post_GetByName} from "../services/Post"
 import { useParams } from "react-router-dom";
-import { Post_GetAll } from "../services/Post"; //Obtener todos los post que tenemos
+import { Post_GetAll} from "../services/Post"; //Obtener todos los post que tenemos
 
 const useStyles = makeStyles(() => ({
   ul: {
@@ -37,6 +37,9 @@ export default function CreateService() {
     },
   };
   const textFieldStyle = { style: { color: "white" } };
+
+ //Aqui guardaremos todos los post
+ const [posts, setPosts]= useState([]);
 
   // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
   //----------Search state-------
@@ -60,12 +63,17 @@ export default function CreateService() {
   //----------Submit state-------
   const onSubmitSearch=(event)=>{
     event.preventDefault();
-    console.log(search.inputSearch)
 
-  }
+    async function fetchData(){
 
- //Aqui guardaremos todos los post
-  const [posts, setPosts]= useState([]);
+    const data= await Post_GetByName(search.inputSearch);
+    setPosts(data);
+    
+    console.log(data);
+    }
+    fetchData();
+}
+
   //------Obtenemos los post y los mostramos en la consola.
 useEffect(()=>{
   async function fetchData(){

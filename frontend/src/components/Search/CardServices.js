@@ -87,9 +87,6 @@ useEffect(()=>{
           avatar={<Avatar style={{marginBottom: "5px"}}>R</Avatar>}
           title={user.name}
         />
-        <Typography variant="body2" color="textSecondary" component="p" style={{padding: "10px", color: "white"}}>
-          Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
-        </Typography>
         <Typography component="p" textAlign="center" className={classes.costo}>
          <Typography  gutterBottom variant="h6" component="h2" style={{padding: "10px", margin: "0px", color: "black"}} > Desde ${prices.price} MXN</Typography>
           
