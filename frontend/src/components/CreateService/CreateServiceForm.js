@@ -146,12 +146,15 @@ export default function CreateServiceForm() {
     });
   };
   //----------Submit state-------
-  const onSubmitCreateService = (event) => {
+  const onSubmitCreateService = async (event) => {
     event.preventDefault();
    
     service.images = image;
-    service._user = '6281727fd938c62622a1471a';
-    const obj = Post_Register(service);
+    service._user = "6216f6c95f824a4804b26d73";
+    const obj = await Post_Register(service);
+
+    console.log("my object:", obj.data);
+
     price._post = obj._id;
     price2._post = obj._id;
     price3._post = obj._id;

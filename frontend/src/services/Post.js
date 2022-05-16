@@ -23,7 +23,8 @@ export const Post_Register = async (post) => {
 
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/post", data)
-        console.log(response); //trae objeto creado
+        console.log("My response: ", response); //trae objeto creado
+        return response;
     }catch(err){
         console.error(err);
         return err;
