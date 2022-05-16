@@ -4,7 +4,9 @@ export const Post_GetAll = async () => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get("/post")
-        console.log("id: ", id);
+        
+        console.log("getAllPosts: ", response);
+
     }catch(err){
         console.error(err);
         return err;
@@ -65,6 +67,7 @@ export const Post_GetByCategory= async (id) => {
         return err;
     }
 }
+
 export const Post_GetByName= async (name) => {
     try{
         //Respuesta de un await con la ruta del api

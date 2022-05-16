@@ -1,8 +1,10 @@
 const bodyParser = require("body-parser");
+const cors= require("cors");
 const express = require("express"); // Mando a llamar el contenido de mi librería.
 const app = express(); // Con la constante express creamos la aplicación y app representa nuestro servicio.
 const port = 5000; // Puerto en donde se ejecutará el servicio dentro de nuestra computadora.
 
+app.use(cors());
 require('./models/connection'); // Agrego el archivo de conexión para poder utilizarlo.
 
 // REQUIRES DE MIS RUTAS //

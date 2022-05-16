@@ -15,6 +15,8 @@ import { makeStyles } from "@mui/styles";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import {Post_GetByName} from "../services/Post"
+import { useParams } from "react-router-dom";
+import { Post_GetAll } from "../services/Post";
 
 const useStyles = makeStyles(() => ({
   ul: {
@@ -62,6 +64,15 @@ export default function CreateService() {
 
   }
  
+useEffect(()=>{
+  async function fetchData(){
+    await Post_GetAll;
+  }
+
+  fetchData();
+}, []);
+
+Post_GetAll();
 
   return (
     <Grid spacing={0} style={background.style}>
@@ -115,7 +126,7 @@ export default function CreateService() {
           style={{ display: "flex", justifyContent: "center" }}
         >
           <Grid item>
-            <CardServices />
+            <CardServices prop1={"id"}/>
           </Grid>
           <Grid item>
             <CardServices />
