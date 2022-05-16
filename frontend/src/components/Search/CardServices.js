@@ -7,6 +7,7 @@ import {Typography, Avatar, CardHeader, CardActions, Button, IconButton} from "@
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
+import {User_GetOne} from "../../services/User"
 
 const useStyles = makeStyles({
   root: {
@@ -37,17 +38,28 @@ export default function CardServices(props) {
 
  //Aqui guardaremos info del post
  const [post, setPost]= useState([]);
- //------Obtenemos los post y los mostramos en la consola.
+ //Aqui guardamos info del usuario
+ const [user, setUser]= useState([]);
+
 useEffect(()=>{
  async function fetchData(){
+   //Tuve que convertir el objeto a string
    const myJSON = JSON.stringify(props);
+
+   //Despues separarlo para que solo me quedara el numero y no exista un error
    const splitString = myJSON.split(":");
    const splitString2= splitString[1].split("}");
    const splitString3 = splitString2[0].split(' " ');
    const idFinal= splitString3[0].slice(1,25);
 
+  //Me traigo la info de ese post con ese id
    const data= await Post_GetById(idFinal);
    setPost(data);
+
+  //Obtengo la info del usuario que subio ese post
+   const dataUser= await User_GetOne(data._user);
+   setUser(dataUser);
+   
   }
 
  fetchData();
@@ -66,7 +78,7 @@ useEffect(()=>{
         </Typography>
         <CardHeader style={{paddingLeft: "10px", paddingRight: "10px", paddingTop: "0px", paddingBottom: "0px", color: "white"}}
           avatar={<Avatar style={{marginBottom: "5px"}}>R</Avatar>}
-          title="Shrimp and Chorizo Paella"
+          title={user.name}
         />
         <Typography variant="body2" color="textSecondary" component="p" style={{padding: "10px", color: "white"}}>
           Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>

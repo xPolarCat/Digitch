@@ -26,7 +26,7 @@ export const User_Update = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.put("/user/:id", {id})
-        console.log("data", data);
+        //console.log("data", data);
     }catch(err){
         console.error(err);
         return err;
@@ -47,8 +47,12 @@ export const User_Delete = async (id) => {
 export const User_GetOne = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/user", {id})
-        console.log("obtuve: ", id);
+        const response = await axios.get(`/user/${id}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
     }catch(err){
         console.error(err);
         return err;
