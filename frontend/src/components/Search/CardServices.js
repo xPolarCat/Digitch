@@ -58,6 +58,7 @@ useEffect(()=>{
   //Me traigo la info de ese post con ese id
    const data= await Post_GetById(idFinal);
    setPost(data);
+   console.log(data);
 
   //Obtengo la info del usuario que subio ese post
    const dataUser= await User_GetOne(data._user);
@@ -70,7 +71,7 @@ useEffect(()=>{
   }
 
  fetchData();
-}, []);
+}, [props]);
 
   return (
     <Card className={classes.root}>

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import {
   Container,
   FormControl,
@@ -37,9 +37,11 @@ export default function CreateService() {
     },
   };
   const textFieldStyle = { style: { color: "white" } };
+  const bool = useRef(false);
 
  //Aqui guardaremos todos los post
  const [posts, setPosts]= useState([]);
+
 
   // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
   //----------Search state-------
@@ -48,46 +50,62 @@ export default function CreateService() {
   });
 
   const onChangeSearch=(event)=>{
-
     setSearch({
       ...search,
       inputSearch : event.target.value
     });
   }
+
   //----------Category state-------
   const [age, setAge] = useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
-  //----------Price state-------
-  //----------Submit state-------
-  const onSubmitSearch=(event)=>{
-    event.preventDefault();
-
-    async function fetchData(){
-
-    const data= await Post_GetByName(search.inputSearch);
-    setPosts(data);
-    
-    console.log(data);
-    }
-    fetchData();
-}
 
   //------Obtenemos los post y los mostramos en la consola.
+
 useEffect(()=>{
+  
+  if(bool.current && search.inputSearch){
+    console.log(posts)
+  
   async function fetchData(){
-    const data= await Post_GetAll();
+    const data= await Post_GetByName(search.inputSearch);
     setPosts(data);
-  }
+    console.log(data);
+
+  } 
 
   fetchData();
-}, []);
+  console.log(posts)
+
+
+  } else{
+    async function fetchData(){
+      const data= await Post_GetAll();
+      setPosts(data);
+    }
+    fetchData();
+  }
+
+  bool.current= true;
+
+}, [search.inputSearch]);
+
+  
+// const onSubmitSearch=(event)=>{
+//   event.preventDefault();
+//   async function fetchData(){
+//   const data= await Post_GetByName(search.inputSearch);
+//   setPosts(data);
+//   }
+//   fetchData();
+// }
 
   return (
     <Grid spacing={0} style={background.style}>
       <div>
-        <form onSubmit={onSubmitSearch}>
+        <form >
           <FormControl fullWidth sx={{ my: 2 }}>
             <Grid container alignItems="center">
               <Grid item xs={10}>
