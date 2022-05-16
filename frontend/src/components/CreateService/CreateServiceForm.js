@@ -38,6 +38,8 @@ export default function CreateServiceForm() {
   useEffect (()=>{
     async function fetchData(){
       const data= await Cat_GetAll();
+      
+      console.log(data);
       setCat (data);
     }
     fetchData();
@@ -226,13 +228,14 @@ export default function CreateServiceForm() {
                 id="inputSelect"
                 name="inputSelect"
                 displayEmpty
-                //onChange={handleChange}
                 sx={{ flexGrow: 1, color: "#ffffff" }}
                 required
               >
-                {categoryServ.map((categories, index)=>{
-                <MenuItem value={index}>{categories.name}</MenuItem>
-                })};
+                {categoryServ.map((cat, index)=>(
+                <Grid item key={index}>
+                <MenuItem >{cat.name}</MenuItem>
+                </Grid>
+                ))}
               
               </Select>
             </Box>

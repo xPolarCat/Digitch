@@ -140,7 +140,7 @@ useEffect(()=>{
           <Grid item key={index}>
           <CardServices id={post._id}/>
           </Grid>
-          ))};
+          ))}
 
         </Grid>
       </div>
