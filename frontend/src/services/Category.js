@@ -4,7 +4,11 @@ export const Cat_GetAll = async () => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get("/category")
-        console.log("respuesta: ", response);
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
     }catch(err){
         console.error(err);
         return err;

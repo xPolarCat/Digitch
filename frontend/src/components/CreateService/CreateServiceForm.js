@@ -12,14 +12,16 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import AddIcon from "@mui/icons-material/Add";
 import SendIcon from "@mui/icons-material/Send";
 import {Price_Register} from '../../services/Price'
 import {Post_Register} from '../../services/Post'
 import { useNavigate } from 'react-router'
+import { Cat_GetAll } from "../../services/Category";
 
 export default function CreateServiceForm() {
+  let navigate = useNavigate();
   const textFieldStyle = { style: { color: "white" } };
   const styles = { helper: { color: "grey" } };
   const dividerStyle = { backgroundColor: "white" };
@@ -32,10 +34,19 @@ export default function CreateServiceForm() {
    }
   }
 
-  const [age, setAge] = useState("");
+  const [categoryServ, setCat] = useState([]);
+  useEffect (()=>{
+    async function fetchData(){
+      const data= await Cat_GetAll();
+      setCat (data);
+    }
+    fetchData();
+    }, []);
+    
+  //const [age, setAge] = useState("");
 
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCat(event.target.value);
 
     setService({
       ...service,
@@ -43,6 +54,7 @@ export default function CreateServiceForm() {
     });
   };
   // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
+  
   const [price, setPrice] = useState({
     name: "",
     price: "",
@@ -161,21 +173,17 @@ export default function CreateServiceForm() {
     price2._post = obj.data._id;
     price3._post = obj.data._id;
 
-    console.log("paquete 1", price);
+    /*console.log("paquete 1", price);
     console.log("paquete 2", price2);
-    console.log("paquete 3", price3);
+    console.log("paquete 3", price3);*/
     
-    const pObj = await Price_Register(price);
-    const pObj2 = await Price_Register(price2);
-    const pObj3 = await Price_Register(price3);
+   await Price_Register(price);
+   await Price_Register(price2);
+   await Price_Register(price3);
 
-    if(pObj.data != null && pObj2.data != null && pObj3.data != null){
-      CONSOLE.LOG("SI SE PUDO")
-      let navigate = useNavigate();
+    if(obj.data != null){
       navigate('/');
     }else{
-      CONSOLE.LOG("NO SE PUDO")
-
     }
     
   };
@@ -217,15 +225,15 @@ export default function CreateServiceForm() {
                 labelId="demo-simple-select-label"
                 id="inputSelect"
                 name="inputSelect"
-                value={age}
                 displayEmpty
-                onChange={handleChange}
+                //onChange={handleChange}
                 sx={{ flexGrow: 1, color: "#ffffff" }}
                 required
               >
-                <MenuItem value={10}>Seleccionar</MenuItem>
-                <MenuItem value={20}>Programacion</MenuItem>
-                <MenuItem value={30}>Llorar por las noches</MenuItem>
+                {categoryServ.map((categories, index)=>{
+                <MenuItem value={index}>{categories.name}</MenuItem>
+                })};
+              
               </Select>
             </Box>
           </FormControl>
