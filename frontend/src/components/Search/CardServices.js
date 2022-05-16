@@ -8,6 +8,7 @@ import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
+import {Price_GetByPost} from "../../services/Price"
 
 const useStyles = makeStyles({
   root: {
@@ -40,6 +41,8 @@ export default function CardServices(props) {
  const [post, setPost]= useState([]);
  //Aqui guardamos info del usuario
  const [user, setUser]= useState([]);
+ //Aqui guardamos info de los precios de los servicios
+ const [prices, setPrice]= useState([]);
 
 useEffect(()=>{
  async function fetchData(){
@@ -59,7 +62,11 @@ useEffect(()=>{
   //Obtengo la info del usuario que subio ese post
    const dataUser= await User_GetOne(data._user);
    setUser(dataUser);
-   
+
+   //Obtengo la info de los precios
+   const dataPrices= await Price_GetByPost(idFinal);
+   setPrice(dataPrices);
+
   }
 
  fetchData();
@@ -84,7 +91,8 @@ useEffect(()=>{
           Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
         </Typography>
         <Typography component="p" textAlign="center" className={classes.costo}>
-          <b>Desde 150 MXN</b> 
+         <Typography  gutterBottom variant="h6" component="h2" style={{padding: "10px", margin: "0px", color: "black"}} > Desde ${prices.price} MXN</Typography>
+          
         </Typography>
       </CardContent>
 

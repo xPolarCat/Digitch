@@ -170,11 +170,11 @@ export default function CreateServiceForm() {
     const pObj3 = await Price_Register(price3);
 
     if(pObj.data != null && pObj2.data != null && pObj3.data != null){
-      CONSOLE.LOG("SI SE PUDO")
-      let navigate = useNavigate();
-      navigate('/');
+     // CONSOLE.LOG("SI SE PUDO")
+     // let navigate = useNavigate();
+     // navigate('/');
     }else{
-      CONSOLE.LOG("NO SE PUDO")
+      //CONSOLE.LOG("NO SE PUDO")
 
     }
     
