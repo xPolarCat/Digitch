@@ -15,6 +15,8 @@ import { makeStyles } from "@mui/styles";
 import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import {Post_GetByName} from "../services/Post"
+import { useParams } from "react-router-dom";
+import { Post_GetAll } from "../services/Post"; //Obtener todos los post que tenemos
 
 const useStyles = makeStyles(() => ({
   ul: {
@@ -61,7 +63,18 @@ export default function CreateService() {
     console.log(search.inputSearch)
 
   }
- 
+
+ //Aqui guardaremos todos los post
+  const [posts, setPosts]= useState([]);
+  //------Obtenemos los post y los mostramos en la consola.
+useEffect(()=>{
+  async function fetchData(){
+    const data= await Post_GetAll();
+    setPosts(data);
+  }
+
+  fetchData();
+}, []);
 
   return (
     <Grid spacing={0} style={background.style}>
@@ -114,42 +127,13 @@ export default function CreateService() {
           spacing={3}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <Grid item>
-            <CardServices />
+          {/* AQUI REALIZO UN CICLO PARA PONER TODOS LOS POST EXISTENTES*/}
+          {posts.map((post, index)=>(
+          <Grid item key={index}>
+          <CardServices id={post._id}/>
           </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
-          <Grid item>
-            <CardServices />
-          </Grid>
+          ))};
+
         </Grid>
       </div>
       <div id="paginationServices">

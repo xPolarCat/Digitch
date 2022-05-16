@@ -1,4 +1,3 @@
-
 import './index.css';
 import './App.css';
 import React, {Fragment} from 'react';
@@ -7,7 +6,7 @@ import './index.css';
 import Navbar from './pages/Navbar';
 import Footer from './pages/Footer';
 import Payment from './pages/Payment';
-import Login from './pages/Login';
+import Login from './pages/login';
 import Register from './pages/register';
 import Chat from './pages/Chat';
 import Details from './pages/Details'

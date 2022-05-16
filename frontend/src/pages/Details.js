@@ -30,9 +30,9 @@ export default function Blog() {
     <React.Fragment>
       <CssBaseline />
       <Grid container sx={{ backgroundColor : '#294C60',
-    height: "100%", 
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover"}}>
+      height: "100%", 
+      backgroundRepeat: "no-repeat",
+      backgroundSize: "cover"}}>
       <Container maxWidth="lg">
         <main >
           <MainFeaturedPost post={mainFeaturedPost} />

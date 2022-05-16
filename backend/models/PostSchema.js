@@ -20,12 +20,12 @@ const PostSchema = new mongoose.Schema({
     _user:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"user",
-        //required: true
+        required: true
     },
     _category:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"categories",
-        //required: true
+        required: true
     },
     created_at:{
         type: Date,
