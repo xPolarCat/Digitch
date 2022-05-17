@@ -32,7 +32,7 @@ function App() {
      <Routes>
         <Route exact path="/userProfile" element={<UserProfile/>}/>
         <Route exact path="/createService" element={<CreateService/>}/>
-        <Route exact path="/editService" element={<EditService/>}/>
+        <Route exact path="/editService/:id" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/details/:id" element={<Details/>}/>
