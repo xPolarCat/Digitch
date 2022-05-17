@@ -1,4 +1,5 @@
-import * as React from 'react';
+
+import React,{ Fragment, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
@@ -18,13 +19,16 @@ import Divider from '@material-ui/core/Divider';
 import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardReview from '../components/UserProfile/CardReview';
+import { useParams } from "react-router-dom";
+import {Post_GetById} from "../services/Post";
+import {User_GetOne} from "../services/User"
+import {Price_GetByPost} from "../services/Price"
 
 
 const Spacing={margin: '30px'}
 const IconStyle2={
     color: "#FFC49B"
   }
-
 const tiers = [
   {
     title: 'Plan de trabajo',
@@ -39,17 +43,13 @@ const tiers = [
     buttonVariant: 'contained',
   }
 ];
-
 const cardGrid= {
     paddingTop:"8px",
     paddingBottom: "8px"
   }
-
 const TextStyle={
     color:"black"
   }
-
-  
 const ImageVStyle={
   width:"120px",
   height:"170px",
@@ -57,18 +57,14 @@ const ImageVStyle={
 
 
 }
-
 const card1= {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
   }
-
-  
 const cardContent= {
     flexGrow: 1,
   }
-
 const cardMedia= {
     paddingTop: '56.25%', // 16:9
   }
@@ -98,8 +94,6 @@ function LinearProgressWithLabel(props) {
       </Box>
     );
   }
-
-
   const GridStyle={ 
     backgroundColor: "rgba(173, 182, 196,0.8)",
     maxHeight: "300px",
@@ -107,8 +101,42 @@ function LinearProgressWithLabel(props) {
 
   }
 
-function PricingContent() {
+
+
+export default function Pricing() {
+   //Aqui guardaremos info del post
+  const params = useParams();
+ const [post, setPost]= useState([]);
+ //Aqui guardamos info del usuario
+ const [user, setUser]= useState([]);
+ //Aqui guardamos info de los precios de los servicios
+ const [prices, setPrice]= useState([]);
+
+ useEffect(()=>{
+   async function fetchData(){
+    
+  //Tuve que convertir el objeto a string
+  const myJSON = JSON.stringify(params.id);
+
+  //Despues separarlo para que solo me quedara el numero y no exista un error
+  const idFinal= myJSON.slice(2,26);
+ //Me traigo la info de ese post con ese id
+ const data= await Post_GetById(idFinal);
+ setPost(data);
+ console.log(data);
+
+ 
+  //Obtengo la info del usuario que subio ese post
+  const dataUser= await User_GetOne(data._user);
+  setUser(dataUser);
+  console.log(dataUser);
+  
+    }
+  
+   fetchData();
+  }, []);
   return (
+
     <React.Fragment>
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
@@ -126,15 +154,7 @@ function PricingContent() {
             </Typography>
             <Typography variant="p" 
             color="white" component="p">
-            Si estas buscando un desarrollador de sitios web HTML, CCS de WordPress
-            profesional para  desarrollar el sitio web de su empresa, entonces esta en el 
-            lugar correcto. Mi objetivo es ofrecer soluciones que causen una excelente  
-            primera impresion. Ya he desarrollado mas de 50 sitios. Encontraras que si
-            tengo confianza, trabajo duro, excelente para comunicarme, confiable y lista.
-            </Typography>
-            <Typography variant="p" 
-            color="white"component="p">
-            Estás en el lugar ideal. Con mi licenciatura en publicidad y publicidad, estoy bien calificado para ayudarlo a asegurar un sitio web bien planificado. Actualmente soy diseñador de UI/UX que trabaja con el diseño de sitios web. Me especializo en crear diseños para sitios web que comuniquen sus servicios de manera efectiva. Si necesita un nuevo diseño de maquetación que comunique de manera más efectiva lo que ofrece a sus clientes, puedo hacerlo por usted. Si tiene alguna pregunta, póngase en contacto conmigo en cualquier momento.
+            {post.content}
             </Typography>
         </Container>
         <Divider style={dividerStyle}/>
@@ -147,7 +167,7 @@ function PricingContent() {
             />
     
               <Typography gutterBottom variant="h5" component="div" style={{color:"white", marginTop: "15px"}}>
-                Juan Portillo
+                {user.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
               Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
@@ -256,9 +276,5 @@ function PricingContent() {
        </Grid>
 
     </React.Fragment>
-  );
-}
-
-export default function Pricing() {
-  return <PricingContent />;
+  )
 }

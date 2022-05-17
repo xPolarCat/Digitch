@@ -35,7 +35,7 @@ function App() {
         <Route exact path="/editService" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
-        <Route exact path="/details" element={<Details/>}/>
+        <Route exact path="/details/:id" element={<Details/>}/>
         <Route exact path="/chat" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment" element={<Payment/>} /> 

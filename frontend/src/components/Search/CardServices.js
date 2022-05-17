@@ -58,7 +58,6 @@ useEffect(()=>{
   //Me traigo la info de ese post con ese id
    const data= await Post_GetById(idFinal);
    setPost(data);
-   console.log(data);
 
   //Obtengo la info del usuario que subio ese post
    const dataUser= await User_GetOne(data._user);
@@ -95,7 +94,7 @@ useEffect(()=>{
       </CardContent>
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
-        <Button variant="contained" style={cardActionStyle} fullWidth href="../details/1">Ver detalle</Button>
+        <Button variant="contained" style={cardActionStyle} fullWidth href={`../details/ ${post._id}`} >Ver detalle</Button>
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>

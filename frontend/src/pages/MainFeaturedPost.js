@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -13,6 +13,10 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import StarIcon from '@mui/icons-material/Star';
+import { useParams } from "react-router-dom";
+import {Post_GetById} from "../services/Post"
+import {User_GetOne} from "../services/User"
+import {Price_GetByPost} from "../services/Price"
 
 
 const TextStyle={
@@ -51,6 +55,38 @@ const useStyles = makeStyles((theme) => ({
 export default function MainFeaturedPost(props) {
   const classes = useStyles();
   const { post } = props;
+  const params = useParams();
+  //Aqui guardaremos info del post
+ const [posts, setPost]= useState([]);
+ //Aqui guardamos info del usuario
+ const [user, setUser]= useState([]);
+ //Aqui guardamos info de los precios de los servicios
+ const [prices, setPrice]= useState([]);
+
+  useEffect(()=>{
+    async function fetchData(){
+      
+   //Tuve que convertir el objeto a string
+   const myJSON = JSON.stringify(params.id);
+
+   //Despues separarlo para que solo me quedara el numero y no exista un error
+  
+   const idFinal= myJSON.slice(2,26);
+  //Me traigo la info de ese post con ese id
+  const data= await Post_GetById(idFinal);
+  setPost(data);
+  
+  //Obtengo la info del usuario que subio ese post
+  const dataUser= await User_GetOne(data._user);
+  setUser(dataUser);
+
+   
+     }
+   
+    fetchData();
+   }, []);
+
+
 
   return (
     <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2015/06/108191-webassembly-pretende-ser-nuevo-estandar-programacion-web.jpg?itok=NvuuYPF-)`, opacity: 1}}>
@@ -63,9 +99,6 @@ export default function MainFeaturedPost(props) {
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}
             </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              {post.description}
-            </Typography>
             <Grid container spacing={2}>
             <Toolbar>
             <Box
@@ -76,7 +109,7 @@ export default function MainFeaturedPost(props) {
                             <ListItemIcon>
                             <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/6.jpg" />
                             </ListItemIcon>
-                            <ListItemText style={TextStyle} primary="Juan Portillo"></ListItemText>
+                            <ListItemText style={TextStyle} primary={user.name}></ListItemText>
                         </ListItem>            
                         <Divider orientation="vertical" flexItem />
             </List>

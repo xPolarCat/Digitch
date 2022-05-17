@@ -1,11 +1,13 @@
-import React from 'react';
+import React,{ Fragment, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 import MainFeaturedPost from './MainFeaturedPost';
 import Info from './Info';
 import Grid from '@mui/material/Grid';
-import BackImage from '../images/fondo_UserProfile_.png'
+import BackImage from '../images/fondo_UserProfile_.png';
+import { useParams } from "react-router-dom";
+import {Post_GetById} from "../services/Post"
 
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
@@ -14,18 +16,42 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const mainFeaturedPost = {
-  title: 'Voy a crear el diseño de tu página web.',
-  description:
-    "Diseñaré una interfaz de usuario de sitio web impresionante, moderna y única.",
-  image: 'https://source.unsplash.com/random',
-  imgText: 'main image description',
-  linkText: '',
-};
 
 export default function Blog() {
   const classes = useStyles();
+  const params = useParams();
+  //Aqui guardaremos info del post
+ const [post, setPost]= useState([]);
 
+  useEffect(()=>{
+    async function fetchData(){
+     
+   //Tuve que convertir el objeto a string
+   const myJSON = JSON.stringify(params.id);
+
+   //Despues separarlo para que solo me quedara el numero y no exista un error
+  
+   const idFinal= myJSON.slice(2,26);
+  //Me traigo la info de ese post con ese id
+  const data= await Post_GetById(idFinal);
+  setPost(data);
+   
+     }
+   
+    fetchData();
+   }, []);
+
+
+  
+const mainFeaturedPost = {
+  title: post.name,
+  description:
+    post.content,
+  image: 'https://source.unsplash.com/random',
+  imgText: 'main image description',
+  linkText: '',
+  id: post._id
+};
   return (
     <React.Fragment>
       <CssBaseline />
@@ -36,7 +62,7 @@ export default function Blog() {
       <Container maxWidth="lg">
         <main >
           <MainFeaturedPost post={mainFeaturedPost} />
-          <Info />
+          <Info id={post._id} />
         </main>
       </Container>
       </Grid>
