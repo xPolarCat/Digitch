@@ -55,3 +55,36 @@ export const Rate_GetOne = async (id) => {
         return err;
     }
 }
+
+export const Rate_GetByUser = async (id) => {
+    try{
+        //Respuesta de un await con la ruta del api
+        const response = await axios.get(`/rate/user/${id}`)
+        console.log("rate: ", response.data);
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}
+
+export const Rate_GetByPost = async (id) => {
+    try{
+        //Respuesta de un await con la ruta del api
+        const response = await axios.get(`/rate/post/${id}`)
+        console.log("rate: ", response);
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}
+

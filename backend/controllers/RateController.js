@@ -100,3 +100,35 @@ exports.rate_getById = async (req, res) =>{
         res.send({message: "Message does not exists."})
     }
 }
+
+exports.rate_getByUser = async (req, res) => {
+    
+    
+    //Tuve que convertir el objeto a string
+    const user = JSON.stringify(req.params);
+    const idFinal= user.slice(10,34);
+    const data = await Rate.findOne({'_user': {$in: idFinal} , sort:{created_at: -1}}); // Busca posts basándonos en el id de una categoría
+
+    
+    console.log(data);
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "User does not exists."})
+    }
+}
+
+exports.rate_getByPost = async (req, res) => {
+    //Tuve que convertir el objeto a string
+    const post = JSON.stringify(req.params);
+    const idFinal= post.slice(10,34);
+    const data = await Rate.find({'_post': {$in: idFinal} , sort:{created_at: -1}}); // Busca posts basándonos en el id de una categoría
+
+    
+    console.log(data);
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Post does not exists."})
+    }
+}
