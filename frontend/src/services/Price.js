@@ -64,6 +64,23 @@ export const Price_GetByPost= async (id) => {
           }else{
               return []
           }
+        
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}
+
+export const Price_GetByPostAll= async (id, opc) => {
+    try{
+        //Respuesta de un await con la ruta del api
+        const response = await axios.get(`price/post/${id}/${opc}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
+        
     }catch(err){
         console.error(err);
         return err;

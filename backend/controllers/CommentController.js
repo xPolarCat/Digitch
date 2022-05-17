@@ -21,7 +21,7 @@ exports.comment_register = async (req, res) =>{
     if(userdb){
         if(postdb){
             // Validación de información 
-            let comment = new Category(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
+            let comment = new Comment(body); // Creo un objeto tipo Comment basado en mi modelo Comment.
 
             await comment
             .save() // si newComment es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
@@ -101,8 +101,17 @@ exports.comment_getById = async (req, res) =>{
 
 exports.comment_getByPost = async (req, res) =>{
     const { post } = req.params;
+
+     //Tuve que convertir el objeto a string
+     const myJSON = JSON.stringify(req.params);
+
+     //Despues separarlo para que solo me quedara el numero y no exista un error
+     const splitString = myJSON.split(":");
+     const splitString2= splitString[1].split("}");
+     const splitString3 = splitString2[0].split(' " ');
+     const idFinal= splitString3[0].slice(1,25);
     // Método optimizado para buscar por ids.
-    const data = await Comment.find({_post: post}); // Encuentra el primer registro que coincide con la condición. 
+    const data = await Comment.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
 
     if(data){

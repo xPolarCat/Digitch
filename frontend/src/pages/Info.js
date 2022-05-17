@@ -22,7 +22,8 @@ import CardReview from '../components/UserProfile/CardReview';
 import { useParams } from "react-router-dom";
 import {Post_GetById} from "../services/Post";
 import {User_GetOne} from "../services/User"
-import {Price_GetByPost} from "../services/Price"
+import {Price_GetByPostAll} from "../services/Price"
+import {Comm_GetByPost} from "../services/Comment"
 
 
 const Spacing={margin: '30px'}
@@ -111,6 +112,8 @@ export default function Pricing() {
  const [user, setUser]= useState([]);
  //Aqui guardamos info de los precios de los servicios
  const [prices, setPrice]= useState([]);
+ //Aqui guardamos info de los comentarios des servicio
+ const [comments, setComment]= useState([]);
 
  useEffect(()=>{
    async function fetchData(){
@@ -123,18 +126,28 @@ export default function Pricing() {
  //Me traigo la info de ese post con ese id
  const data= await Post_GetById(idFinal);
  setPost(data);
- console.log(data);
 
  
   //Obtengo la info del usuario que subio ese post
   const dataUser= await User_GetOne(data._user);
   setUser(dataUser);
-  console.log(dataUser);
+
   
+   //Obtengo la info de los precios
+   const dataPrices= await Price_GetByPostAll(idFinal,1);
+   setPrice(dataPrices);
+  
+    //Obtengo la info de los comentarios
+    const dataComments= await Comm_GetByPost(idFinal);
+    setComment(dataComments);
+    console.log(dataComments);
+
     }
   
    fetchData();
   }, []);
+
+
   return (
 
     <React.Fragment>
@@ -181,21 +194,21 @@ export default function Pricing() {
       </Grid>
 
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          {tiers.map((tier) => (
+      {prices.map((price, index)=>(
+        <Grid item xs={12} md={6} key={index}>
             <Grid fullWidth
               item
-              key={tier.title}
+              key={price.name}
               xs={12}
               md={12}
 
             >
               <Card>
                 <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
+                  title={price.name}
+                  subheader={price.subheader}
                   titleTypographyProps={{ align: 'center' }}
-                  action={tier.title === 'Pro' ? <StarIcon /> : null}
+                  action={price.name === 'Pro' ? <StarIcon /> : null}
                   subheaderTypographyProps={{
                     align: 'center',
                   }}
@@ -217,21 +230,18 @@ export default function Pricing() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="text.primary" sx={{color: 'white'}}>
-                      ${tier.price}
+                      ${price.price}
                     </Typography>
                   </Box>
                   <ul>
-                    {tier.description.map((line) => (
                       <Typography
                         component="li"
                         variant="subtitle1"
                         align="center"
-                        key={line}
                         sx={{color: 'white'}}
                       >
-                        {line}
+                        {price.description}
                       </Typography>
-                    ))}
                   </ul>
                 </CardContent>
                 <CardActions style={{ backgroundColor: "#ADB6C4"}}
@@ -245,8 +255,8 @@ export default function Pricing() {
                 </CardActions>
               </Card>
             </Grid>
-          ))}
         </Grid>
+          ))}
         <Grid item xs={12} md={6}>
           <Typography
               component="h4"
@@ -269,10 +279,9 @@ export default function Pricing() {
       </Grid>
 
       <Grid container mt={3}> 
-      <Divider/>
-        <CardReview/>  
-        <Divider/>
-        <CardReview/>   
+      {comments.map((comment, index)=>(
+        <CardReview key={index} prop={comment._id}/>  
+      ))}
        </Grid>
 
     </React.Fragment>

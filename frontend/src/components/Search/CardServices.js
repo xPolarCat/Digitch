@@ -66,6 +66,9 @@ useEffect(()=>{
    //Obtengo la info de los precios
    const dataPrices= await Price_GetByPost(idFinal);
    setPrice(dataPrices);
+   
+   console.log(idFinal);
+   console.log(prices);
 
   }
 
