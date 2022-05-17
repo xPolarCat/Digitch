@@ -16,7 +16,7 @@ export const Rate_Register = async (data) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/rate")
-        console.log("Rate register",data);
+        console.log("Rate register", response);
     }catch(err){
         console.error(err);
         return err;

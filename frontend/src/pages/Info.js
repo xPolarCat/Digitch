@@ -90,7 +90,7 @@ function LinearProgressWithLabel(props) {
         <Box sx={{ minWidth: 35 }}>
           <Typography variant="body2" color="white">{`${Math.round(
             props.value,
-          )}%`}</Typography>
+          )}`}</Typography>
         </Box>
       </Box>
     );
@@ -269,9 +269,9 @@ export default function Pricing() {
           <Grid container>
               <Grid item xs={12}>
                   <LinearProgressWithLabel color="primary" value={0} value2={5}/>
-                  <LinearProgressWithLabel color="primary" value={50} value2={4}/>
+                  <LinearProgressWithLabel color="primary" value={3} value2={4}/>
                   <LinearProgressWithLabel color="primary" value={0} value2={3}/>
-                  <LinearProgressWithLabel color="primary" value={50} value2={2}/>
+                  <LinearProgressWithLabel color="primary" value={0} value2={2}/>
                   <LinearProgressWithLabel color="primary" value={0} value2={1}/>
               </Grid>
           </Grid>
