@@ -92,6 +92,7 @@ exports.price_getById = async (req, res) =>{
 exports.price_getByPost = async (req, res) =>{
     const { post } = req.params;
 
+    console.log("entre al normal");
     //Tuve que convertir el objeto a string
     const myJSON = JSON.stringify(req.params);
 
@@ -100,11 +101,34 @@ exports.price_getByPost = async (req, res) =>{
     const splitString2= splitString[1].split("}");
     const splitString3 = splitString2[0].split(' " ');
     const idFinal= splitString3[0].slice(1,25);
-
-
     // Método optimizado para buscar por ids.
     //const data = await Price.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
     const data = await Price.findOne({_post: idFinal}); 
+    // Es lo mismo que hacer lo de arriba
+
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "Comments do not exist in this post."})
+    }
+}
+
+exports.price_getByPostAll = async (req, res) =>{
+    const { post } = req.params;
+
+    console.log("entre al que quiero");
+    //Tuve que convertir el objeto a string
+    const myJSON = JSON.stringify(req.params);
+
+    //Despues separarlo para que solo me quedara el numero y no exista un error
+    const splitString = myJSON.split(":");
+    const splitString2= splitString[1].split("}");
+    const splitString3 = splitString2[0].split(' " ');
+    const idFinal= splitString3[0].slice(1,25);
+    // Método optimizado para buscar por ids.
+    const data = await Price.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
+    //const data = await Price.findOne({_post: idFinal}); 
     // Es lo mismo que hacer lo de arriba
 
 

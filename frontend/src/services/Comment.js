@@ -40,7 +40,12 @@ export const Comm_Delete = async (id) => {
 export const Comm_GetById = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/comment/:id", {id})
+        const response = await axios.get(`comment/${id}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
     }catch(err){
         console.error(err);
         return err;
@@ -49,7 +54,12 @@ export const Comm_GetById = async (id) => {
 export const Comm_GetByPost = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/comment/:_post", {id})
+        const response = await axios.get(`/comment/post/${id}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
     }catch(err){
         console.error(err);
         return err;

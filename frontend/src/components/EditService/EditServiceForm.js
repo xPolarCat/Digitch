@@ -16,9 +16,6 @@ export default function EditServiceForm() {
     async function fetchData(){
       const data= await Post_GetById(id);
       console.log("Consulta por ID: ", data);
-      const myJSON = JSON.stringify(id.id); 
-
-      console.log(myJSON);
     }
 
     fetchData();
@@ -32,7 +29,7 @@ export default function EditServiceForm() {
    }
   }
 
-  const [age, setAge] = useState("");
+
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -132,13 +129,20 @@ export default function EditServiceForm() {
     }
   };
   const [service, setService] = useState({
+    _user: data._user,
+    content: data.content,
+    name: data.name,
+    _category: data._category,
+    _id: data._id,
+  });
+  /*const [service, setService] = useState({
     name: "",
     content: "",
     images: "0",
     user: 1,
     category: 1,
     created_at: new Date().toString(),
-  });
+  });*/
 
   const onChangeTitulo = (event) => {
     setService({

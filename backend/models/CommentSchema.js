@@ -2,16 +2,10 @@ const mongoose = require('mongoose');
 
 // Mi esquema recibe como parámetro los atributos que tendrá. Este hace referencia a mi tabla Users de la DB
 const CommentSchema = new mongoose.Schema({
-    name:{  // Podemos poner las características de cada atributo de la siguiente manera y funcionan como validaciones.
-        type: String, // Tipo de dato.
-        required: true, // Es requerido. 
-        minlength: 4, // Mínimo de caracteres. 
-        maxlength: 60 // Máximo de caracteres.
-    },
     description:{
         type: String, // Tipo de dato.
         required: true, // Es requerido. 
-        minlength: 40, // Mínimo de caracteres. 
+        minlength: 4, // Mínimo de caracteres. 
         maxlength: 300, // Máximo de caracteres.
     },
     _user:{
