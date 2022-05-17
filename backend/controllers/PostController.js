@@ -80,12 +80,13 @@ exports.post_update = async (req, res) => {
     if(!userdb){ // Si no mandé un usuario, entonces hago un update, debido a que no me interesa cambiar el id del usuario del post.
     try{
         const postdb = await Post.findById(id); // Hago una consulta basándome en el id. 
-
+        console.log("Body: ", body.name);
+        
         if(postdb){
             // Actualizar el contenido de mi fila.
             const data = await Post.findOneAndUpdate(  
             // El id en mi base de datos se guarda con un _
-                {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
+                {id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
                 body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
                 {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
             
@@ -93,6 +94,7 @@ exports.post_update = async (req, res) => {
         }else{
             // Regresar un mensaje de error. 
             res.send({message: "The id does not exists"});
+            
         }
     }catch(err){
         res.send(err);

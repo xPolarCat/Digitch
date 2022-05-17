@@ -103,7 +103,7 @@ exports.price_getByPost = async (req, res) =>{
     const idFinal= splitString3[0].slice(1,25);
     // Método optimizado para buscar por ids.
     //const data = await Price.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
-    const data = await Price.findOne({_post: idFinal}); 
+    const data = await Price.find({_post: idFinal}); 
     // Es lo mismo que hacer lo de arriba
 
 
