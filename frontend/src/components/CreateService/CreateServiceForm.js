@@ -48,7 +48,7 @@ export default function CreateServiceForm() {
   //const [age, setAge] = useState("");
 
   const handleChange = (event) => {
-    setCat(event.target.value);
+    //setCat(event.target.value);
 
     setService({
       ...service,
@@ -228,13 +228,13 @@ export default function CreateServiceForm() {
                 id="inputSelect"
                 name="inputSelect"
                 displayEmpty
+                value={service._category}
+                onChange={handleChange}
                 sx={{ flexGrow: 1, color: "#ffffff" }}
                 required
               >
                 {categoryServ.map((cat, index)=>(
-                <Grid item key={index}>
-                <MenuItem >{cat.name}</MenuItem>
-                </Grid>
+                <MenuItem key={index} value={cat.name}>{cat.name}</MenuItem>
                 ))}
               
               </Select>

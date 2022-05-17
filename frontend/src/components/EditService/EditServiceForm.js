@@ -1,13 +1,28 @@
 import { Container, FormControl, FormLabel, TextField, Select, MenuItem, IconButton, Box, Button, Grid, Typography, Divider } from '@mui/material'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useEffect } from 'react'
 import AddIcon from '@mui/icons-material/Add';
 import SendIcon from '@mui/icons-material/Send';
 import BackgroundImage from '../../resources/login-background.jpg';
+import { Post_GetById } from '../../services/Post';
+import { useParams } from 'react-router';
 
 export default function EditServiceForm() {
   const textFieldStyle = { style: { color: "white" } };
   const styles = { helper: { color: "grey" } };
   const dividerStyle = { backgroundColor: "white" };
+  const {id} = useParams();
+
+  useEffect (() =>{
+    async function fetchData(){
+      const data= await Post_GetById(id);
+      console.log("Consulta por ID: ", data);
+      const myJSON = JSON.stringify(id.id); 
+
+      console.log(myJSON);
+    }
+
+    fetchData();
+   }, []);
 
   const [image, setImage] = useState(null)
 
