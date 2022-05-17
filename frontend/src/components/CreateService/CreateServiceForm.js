@@ -29,9 +29,11 @@ export default function CreateServiceForm() {
   const [image, setImage] = useState(null)
 
   const onImageChange = (event) => {
-   if (event.target.files && event.target.files[0]) {
-     setImage(URL.createObjectURL(event.target.files[0]));
-   }
+    console.log("selected file: ", event.target.files[0]);
+    if (event.target.files && event.target.files[0]) {
+      //setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
+    }
   }
 
   const [categoryServ, setCat] = useState([]);
@@ -165,12 +167,12 @@ export default function CreateServiceForm() {
     event.preventDefault();
    
     service.images = image;
-    service._user = '6281727fd938c62622a1471a';
+    service._user = '62819a5f9eb9bc87516154a9';
     service._category = '6281864dea063144676f6195';
     const obj = await Post_Register(service);
 
     console.log("my object0:", obj.data);
-
+  
     price._post = obj.data._id;
     price2._post = obj.data._id;
     price3._post = obj.data._id;

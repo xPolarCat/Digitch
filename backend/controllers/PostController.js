@@ -1,6 +1,12 @@
 const Post = require("../models/PostSchema"); // Traigo mi modelo Post.
 const Vendor = require("../models/VendorSchema");
 const User = require("../models/UserSchema");
+const {Storage} = require("@google-cloud/storage");
+
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT_ID,
+    keyFilename: process.env.GCLOUD_APPLICATION_CREDENTIALS,
+});
 
 // Obtener todos los posts 
 exports.post_getall = async (req, res) =>{
@@ -11,26 +17,57 @@ exports.post_getall = async (req, res) =>{
 
 // Insert
 exports.post_register = async (req, res) =>{
-    const { body } = req; // Obtenemos la info del body.
+    
+    try{
+        const { body, file } = req; // Obtenemos la info del body.
 
-    const userdb = await User.findById(body._user); // Valio si existe un usuario con el id recibido
+        console.log("Mi controlador:", body, file);
 
-    if(userdb){ // Si el usuario existe, entonces creo el post 
-        // Validación de información 
-        let newPost = new Post({created_at: Date.now(), name: body.name, content: body.content, images: body.images, _user: body._user, _category: body._category}); // Creo un objeto tipo post basado en mi modelo post.
-        await newPost
-        .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
-        .then((newPost) => console.log("New post succesfully registered!", newPost))
-        .catch((err) => {
-            console.error("An error in the Post register has occurred.", err);
-            res.send(err.errors);
-        }); // Aquí guardo el nuevo post.
+        if(!file){
+            res.status(400).send({code: "400", message: "File does not exist"});
+        }
 
-        res.send(newPost); // Regreso el objeto creado.
-        return newPost;
-    }else{
-        res.send({message: "The user does not exist"});
+        const userdb = await User.findById(body._user); // Valio si existe un usuario con el id recibido
+    
+        if(userdb){ // Si el usuario existe, entonces creo el post 
+
+            const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
+            const blob = bucket.file(file.originalname);
+            const blobStream = blob.createWriteStream({
+                metadata:{
+                    contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
+                },
+            });
+    
+            blobStream.on("error", (err) => next(err));
+            
+            blobStream.on("finish", async ()  =>{
+                const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
+            
+                // Validación de información 
+                let newPost = new Post({created_at: Date.now(), name: body.name, content: body.content, images: publicUrl, _user: body._user, _category: body._category}); // Creo un objeto tipo post basado en mi modelo post.
+                await newPost
+                .save() // si newPost es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+                .then((newPost) => console.log("New post succesfully registered!", newPost))
+                .catch((err) => {
+                    console.error("An error in the Post register has occurred.", err);
+                    res.send(err.errors);
+                }); // Aquí guardo el nuevo post.
+        
+                res.send(newPost); // Regreso el objeto creado.
+                return newPost;
+            });
+
+            blobStream.end(file.buffer);
+
+            
+        }else{
+            res.send({message: "The user does not exist"});
+        }
+    }catch(err){
+        res.status(500).send({code: "500", message: "An error has ocurred"})
     }
+    
 }
 
 // Update

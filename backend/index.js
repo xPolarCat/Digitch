@@ -1,3 +1,4 @@
+require('dotenv').config();
 const bodyParser = require("body-parser");
 const express = require("express"); // Mando a llamar el contenido de mi librería.
 const cors = require("cors"); //Se pueden tener solicitudes desde otros puertos
