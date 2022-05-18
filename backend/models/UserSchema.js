@@ -42,15 +42,9 @@ const UserSchema = new mongoose.Schema({
         maxlength: 30, // Máximo de caracteres.
         trim: true, // Sin espacios en blanco.
     },
-    phone:{
+    description:{
         type: String,
-        trim: true,
-        validate: {
-          validator: function (v) {
-            return /^[0-9]{10}/.test(v);
-          },
-          message: '{VALUE} is not a valid 10 digit number!'
-        }
+        maxlength: 100, // Máximo de caracteres.
     },
     photo:{
         type: Buffer,
