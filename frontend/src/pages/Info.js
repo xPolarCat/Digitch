@@ -115,8 +115,9 @@ export default function Pricing() {
  const [prices, setPrice]= useState([]);
  //Aqui guardamos info de los comentarios des servicio
  const [comments, setComment]= useState([]);
-   //Aqui guardamos info de la calificacion
-   const [rate, setRate]= useState();
+ const [rates, setRate]=useState([]);
+ //Aqui guardo la suma de las calificaciones
+ const [sum, setSum]=useState();
 
  useEffect(()=>{
    async function fetchData(){
@@ -139,19 +140,17 @@ export default function Pricing() {
    //Obtengo la info de los precios
    const dataPrices= await Price_GetByPostAll(idFinal,1);
    setPrice(dataPrices);
+   console.log("prices", prices)
   
     //Obtengo la info de los comentarios
     const dataComments= await Comm_GetByPost(idFinal);
     setComment(dataComments);
-    console.log(dataComments);
+    console.log("comm", comments);
 
-    //Obtengo todos las calificaciones de ese posts
-    const dataRate= await Rate_GetByPost(idFinal);
-    setRate(dataRate);
-    console.log("estoy en info",dataRate);
     }
   
    fetchData();
+
   }, []);
 
 

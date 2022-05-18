@@ -60,7 +60,6 @@ export const Rate_GetByUser = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get(`/rate/user/${id}`)
-        console.log("rate: ", response.data);
         if(response.status==200) {
             return response.data;
           }else{
@@ -76,7 +75,6 @@ export const Rate_GetByPost = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get(`/rate/post/${id}`)
-        console.log("rate: ", response);
         if(response.status==200) {
             return response.data;
           }else{
