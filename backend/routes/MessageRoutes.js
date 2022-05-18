@@ -8,6 +8,6 @@ router.post("/message", MessageController.message_register); // Mi ruta para el 
 router.put("/message/:id", MessageController.message_update); // Cuando vamos a mandar un parámetro en la ruta se escribe : y el id.
 router.delete("/message/:id", MessageController.message_delete); // Ruta para borrar un mensaje.
 router.get("/message/:id", MessageController.message_getById); // Búsqueda por Id
-router.get("/message/:id", MessageController.message_getByUsers); // Búsqueda de mensajes entre dos usuarios
+router.post("/message/users/:id", MessageController.message_getByUsers); // Búsqueda de mensajes entre dos usuarios
 
 module.exports = router;
