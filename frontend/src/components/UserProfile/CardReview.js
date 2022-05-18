@@ -26,17 +26,14 @@ export default function CardReview(props) {
             const myJSON = JSON.stringify(props);
             //Despues separarlo para que solo me quedara el numero y no exista un error
             const idFinal= myJSON.slice(9,33);
-            console.log(idFinal);
 
             //Obtenemos la info de ese comentario
             const dataComments= await Comm_GetById(idFinal);
             setComment(dataComments);
-            console.log(dataComments);
             
             //Obtengo la info del usuario que subio ese post
             const dataUser= await User_GetOne(dataComments._user);
             setUser(dataUser);
-            console.log(dataUser);
 
             //Obtengo la calificacion que dio ese usuario
             const dataRate= await Rate_GetByUser(dataComments._user);

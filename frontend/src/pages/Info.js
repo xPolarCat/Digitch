@@ -115,8 +115,9 @@ export default function Pricing() {
  const [prices, setPrice]= useState([]);
  //Aqui guardamos info de los comentarios des servicio
  const [comments, setComment]= useState([]);
-   //Aqui guardamos info de la calificacion
-   const [rate, setRate]= useState();
+ const [rates, setRate]=useState([]);
+ //Aqui guardo la suma de las calificaciones
+ const [sum, setSum]=useState();
 
  useEffect(()=>{
    async function fetchData(){
@@ -134,24 +135,23 @@ export default function Pricing() {
   //Obtengo la info del usuario que subio ese post
   const dataUser= await User_GetOne(data._user);
   setUser(dataUser);
+  console.log("infosi",dataUser);
 
   
    //Obtengo la info de los precios
    const dataPrices= await Price_GetByPostAll(idFinal,1);
    setPrice(dataPrices);
+   console.log("prices", prices)
   
     //Obtengo la info de los comentarios
     const dataComments= await Comm_GetByPost(idFinal);
     setComment(dataComments);
-    console.log(dataComments);
+    console.log("comm", comments);
 
-    //Obtengo todos las calificaciones de ese posts
-    const dataRate= await Rate_GetByPost(idFinal);
-    setRate(dataRate);
-    console.log("estoy en info",dataRate);
     }
   
    fetchData();
+
   }, []);
 
 
@@ -190,9 +190,7 @@ export default function Pricing() {
                 {user.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+              {user.description}
               </Typography>
               <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href="/UserProfile"> Contáctame</Button>
              
@@ -256,7 +254,7 @@ export default function Pricing() {
                     backgroundColor: (theme) =>
                      "#ADB6C4",
                   }}>
-                  <Button fullWidth href="/Payment">
+                  <Button fullWidth href={`../payment/ ${price._id}`}>
                     Comprar
                   </Button>
                 </CardActions>
