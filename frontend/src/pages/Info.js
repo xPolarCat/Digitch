@@ -135,6 +135,7 @@ export default function Pricing() {
   //Obtengo la info del usuario que subio ese post
   const dataUser= await User_GetOne(data._user);
   setUser(dataUser);
+  console.log("infosi",dataUser);
 
   
    //Obtengo la info de los precios
@@ -189,9 +190,7 @@ export default function Pricing() {
                 {user.name}
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
-              Miembro desde Octubre 2021. Soy diseñadora de WordPress entusiasta y profesional con 2 años de experiencia. Tengo mucha experiencia en WordPress, HTML, CSS, entre mas.
+              {user.description}
               </Typography>
               <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href="/UserProfile"> Contáctame</Button>
              
