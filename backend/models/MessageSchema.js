@@ -6,10 +6,10 @@ const MessageSchema = new mongoose.Schema({
         minlength: 1, // Mínimo de caracteres. 
         maxlength: 500, // Máximo de caracteres.
     },
-    _sender:[{
+    _sender:{
         type: mongoose.Schema.Types.ObjectId,
         required: true
-    }],
+    },
     _receiver:{
         type: mongoose.Schema.Types.ObjectId,
         required: true
