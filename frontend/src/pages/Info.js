@@ -254,7 +254,7 @@ export default function Pricing() {
                     backgroundColor: (theme) =>
                      "#ADB6C4",
                   }}>
-                  <Button fullWidth href="/Payment">
+                  <Button fullWidth href={`../payment/ ${price._id}`}>
                     Comprar
                   </Button>
                 </CardActions>

@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React,{ Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import BackImage from "../images/backImagePay.jpg";
@@ -10,85 +10,102 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CheckCircleOutlineTwoToneIcon from "@mui/icons-material/CheckCircleOutlineTwoTone";
 import WorkIcon from "@mui/icons-material/Work";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import { useParams } from "react-router-dom";
+import {Price_GetById} from "../services/Price"
+import {Post_GetById} from "../services/Post"
+
+const GridPayStyle = {
+  backgroundColor: "#001B2E",
+  maxHeight: "30vh",
+  minHeight: "30vh",
+  minWidth: "30vh",
+  borderRadius: "10px",
+  marginBottom: "0px",
+};
+const GridStyle = {
+  backgroundColor: "#001B2E",
+
+  minHeight: "55vh",
+  minWidth: "30vh",
+  borderRadius: "10px",
+};
+const BorderStyle = {
+  borderBottom: "2px solid white",
+};
+const IconStyle = {
+  width: "100px",
+  color: "white",
+};
+const IconStyle2 = {
+  color: "white",
+};
+const TextStyle = {
+  color: "white",
+  textAlign: "center",
+};
+const PaypalStyle = {
+  color: "white",
+  backgroundColor: "#294C60",
+  marginTop: "-20px",
+};
+const theme = createTheme({
+  spacing: 4,
+});
+const Spacing = { 
+  margin: "50px" 
+};
+const ImagesStyle = {
+  width: "150px",
+  height: "80px",
+  borderRadius: "10px",
+};
+const PaddingStyle = {
+  padding: 10,
+};
+const buyButtonStyle = {
+  align: "right",
+  marginTop: "1vh",
+  backgroundColor: "#294C60",
+};
+const background = {
+  style: {
+    backgroundColor: "#294C60",
+    backgroundSize: "cover",
+    minHeight: "100vh",
+  },
+};
 
 export default function Payment() {
-  const BackgroundStyle = {
-    backgroundColor: "#294C60",
-    height: "100%",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-  };
+ 
+  
+  const params = useParams();
 
-  const GridPayStyle = {
-    backgroundColor: "#001B2E",
-    maxHeight: "30vh",
-    minHeight: "30vh",
-    minWidth: "30vh",
-    borderRadius: "10px",
-    marginBottom: "0px",
-  };
+  //Aqui guardaremos info del paquete
+ const [price, setPrice]= useState([]);
+ //Aqui guardaremos info del post
+const [post, setPost]= useState([]);
 
-  const GridStyle = {
-    backgroundColor: "#001B2E",
+ useEffect(()=>{
+   async function fetchData(){
+    
+  //Tuve que convertir el objeto a string
+  const myJSON = JSON.stringify(params.id);
 
-    minHeight: "55vh",
-    minWidth: "30vh",
-    borderRadius: "10px",
-  };
+  //Despues separarlo para que solo me quedara el numero y no exista un error
+  const idFinal= myJSON.slice(2,26);
+  //Me traigo la info de ese price con ese id
+  const data= await Price_GetById(idFinal);
+  setPrice(data);
+  console.log(data);
 
-  const BorderStyle = {
-    borderBottom: "2px solid white",
-  };
-
-  const IconStyle = {
-    width: "100px",
-    color: "white",
-  };
-
-  const IconStyle2 = {
-    color: "white",
-  };
-
-  const TextStyle = {
-    color: "white",
-    textAlign: "center",
-  };
-
-  const PaypalStyle = {
-    color: "white",
-    backgroundColor: "#294C60",
-    marginTop: "-20px",
-  };
-
-  const theme = createTheme({
-    spacing: 4,
-  });
-
-  const Spacing = { margin: "50px" };
-
-  const ImagesStyle = {
-    width: "150px",
-    height: "80px",
-    borderRadius: "10px",
-  };
-
-  const PaddingStyle = {
-    padding: 10,
-  };
-
-  const buyButtonStyle = {
-    align: "right",
-    marginTop: "1vh",
-    backgroundColor: "#294C60",
-  };
-  const background = {
-    style: {
-      backgroundColor: "#294C60",
-      backgroundSize: "cover",
-      minHeight: "100vh",
-    },
-  };
+  //Me traigo la info de el post con ese paquete de precio
+  const data2= await Post_GetById(data._post);
+  setPost(data2);
+  console.log("post",data2)
+    }
+  
+   fetchData();
+  }, []);
 
   return (
     <Grid
@@ -109,7 +126,7 @@ export default function Payment() {
                   style={ImagesStyle}
                 />
               </Box>
-              <h4 style={TextStyle}>Voy a crear el diseño de tu pagina web.</h4>
+              <h4 style={TextStyle}>{post.name}</h4>
             </Toolbar>
           </Container>
           <Container maxWidth="sm" style={BorderStyle}>
@@ -120,31 +137,7 @@ export default function Payment() {
                     <CheckCircleOutlineTwoToneIcon />
                   </td>
                   <td>
-                    <p style={TextStyle}>10 Paginas web.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={IconStyle2}>
-                    <CheckCircleOutlineTwoToneIcon />
-                  </td>
-                  <td>
-                    <p style={TextStyle}>Diseño adaptable.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={IconStyle2}>
-                    <CheckCircleOutlineTwoToneIcon />
-                  </td>
-                  <td>
-                    <p style={TextStyle}>Archivo fuente.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style={IconStyle2}>
-                    <CheckCircleOutlineTwoToneIcon />
-                  </td>
-                  <td>
-                    <p style={TextStyle}>Carga de contenido.</p>
+                    <p style={TextStyle}>{price.description}</p>
                   </td>
                 </tr>
                 <tr>
@@ -152,11 +145,11 @@ export default function Payment() {
                     <WorkIcon />
                   </td>
                   <td>
-                    <p style={TextStyle}>Plan de trabajo.</p>
+                    <p style={TextStyle}>{price.name}</p>
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>90US$</p>
+                    <p style={TextStyle}>{price.price}MXN$</p>
                   </td>
                 </tr>
                 <tr>
@@ -168,7 +161,7 @@ export default function Payment() {
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>4,4US$</p>
+                    <p style={TextStyle}>80MXN$</p>
                   </td>
                 </tr>
               </tbody>
@@ -184,17 +177,7 @@ export default function Payment() {
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>94,4US$</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td></td>
-                  <td>
-                    <p style={TextStyle}>Tiempo total de entrega:</p>
-                  </td>
-                  <td width="100px"></td>
-                  <td>
-                    <p style={TextStyle}>15 dias</p>
+                    <p style={TextStyle}>({price.price}+80) MXN$</p>
                   </td>
                 </tr>
               </tbody>

@@ -47,8 +47,12 @@ export const Price_Delete= async (id) => {
 export const Price_GetById= async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/price/:id", id)
-        console.log(response);
+        const response = await axios.get(`price/${id}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
     }catch(err){
         console.error(err);
         return err;
