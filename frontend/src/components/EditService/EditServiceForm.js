@@ -5,61 +5,99 @@ import SendIcon from '@mui/icons-material/Send';
 import BackgroundImage from '../../resources/login-background.jpg';
 import { Post_GetById } from '../../services/Post';
 import { useParams } from 'react-router';
+import { Price_GetById, Price_GetByPost, Price_Update } from '../../services/Price';
+import { Cat_GetAll, Cat_GetOne } from '../../services/Category';
+import {Price_Register} from '../../services/Price';
+import {Post_Update} from '../../services/Post';
+import { useNavigate } from 'react-router';
 
 export default function EditServiceForm() {
+  let navigate = useNavigate();
   const textFieldStyle = { style: { color: "white" } };
   const styles = { helper: { color: "grey" } };
   const dividerStyle = { backgroundColor: "white" };
   const {id} = useParams();
 
+  const [categoryServ, setCat] = useState(
+    {
+      name: "",
+      _id : ""
+    }
+  );
+  const [categoriesServ, setCats] = useState([]);
+
   useEffect (() =>{
     async function fetchData(){
-      const data= await Post_GetById(id);
-      console.log("Consulta por ID: ", data);
+      const dataPost = await Post_GetById(id);
+      console.log("Consulta por ID: ", dataPost);
+      setService(dataPost);
+      console.log(dataPost._category);
+      const dataCategory = await Cat_GetOne(dataPost._category)
+      const dataAllCategory = await Cat_GetAll()
+      console.log(dataCategory.name)
+      setCats(dataAllCategory);
+      setCat({
+        name: dataCategory.name,
+        _id: dataCategory._id
+      });
+      const dataPriceList = await Price_GetByPost(dataPost._id)
+      console.log(dataPriceList)
+      setPrice({
+        name: dataPriceList[0].name,
+        description: dataPriceList[0].description,
+        price: dataPriceList[0].price
+      })
+      setPrice2({
+        name: dataPriceList[1].name,
+        description: dataPriceList[1].description,
+        price: dataPriceList[1].price
+      })
+      setPrice3({
+        name: dataPriceList[2].name,
+        description: dataPriceList[2].description,
+        price: dataPriceList[2].price
+      })
     }
 
     fetchData();
    }, []);
 
-  const [image, setImage] = useState(null)
+   const [image, setImage] = useState(null)
 
   const onImageChange = (event) => {
-   if (event.target.files && event.target.files[0]) {
-     setImage(URL.createObjectURL(event.target.files[0]));
+    if (event.target.files && event.target.files[0]) {
+      setImage(URL.createObjectURL(event.target.files[0]));
+    }
    }
-  }
 
 
 
   const handleChange = (event) => {
-    setAge(event.target.value);
-
+    setCat({
+      ...categoryServ,
+      name: event.target.value
+    });
     setService({
       ...service,
-      category: event.target.value,
+      _category: event.target.value,
     });
   };
+
   // - States - SE USAN ESTADOS PARA OBTENER LA INFORMACIÓN
   const [price, setPrice] = useState({
     name: "",
     price: "",
     description: "",
-    _post: 1,
-    created_at: new Date().toString(),
   });
   const [price2, setPrice2] = useState({
     name: "",
     price: "",
     description: "",
-    _post: 1,
-    created_at: new Date().toString(),
   });
   const [price3, setPrice3] = useState({
     name: "",
     price: "",
     description: "",
-    _post: 1,
-    created_at: new Date().toString(),
   });
 
   const onChangePrices = (event) => {
@@ -129,11 +167,11 @@ export default function EditServiceForm() {
     }
   };
   const [service, setService] = useState({
-    _user: data._user,
-    content: data.content,
-    name: data.name,
-    _category: data._category,
-    _id: data._id,
+    _user: "",
+    content:"",
+    name: "",
+    _category: "",
+    _id: "",
   });
   /*const [service, setService] = useState({
     name: "",
@@ -157,12 +195,29 @@ export default function EditServiceForm() {
     });
   };
   //----------Submit state-------
-  const onSubmitEditService = (event) => {
+  const onSubmitEditService = async (event) => {
     event.preventDefault();
-    console.log("servicio", service);
-    console.log("paquete 1", price);
+   
+    service.images = image;
+    service._user = '62819a5f9eb9bc87516154a9';
+    service._category = categoryServ._id;
+    const obj = await Post_Update(id);
+
+    console.log("my object0:", obj);
+  
+    /*console.log("paquete 1", price);
     console.log("paquete 2", price2);
     console.log("paquete 3", price3);
+    
+   await Price_Update(price);
+   await Price_Update(price2);
+   await Price_Update(price3);
+
+    if(obj.data != null){
+      navigate('/');
+    }else{
+    }*/
+    
   };
 
   return (
@@ -202,15 +257,14 @@ export default function EditServiceForm() {
                     labelId="demo-simple-select-label"
                     id="inputSelect"
                     name="inputSelect"
-                    value={age}
-                    displayEmpty
+                    value={categoryServ.name}
                     onChange={handleChange}
                     sx={{ flexGrow: 1, color: "#ffffff" }}
                     required
                   >
-                    <MenuItem value={10}>Seleccionar</MenuItem>
-                    <MenuItem value={20}>Programacion</MenuItem>
-                    <MenuItem value={30}>Llorar por las noches</MenuItem>
+                     {categoriesServ.map((cat, index)=>(
+                    <MenuItem key={index} value={cat.name}>{cat.name}</MenuItem>
+                    ))}
                   </Select>
                 </Box>
               </FormControl>
@@ -229,7 +283,7 @@ export default function EditServiceForm() {
                   InputProps={textFieldStyle}
                   autoComplete="off"
                   onChange={onChangeDesc}
-                  value={service.description}
+                  value={service.content}
                   required
                 />
               </FormControl>

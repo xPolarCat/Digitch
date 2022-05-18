@@ -20,6 +20,7 @@ import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardReview from '../components/UserProfile/CardReview';
 import { useParams } from "react-router-dom";
+import {Rate_GetByPost} from "../services/Rate"
 import {Post_GetById} from "../services/Post";
 import {User_GetOne} from "../services/User"
 import {Price_GetByPostAll} from "../services/Price"
@@ -90,7 +91,7 @@ function LinearProgressWithLabel(props) {
         <Box sx={{ minWidth: 35 }}>
           <Typography variant="body2" color="white">{`${Math.round(
             props.value,
-          )}%`}</Typography>
+          )}`}</Typography>
         </Box>
       </Box>
     );
@@ -114,6 +115,8 @@ export default function Pricing() {
  const [prices, setPrice]= useState([]);
  //Aqui guardamos info de los comentarios des servicio
  const [comments, setComment]= useState([]);
+   //Aqui guardamos info de la calificacion
+   const [rate, setRate]= useState();
 
  useEffect(()=>{
    async function fetchData(){
@@ -142,6 +145,10 @@ export default function Pricing() {
     setComment(dataComments);
     console.log(dataComments);
 
+    //Obtengo todos las calificaciones de ese posts
+    const dataRate= await Rate_GetByPost(idFinal);
+    setRate(dataRate);
+    console.log("estoy en info",dataRate);
     }
   
    fetchData();
@@ -269,9 +276,9 @@ export default function Pricing() {
           <Grid container>
               <Grid item xs={12}>
                   <LinearProgressWithLabel color="primary" value={0} value2={5}/>
-                  <LinearProgressWithLabel color="primary" value={50} value2={4}/>
+                  <LinearProgressWithLabel color="primary" value={3} value2={4}/>
                   <LinearProgressWithLabel color="primary" value={0} value2={3}/>
-                  <LinearProgressWithLabel color="primary" value={50} value2={2}/>
+                  <LinearProgressWithLabel color="primary" value={0} value2={2}/>
                   <LinearProgressWithLabel color="primary" value={0} value2={1}/>
               </Grid>
           </Grid>

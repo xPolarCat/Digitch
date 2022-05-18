@@ -45,8 +45,13 @@ export const Post_Register = async (post) => {
 export const Post_Update = async (id) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.put("/post/:id", id)
-        console.log("post");
+        const response = await axios.put(`/post/${id}`)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
+  
     }catch(err){
         console.error(err);
         return err;

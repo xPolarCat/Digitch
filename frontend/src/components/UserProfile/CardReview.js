@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography'
 import StarIcon from '@mui/icons-material/Star';
 import {Comm_GetById} from "../../services/Comment"
 import {User_GetOne} from "../../services/User"
+import {Rate_GetByUser} from "../../services/Rate"
 
 export default function CardReview(props) {
     const textFieldStyle = {style: {color : 'white'} }
@@ -12,6 +13,11 @@ export default function CardReview(props) {
    const [comment, setComment]= useState([]);
    //Aqui guardamos info del usuario
    const [user, setUser]= useState([]);
+   //Aqui guardamos info de la calificacion
+   const [rate, setRate]= useState();
+   //Aqui guardamos la calificacion
+   const [rateFinal, setRate2]= useState();
+
 
 
      useEffect(()=>{
@@ -32,9 +38,12 @@ export default function CardReview(props) {
             setUser(dataUser);
             console.log(dataUser);
 
-
-
-
+            //Obtengo la calificacion que dio ese usuario
+            const dataRate= await Rate_GetByUser(dataComments._user);
+            setRate(dataRate);
+            setRate2(dataRate.rate);
+            
+               
          }
        
         fetchData();
@@ -48,7 +57,7 @@ export default function CardReview(props) {
                 {user.name}
             </Typography>
             <Typography  style={{color: "white"}}>
-                Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
+                Calificación: {rateFinal}  <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
             </Typography>
             <Typography style={{color: "white"}}>
                {comment.description}
