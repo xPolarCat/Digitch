@@ -11,11 +11,19 @@ export const User_GetAll = async () => {
     }
 }
 
-export const User_Register = async () => {
+export const User_Register = async (user) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/user")
-        console.log("ola?");
+        const response = await axios.post("/user", user,{
+            headers:{
+                "Content-Type": "multipart/form-data",
+            },
+        })
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
     }catch(err){
         console.error(err);
         return err;
