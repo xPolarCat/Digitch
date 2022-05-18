@@ -74,33 +74,53 @@ exports.post_register = async (req, res) =>{
 exports.post_update = async (req, res) => {
     const { id } = req.params; // Los params son los que se envían en el URL.
     const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
-
+    console.log("post controller Id: ", id);
+    console.log("Body: ", body);
     const userdb = await body._user; // Valio si mandé un usuario como parámetro
 
-    if(!userdb){ // Si no mandé un usuario, entonces hago un update, debido a que no me interesa cambiar el id del usuario del post.
     try{
-        const postdb = await Post.findById(id); // Hago una consulta basándome en el id. 
-        console.log("Body: ", body.name);
-        
-        if(postdb){
-            // Actualizar el contenido de mi fila.
-            const data = await Post.findOneAndUpdate(  
-            // El id en mi base de datos se guarda con un _
-                {id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
-                body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
-                {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
-            
-            res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
-        }else{
-            // Regresar un mensaje de error. 
-            res.send({message: "The id does not exists"});
-            
+        const { body, file } = req; // Obtenemos la info del body.
+
+        console.log("Mi controlador:", body, file);
+
+        if(!file){
+            res.status(400).send({code: "400", message: "File does not exist"});
         }
+        const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
+        const blob = bucket.file(file.originalname);
+        const blobStream = blob.createWriteStream({
+            metadata:{
+                contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
+            },
+        });
+
+        blobStream.on("error", (err) => next(err));
+        
+        blobStream.on("finish", async ()  =>{
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
+        
+        const postdb = await Post.findById(body._id); // Hago una consulta basándome en el id. 
+        console.log("Body: ", body.name);
+        body.images= publicUrl;
+
+            if(postdb){
+                // Actualizar el contenido de mi fila.
+                const data = await Post.findOneAndUpdate(  
+                // El id en mi base de datos se guarda con un _
+                    {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
+                    body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
+                    {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
+                
+                res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
+            }else{
+                // Regresar un mensaje de error. 
+                res.send({message: "The id does not exists"});
+                
+            }
+            });
+        blobStream.end(file.buffer);
     }catch(err){
         res.send(err);
-    }
-    }else{
-        res.send({message: "You can not send the user as parameter to update a Post"});
     }
 
 }

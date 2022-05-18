@@ -35,10 +35,10 @@ exports.price_register = async (req, res) =>{
 exports.price_update = async (req, res) => {
     const { id } = req.params; // Los params son los que se envían en el URL.
     const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
-
+    console.log("price controller Id: ", id);
+    console.log("Body: ", body);
     const postdb = await body._post; // Valio si mandé un post como parámetro
 
-    if(!postdb){ // Si no mandé un post, entonces hago un update, debido a que no me interesa cambiar el id del post al que pertenece el precio.
     try{
         const pricedb = await Price.findById(id); // Hago una consulta basándome en el id. 
 
@@ -58,9 +58,7 @@ exports.price_update = async (req, res) => {
     }catch(err){
         res.send(err);
     }
-    }else{
-        res.send({message: "You can not send the user as parameter to update a Post"});
-    }
+   
 
 }
 
@@ -103,7 +101,7 @@ exports.price_getByPost = async (req, res) =>{
     const idFinal= splitString3[0].slice(1,25);
     // Método optimizado para buscar por ids.
     //const data = await Price.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
-    const data = await Price.findOne({_post: idFinal}); 
+    const data = await Price.find({_post: idFinal}); 
     // Es lo mismo que hacer lo de arriba
 
 

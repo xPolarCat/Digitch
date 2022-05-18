@@ -167,8 +167,8 @@ export default function CreateServiceForm() {
     event.preventDefault();
    
     service.images = image;
-    service._user = '62819a5f9eb9bc87516154a9';
-    service._category = '6281864dea063144676f6195';
+    service._user = '6281727fd938c62622a1471a';
+    service._category = categoryServ._id;
     const obj = await Post_Register(service);
 
     console.log("my object0:", obj.data);
@@ -179,17 +179,17 @@ export default function CreateServiceForm() {
 
     /*console.log("paquete 1", price);
     console.log("paquete 2", price2);
-    console.log("paquete 3", price3);*/
+    console.log("paquete 3", price3); if(obj.data != null){
+      navigate('/');
+    }else{
+    }
+    */
     
    await Price_Register(price);
    await Price_Register(price2);
    await Price_Register(price3);
 
-    if(obj.data != null){
-      navigate('/');
-    }else{
-    }
-    
+   
   };
 
   return (

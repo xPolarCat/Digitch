@@ -31,6 +31,7 @@ export default function EditServiceForm() {
       const dataPost = await Post_GetById(id);
       console.log("Consulta por ID: ", dataPost);
       setService(dataPost);
+      setImage(dataPost.images);
       console.log(dataPost._category);
       const dataCategory = await Cat_GetOne(dataPost._category)
       const dataAllCategory = await Cat_GetAll()
@@ -43,16 +44,19 @@ export default function EditServiceForm() {
       const dataPriceList = await Price_GetByPost(dataPost._id)
       console.log(dataPriceList)
       setPrice({
+        _id: dataPriceList[0]._id,
         name: dataPriceList[0].name,
         description: dataPriceList[0].description,
         price: dataPriceList[0].price
       })
       setPrice2({
+        _id: dataPriceList[1]._id,
         name: dataPriceList[1].name,
         description: dataPriceList[1].description,
         price: dataPriceList[1].price
       })
       setPrice3({
+        _id: dataPriceList[2]._id,
         name: dataPriceList[2].name,
         description: dataPriceList[2].description,
         price: dataPriceList[2].price
@@ -64,18 +68,20 @@ export default function EditServiceForm() {
 
    const [image, setImage] = useState(null)
 
-  const onImageChange = (event) => {
+   const onImageChange = (event) => {
+    console.log("selected file: ", event.target.files[0]);
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      //setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
     }
-   }
+  }
 
 
 
   const handleChange = (event) => {
     setCat({
       ...categoryServ,
-      name: event.target.value
+      name: event.target.value,
     });
     setService({
       ...service,
@@ -167,11 +173,10 @@ export default function EditServiceForm() {
     }
   };
   const [service, setService] = useState({
-    _user: "",
     content:"",
     name: "",
     _category: "",
-    _id: "",
+    _id: ""
   });
   /*const [service, setService] = useState({
     name: "",
@@ -199,25 +204,24 @@ export default function EditServiceForm() {
     event.preventDefault();
    
     service.images = image;
-    service._user = '62819a5f9eb9bc87516154a9';
+    //service._user = '62819a5f9eb9bc87516154a9';
     service._category = categoryServ._id;
-    const obj = await Post_Update(id);
+    console.log("post form ", id);
+    const obj = await Post_Update(id, service);
 
     console.log("my object0:", obj);
   
-    /*console.log("paquete 1", price);
+    console.log("paquete 1", price);
     console.log("paquete 2", price2);
-    console.log("paquete 3", price3);
+    console.log("paquete 3", price3); 
     
-   await Price_Update(price);
-   await Price_Update(price2);
-   await Price_Update(price3);
-
-    if(obj.data != null){
       navigate('/');
-    }else{
-    }*/
+   
     
+   await Price_Update(price._id, price);
+   await Price_Update(price2._id, price2);
+   await Price_Update(price3._id, price3);
+
   };
 
   return (
@@ -491,7 +495,23 @@ export default function EditServiceForm() {
                   </Box>
                 </Grid>
               </Grid>
-
+              <Grid container fullWidth>
+              <FormControl style={{display: "flex", margin: "auto" }}>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ backgroundColor: "#294C60" }}
+                >
+                  Cambiar imagen
+                  <input
+                    type="file"
+                    hidden
+                    onChange={onImageChange}
+                    accept="image/*"
+                  />
+                </Button>
+              </FormControl>
+              </Grid>
               <Grid item fullWidth sx={{my:1}} >
                 <img style={{display: "flex", margin: "auto" }} width="250px" src={image}/>
               </Grid>

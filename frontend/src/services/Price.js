@@ -22,11 +22,17 @@ export const Price_Register= async (price) => {
     }
 }
 
-export const Price_Update= async (id) => {
+export const Price_Update= async (id, price) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.put("/price/:id", id)
-        console.log(response)
+        const response = await axios.put(`/price/${id}`, price)
+        if(response.status==200) {
+            console.log("llego a codigo 200");
+            return response.data;
+          }else{
+              return []
+          }
+        
     }catch(err){
         console.error(err);
         return err;
@@ -37,7 +43,12 @@ export const Price_Delete= async (id) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.delete("/price/:id", id)
-        console.log("id: ", id);
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
+        
     }catch(err){
         console.error(err);
         return err;
