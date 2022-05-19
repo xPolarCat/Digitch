@@ -1,7 +1,7 @@
 const User = require("../models/UserSchema"); // Traigo mi modelo User.
 const {Storage} = require("@google-cloud/storage");
 const jwt = require("jsonwebtoken");
-const {protect} = require('../middleware/authMiddleware');
+
 
 const storage = new Storage({
     projectId: process.env.GCLOUD_PROJECT_ID,
@@ -150,6 +150,14 @@ exports.user_login = async (req, res) =>{
     }else{
         res.send({message: "incorrect user or password."})
     }
+}
+
+exports.user_getMe = async (req, res) =>{
+    const {_id} = await User.findById(req.user.id);
+
+    res.status(200).json({
+        id: _id
+    })
 }
 
 // Generar JWT
