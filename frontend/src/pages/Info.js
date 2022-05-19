@@ -192,7 +192,7 @@ export default function Pricing() {
               <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
               {user.description}
               </Typography>
-              <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href="/UserProfile"> Contáctame</Button>
+              <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href={`../userProfile/ ${user._id}`}> Contáctame</Button>
              
         </Box>
         </Grid>
