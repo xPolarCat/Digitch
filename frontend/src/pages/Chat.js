@@ -129,14 +129,6 @@ useEffect(()=>{
     const dataUsers= await User_GetAll(idFinal);
     setUsers(dataUsers);
     console.log("usuarios", dataUsers)
-
-    
-    {users.map((user,index) => {
-        if(user._id==idFinal){
-           console.log("somos el mismo", user._id) 
-        }
-    })}
-
      }
 
     fetchData();
@@ -170,11 +162,11 @@ useEffect(()=>{
             </Grid>
             <Grid item xs={12} md={9} style={{ width: '100%', color: "white", border: '1px solid white'}}>
                 <List >
-                <ListItem button key="SantiangoOrtiz" >
+                <ListItem button key={user.name} >
                         <ListItemIcon>
-                            <Avatar alt="Santiango Ortiz" src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary="Santiango Ortiz">Santiango Ortiz</ListItemText>
+                        <ListItemText primary={user.name}>{user.name}</ListItemText>
                     </ListItem>
                 </List>
                 <Divider  style={{backgroundColor: "white"}}/>
