@@ -33,16 +33,22 @@ export default function CreateServiceForm() {
     if (event.target.files && event.target.files[0]) {
       //setImage(URL.createObjectURL(event.target.files[0]));
       setImage(event.target.files[0]);
+      setService({
+        ...service,
+        images: event.target.files[0],
+      });
     }
   }
 
   const [categoryServ, setCat] = useState([]);
+  const [categories, setCats] = useState([]);
+
   useEffect (()=>{
     async function fetchData(){
       const data= await Cat_GetAll();
       
       console.log(data);
-      setCat (data);
+      setCats(data);
     }
     fetchData();
     }, []);
@@ -50,8 +56,9 @@ export default function CreateServiceForm() {
   //const [age, setAge] = useState("");
 
   const handleChange = (event) => {
-    //setCat(event.target.value);
 
+    setCat(event.target.value);
+    console.log("cateogri d", event.target.value)
     setService({
       ...service,
       _category: event.target.value,
@@ -166,9 +173,12 @@ export default function CreateServiceForm() {
   const onSubmitCreateService = async (event) => {
     event.preventDefault();
    
-    service.images = image;
-    service._user = '6281727fd938c62622a1471a';
-    service._category = categoryServ._id;
+    setService({
+      ...service,
+      _user: '628685001f953e041bb3a9d8',
+    });
+
+    console.log("service in", service)
     const obj = await Post_Register(service);
 
     console.log("my object0:", obj.data);
@@ -177,13 +187,14 @@ export default function CreateServiceForm() {
     price2._post = obj.data._id;
     price3._post = obj.data._id;
 
-    /*console.log("paquete 1", price);
+    console.log("paquete 1", price);
     console.log("paquete 2", price2);
-    console.log("paquete 3", price3); if(obj.data != null){
+    console.log("paquete 3", price3); 
+    if(obj.data != null){
       navigate('/');
     }else{
     }
-    */
+    
     
    await Price_Register(price);
    await Price_Register(price2);
@@ -230,13 +241,13 @@ export default function CreateServiceForm() {
                 id="inputSelect"
                 name="inputSelect"
                 displayEmpty
-                value={service._category}
+                value={categoryServ.name}
                 onChange={handleChange}
                 sx={{ flexGrow: 1, color: "#ffffff" }}
                 required
               >
-                {categoryServ.map((cat, index)=>(
-                <MenuItem key={index} value={cat.name}>{cat.name}</MenuItem>
+                {categories.map((cat, index)=>(
+                <MenuItem key={index} value={cat._id}>{cat.name}</MenuItem>
                 ))}
               
               </Select>
