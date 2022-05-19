@@ -136,11 +136,16 @@ exports.user_login = async (req, res) =>{
     const { body } = req;
     console.log("Body Controller:", body);
     // Método optimizado para buscar por ids.
-    const data = await User.find({email: body.email, password: body.password}); // Encuentra el primer registro que coincide con la condición. 
+    const data = await User.findOne({email: body.email, password: body.password}); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
 
     if(data){
-        res.send(data);
+        res.json({
+            _id: data._id,
+            email: data.email,
+            token:  generateToken(data._id)
+        })
+        //res.send(data._id);
     }else{
         res.send({message: "incorrect user or password."})
     }
