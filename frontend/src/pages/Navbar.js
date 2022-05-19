@@ -14,7 +14,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Avatar } from '@mui/material';
 
-const LoginStyle = {margin: '5px', color: 'white'};
+const LoginStyle = {marginTop: '5px',marginBottom: "5px", marginLeft:"0px", marginRight:"10px", color: 'white', fontSize:"12.5px"};
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -93,8 +93,8 @@ export default function Navbar() {
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
-
-  const imageStyle= { width:"150px"}
+//150px
+  const imageStyle= { width:"12.5vw", marginTop: "12px"}
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -117,9 +117,22 @@ export default function Navbar() {
   );
 
   const ColorStyle= {backgroundColor:"#001B2E", }
-  const ColorStyle2= {backgroundColor:"#294C60"}
+  const ColorStyle2= {backgroundColor:"#294C60", width:"9vw", fontSize:"11px"}
   const ColorStyle3= {backgroundColor:"#ADB6C4", height:"55px"}
   const ColorStyle4= {color:"#EDEDED"}
+
+//funciones para hover
+function changeFontSize_login(e) {
+    e.target.style.color = '#DBDBDB';
+    e.target.style.textDecoration = 'none';
+
+}
+
+function returnFontSize_login(e) {
+    e.target.style.color = '#FFFFFF';
+  
+}
+
   return (
     <Box sx={{ flexGrow: 1}} >
       <AppBar position="static" style={ColorStyle} >
@@ -169,7 +182,7 @@ export default function Navbar() {
           </IconButton>
           <Box sx={{ display:'flex'}}>
             
-          <Link href="/login" style={LoginStyle}>
+          <Link onMouseOver={changeFontSize_login} onMouseLeave={returnFontSize_login} href="/login" style={LoginStyle}>
                             Iniciar sesión
                     </Link>
           </Box>

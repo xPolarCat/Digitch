@@ -16,8 +16,15 @@ export const User_GetAll = async () => {
 }
 
 export const User_Register = async (ouser) => {
-    console.log("user servce", ouser);
+    console.log("user SERVICE", ouser);
     try{
+        let data = new FormData();
+        data.set('name', ouser.name);
+        data.set('email', ouser.email);
+        data.set('password', ouser.password);
+        data.set('descrption', ouser.desc);
+        data.set('photo', ouser.photo, `${ouser.photo.lastModified}.${ouser.photo.name}`);
+
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/user", ouser, {
             headers:{
@@ -35,7 +42,11 @@ export const User_Register = async (ouser) => {
 export const User_Update = async (id, user) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.put(`/user/${id}`, user)
+        const response = await axios.put(`/user/${id}`, user, {
+            headers:{
+                "Content-Type": "multipart/form-data",
+            },
+        });
         if(response.status==200) {
             return response.data;
           }else{

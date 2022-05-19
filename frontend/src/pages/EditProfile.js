@@ -31,6 +31,7 @@ const EditProfile = () => {
       console.log("Consulta por ID: ", dataUser);
       setUser(dataUser);
       setPass({confirmPassword: dataUser.password})
+      setImage(dataUser.photo)
     }
 
     fetchData();
@@ -63,7 +64,7 @@ const EditProfile = () => {
     description: "",
     password: "",
     updated_at: new Date().toString(),
-    photo: ""
+    photo: null
   });
   const [pass, setPass] = useState({confirmPassword: ""});
 
@@ -86,9 +87,10 @@ const EditProfile = () => {
       if(user.password == pass.confirmPassword){
         event.preventDefault();
         console.log("Contraseñas correctas")
-        console.log(user)
+        console.log("info pa mandar", user)
+        user.photo = image;
         const resp = await User_Update(id, user)
-        console.log(resp);
+        console.log("info pa recibir",resp);
 
       }else{
         console.log("Contraseñas no correctas")
@@ -97,8 +99,14 @@ const EditProfile = () => {
     }
   }
   const onImageChange = (event) => {
+    console.log("selected file: ", event.target.files[0]);
+
     if (event.target.files && event.target.files[0]) {
-      setImage(URL.createObjectURL(event.target.files[0]));
+      setImage(event.target.files[0]);
+      setUser({
+        ...user,
+        photo: event.target.files[0],
+      });
     }
   };
   return (
