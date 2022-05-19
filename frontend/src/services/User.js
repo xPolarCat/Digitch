@@ -11,19 +11,17 @@ export const User_GetAll = async () => {
     }
 }
 
-export const User_Register = async (user) => {
+export const User_Register = async (ouser) => {
+    console.log("user servce", ouser);
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/user", user,{
+        const response = await axios.post("/user", ouser, {
             headers:{
                 "Content-Type": "multipart/form-data",
             },
-        })
-        if(response.status==200) {
-            return response.data;
-          }else{
-              return {}
-          }
+        });
+        console.log("My response: ", response); //trae objeto creado
+        return response;
     }catch(err){
         console.error(err);
         return err;

@@ -25,7 +25,7 @@ const Register=()=>{
     const switchStyle = {align: 'right'}
 
 
-    const [user, setUser] = useState({  // Inicializo estas variables de estado con valores vacíos 
+    const [ouser, setUser] = useState({  // Inicializo estas variables de estado con valores vacíos 
         name: "",
         email: "",
         desc: "",
@@ -41,6 +41,7 @@ const Register=()=>{
           //setImage(URL.createObjectURL(event.target.files[0]));
           setImage(event.target.files[0]);
           setUser({
+              ...ouser,
               photo: event.target.files[0]
           })
         }
@@ -48,9 +49,8 @@ const Register=()=>{
     
     const handleOnSubmitRegister = async (event) => { // Este event es un parámetro que se puede recibir en todas las funciones que sean desencadenadas por un evento de React.
         event.preventDefault() // Lo que hace es evitar el refresh que hace el form.
-        user.photo = image;
-        console.log(user);
-        const us = await User_Register(user);
+        console.log("CONSOLE LGO", ouser);
+        const us = await User_Register(ouser);
         console.log("my object:", us);
         // if(us != null){
         //     navigate('/');
@@ -61,11 +61,36 @@ const Register=()=>{
     const handleOnChangeInput = (event) => { // Esto se agrega porque al utilizar un valor como user.name, este no puede cambiar. Hay que utilizar el onChange para poder cambiar el valor de mi variable name
         const {name, value} = event.target; // Utilizo Destructuring, obtengo el name del input y el valor 
         setUser({
-            ...user, // Esto es Destructuring, pone todos los atributos que estén contenidos en User, así sobreescribe la información con base en el name de mi input. 
+            ...ouser, // Esto es Destructuring, pone todos los atributos que estén contenidos en User, así sobreescribe la información con base en el name de mi input. 
             [name]: value
         }) // No tengo idea de por qué funciona si no hace referencia a los otros valores como email, password y photo D: 
     }   
+    const onChangeName = (event) => {
+        setUser({
+          ...ouser,
+          name: event.target.value,
+        });
+      };
 
+    const onChangeEmail = (event) => {
+        setUser({
+          ...ouser,
+          email: event.target.value,
+        });
+      };
+    
+    const onChangeDesc = (event) => {
+        setUser({
+            ...ouser,
+            desc: event.target.value,
+        });
+    };
+    const onChangePass = (event) => {
+        setUser({
+            ...ouser,
+            password: event.target.value,
+        });
+    };
     // const onChangeEmail = (event) => { // Podría hacer esto uno por uno, pero es mejor utilizar la opción anterior 
     //     setUser({
     //         ...user,
@@ -86,16 +111,16 @@ const Register=()=>{
                 <Grid container direction={"column"} spacing={5}>
                 
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="name" name="name" value={user.name} onChange={handleOnChangeInput} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} id="name" name="name" value={ouser.name} onChange={onChangeName} InputLabelProps= {textFieldStyle} label='Nombre de usuario' placeholder='Ingresa tu nombre de usuario' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="email" name="email" value={user.email} onChange={handleOnChangeInput} InputLabelProps= {textFieldStyle} label='Correo electrónico' placeholder='Ingresa tu correo electrónico' type='email' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} id="email" name="email" value={ouser.email} onChange={onChangeEmail} InputLabelProps= {textFieldStyle} label='Correo electrónico' placeholder='Ingresa tu correo electrónico' type='email' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="desc" name="desc" value={user.desc} onChange={handleOnChangeInput} InputLabelProps= {textFieldStyle} label='Descripción' placeholder='Habla un poco de ti...'  fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} id="desc" name="desc" value={ouser.desc} onChange={onChangeDesc} InputLabelProps= {textFieldStyle} label='Descripción' placeholder='Habla un poco de ti...'  fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} htmlFor="password" name="password" value={user.password} onChange={handleOnChangeInput} minLength={8} maxLength={30} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} id="password" name="password" value={ouser.password} onChange={onChangePass} minLength={8} maxLength={30} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
                     </Grid>
                     <Grid item>
                     <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Confirmar contraseña' minLength={8} maxLength={30} placeholder='Confirma tu contraseña' type='password' fullWidth required/>
@@ -129,7 +154,7 @@ const Register=()=>{
                     </FormControl>
                     </Grid>
                     <Grid item fullWidth sx={{my:1}} >
-                        <img style={{display: "flex", margin: "auto" }} width="250px" src={user.photo}/>
+                        <img style={{display: "flex", margin: "auto" }} width="250px" src={ouser.photo}/>
                     </Grid>
                     <Grid item>
                     <FormControlLabel
