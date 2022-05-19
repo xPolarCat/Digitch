@@ -35,6 +35,14 @@ export default function CardServices(props) {
 
   const classes = useStyles();
 
+  //funciones para hover
+function changeBackground_details(e) {
+    e.target.style.background = '#002E4F';
+  }
+
+  function returnBackground_details(e) {
+    e.target.style.background = '#001B2E';
+  }
 
 
  //Aqui guardaremos info del post
@@ -97,7 +105,7 @@ useEffect(()=>{
       </CardContent>
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
-        <Button variant="contained" style={cardActionStyle} fullWidth href={`../details/ ${post._id}`} >Ver detalle</Button>
+        <Button onMouseOver={changeBackground_details} onMouseLeave={returnBackground_details} variant="contained" style={cardActionStyle} fullWidth href={`../details/ ${post._id}`} >Ver detalle</Button>
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>

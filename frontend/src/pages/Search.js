@@ -124,6 +124,7 @@ useEffect(()=>{
               <Grid item xs={2}>
                 <IconButton
                   style={{
+                    marginLeft:"10px",
                     maxWidth: "10vh",
                     minWidth: "1vh",
                     color: "white",
@@ -140,7 +141,7 @@ useEffect(()=>{
         </form>
       </div>
       <div id="resultLegend">
-        <Typography variant="h4" style={{ padding: "10px", color: "white" }}>
+        <Typography variant="h4" style={{ padding: "10px", color: "white", backgroundColor:"#001B2E", borderRadius:"12px", marginRight:"65%", fontSize:"2.5vw" }}>
           Resultados para: Diseño
         </Typography>
       </div>
