@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema({
         maxlength: 100, // Máximo de caracteres.
     },
     photo:{
-        type: Buffer,
+        type: String,
         required: false
     },
     created_at:{
