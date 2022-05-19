@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,10 @@ import SendIcon from '@material-ui/icons/Send';
 import InputBase from '@mui/material/InputBase';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
+import { useParams } from "react-router-dom";
+import {User_GetOne} from "../services/User";
+import {User_GetAll} from "../services/User";
+
 
 const useStyles = makeStyles({
   table: {
@@ -60,7 +64,7 @@ const Search = styled('div')(({ theme }) => ({
     },
   }));
   
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
     backgroundColor: theme.palette.common.white,
     height:"48px",
     width:"180px",
@@ -80,7 +84,7 @@ const Search = styled('div')(({ theme }) => ({
   }));
   
 
-  const BoxMessageOneStyle={
+const BoxMessageOneStyle={
       backgroundColor: "#FFFFFF",
       padding:"5px",
       borderRadius:"12px",
@@ -88,7 +92,6 @@ const Search = styled('div')(({ theme }) => ({
       color: "black"
   }
 
-  
   const BoxMessageTwoStyle={
     backgroundColor: "#FFC49B",
     padding:"5px",
@@ -98,9 +101,48 @@ const Search = styled('div')(({ theme }) => ({
 }
 const textFieldStyle = {style: {color : 'white'} }
 
-const Chat = () => {
+export default function Chat() {
   const classes = useStyles();
+  const params = useParams();
+  
+ //Aqui guardamos info del usuario
+ const [user, setUser]= useState([]);
+ //Aqui guardamos info de todos los usuarios
+ const [users, setUsers]= useState([]);
 
+useEffect(()=>{
+    async function fetchData(){
+     
+   //Tuve que convertir el objeto a string
+   const myJSON = JSON.stringify(params.id);
+   //Despues separarlo para que solo me quedara el numero y no exista un error
+   const idFinal= myJSON.slice(2,26);
+  //Me traigo la info de ese post con ese id
+  console.log(idFinal);
+   
+    //Obtengo la info del usuario que subio ese post
+    const dataUser= await User_GetOne(idFinal);
+    setUser(dataUser);
+    console.log("infosi",dataUser);
+
+    //Obtengo la info de todos los usuarios
+    const dataUsers= await User_GetAll(idFinal);
+    setUsers(dataUsers);
+    console.log("usuarios", dataUsers)
+
+    
+    {users.map((user,index) => {
+        if(user._id==idFinal){
+           console.log("somos el mismo", user._id) 
+        }
+    })}
+
+     }
+
+    fetchData();
+    
+   }, []);
+    
   return (
       <div>
         <Grid container style={BackgroundStyle}>
@@ -111,29 +153,19 @@ const Chat = () => {
                         <ListItemIcon>
                         <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/6.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary="Juan Portillo"></ListItemText>
+                        <ListItemText primary={user.name}></ListItemText>
                     </ListItem>
                 </List>
                 <Divider style={{backgroundColor: "white"}}/>
                 <List>
-                    <ListItem button key="SantiangoOrtiz">
+                {users.map((user, index)=>(
+                    <ListItem button key={index} value={user._id}>
                         <ListItemIcon>
-                            <Avatar alt="Santiango Ortiz" src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary="Santiango Ortiz">Santiango Ortiz</ListItemText>
+                        <ListItemText primary={user.name}>{user.name}</ListItemText>
                     </ListItem>
-                    <ListItem button key="EmmaHuerta">
-                        <ListItemIcon>
-                            <Avatar alt="Emma Huerta" src="https://material-ui.com/static/images/avatar/4.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="Emma Huerta">Emma Huerta</ListItemText>
-                    </ListItem>
-                    <ListItem button key="RenatoAcosta">
-                        <ListItemIcon>
-                            <Avatar alt="Renato Acosta" src="https://material-ui.com/static/images/avatar/8.jpg" />
-                        </ListItemIcon>
-                        <ListItemText primary="Renato Acosta">Renato Acosta</ListItemText>
-                    </ListItem>
+                ))}
                 </List>
             </Grid>
             <Grid item xs={12} md={9} style={{ width: '100%', color: "white", border: '1px solid white'}}>
@@ -212,5 +244,3 @@ const Chat = () => {
       </div>
   );
 }
-
-export default Chat;

@@ -30,13 +30,13 @@ function App() {
       <Navbar/>
      </AppBar>
      <Routes>
-        <Route exact path="/userProfile" element={<UserProfile/>}/>
+        <Route exact path="/userProfile/:id" element={<UserProfile/>}/>
         <Route exact path="/createService" element={<CreateService/>}/>
         <Route exact path="/editService/:id" element={<EditService/>}/>
         <Route exact path="/search" element={<Search/>}/>
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/details/:id" element={<Details/>}/>
-        <Route exact path="/chat" element={<Chat/>}/>
+        <Route exact path="/chat/:id" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment/:id" element={<Payment/>} /> 
         <Route exact path="/editprofile/:id" element= {<EditProfile />}/>  

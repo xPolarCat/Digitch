@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia"
 import CardContent from "@mui/material/CardContent";
 import {Typography, Avatar, Button, Box, Divider} from "@mui/material"; 
 import StarIcon from '@mui/icons-material/Star';
+import {User_GetOne} from "../../services/User"
 
 const useStyles = makeStyles({
     root: {
@@ -24,8 +25,34 @@ const useStyles = makeStyles({
     }
   });
   
-  export default function CardDescription() {
-    const classes = useStyles();
+  export default function CardDescription(props) {
+    const classes = useStyles();  
+    //Aqui guardamos info del usuario
+    const [user, setUser]= useState([]);
+
+    
+useEffect(()=>{
+  async function fetchData(){
+    //Tuve que convertir el objeto a string
+    const myJSON = JSON.stringify(props);
+ 
+    //Despues separarlo para que solo me quedara el numero y no exista un error
+    const splitString = myJSON.split(":");
+    const splitString2= splitString[1].split("}");
+    const splitString3 = splitString2[0].split(' " ');
+    const idFinal= splitString3[0].slice(1,25);
+ 
+ 
+   //Obtengo la info del usuario que subio ese post
+    const dataUser= await User_GetOne(idFinal);
+    setUser(dataUser);
+    console.log(dataUser);
+ 
+   }
+ 
+  fetchData();
+ }, [props]);
+
   
     return (
       <Card className={classes.root} variant="outlined" >
@@ -33,16 +60,13 @@ const useStyles = makeStyles({
           <Avatar style={{margin: "auto", height:"100px", width:"100px"}} 
           src="https://cdn.forbes.com.mx/2019/04/blackrrock-invertir-1-640x360.jpg" /> 
           <Typography variant="h4" style={{padding: "10px", margin: "0px", color: "white"}} textAlign="center">
-            Edna Lecea
-          </Typography>
-          <Typography variant="h6" style={{padding: "5px", margin: "0px", color: "white"}} textAlign="center">
-            Una mente soñadora
+            {user.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" style={{padding: "5px", color: "white"}} textAlign="center">
-            Clasificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
+            Calificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Typography>
           <Box textAlign='center' sx={{m: 1}} >
-            <Button variant='contained'style={{backgroundColor: "#294C60"}} href="/chat">
+            <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/ ${user._id}`}>
               Enviar mensaje
             </Button>
           </Box>
@@ -55,7 +79,7 @@ const useStyles = makeStyles({
 
           <Divider sx={{m:2}}/>
           <Typography component="p" textAlign="center" style={{color: "white"}}>
-          Soy una desarrolladora Front End con experiencia en HTML, CSS y Javascript además de la utilización de diversos frameworks como Bootstrap, ReactJS y VueJS.
+          {user.description}
           </Typography>
         </CardContent>
 
