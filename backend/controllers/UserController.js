@@ -1,6 +1,6 @@
 const User = require("../models/UserSchema"); // Traigo mi modelo User.
 const {Storage} = require("@google-cloud/storage");
-
+const jwt = require("jsonwebtoken");
 
 const storage = new Storage({
     projectId: process.env.GCLOUD_PROJECT_ID,
@@ -109,6 +109,7 @@ exports.user_getById = async (req, res) =>{
 
 exports.user_login = async (req, res) =>{
     const { body } = req;
+    console.log("Body Controller:", body);
     // Método optimizado para buscar por ids.
     const data = await User.find({email: body.email, password: body.password}); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
@@ -118,4 +119,12 @@ exports.user_login = async (req, res) =>{
     }else{
         res.send({message: "incorrect user or password."})
     }
+}
+
+// Generar JWT
+
+const generateToken = (id) =>{
+    return jwt.sign({id}, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    })
 }
