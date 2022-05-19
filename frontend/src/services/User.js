@@ -12,10 +12,17 @@ export const User_GetAll = async () => {
 }
 
 export const User_Register = async (ouser) => {
-    console.log("user servce", ouser);
+    console.log("user SERVICE", ouser);
     try{
+        let data = new FormData();
+        data.set('name', ouser.name);
+        data.set('email', ouser.email);
+        data.set('password', ouser.password);
+        data.set('descrption', ouser.descrption);
+        data.set('photo', ouser.photo, `${ouser.photo.lastModified}.${ouser.photo.name}`);
+
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/user", ouser, {
+        const response = await axios.post("/user", data, {
             headers:{
                 "Content-Type": "multipart/form-data",
             },

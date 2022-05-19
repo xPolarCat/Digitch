@@ -18,7 +18,7 @@ exports.user_getall = async (req, res) =>{
 // Mi método para registrar usuarios 
 exports.user_register = async (req, res) =>{
     const { body, file } = req; // Obtenemos la info del body.
-    console.log("Mi controlador:", body, file);
+    console.log("Mi controlador:", body, file, "mi req", req.body);
     const us = req.body;
     // if(!file){
     //     res.status(400).send({code: "400", message: "File does not exist"});
