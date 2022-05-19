@@ -18,13 +18,8 @@ export default function EditServiceForm() {
   const dividerStyle = { backgroundColor: "white" };
   const {id} = useParams();
 
-  const [categoryServ, setCat] = useState(
-    {
-      name: "",
-      _id : ""
-    }
-  );
-  const [categoriesServ, setCats] = useState([]);
+  const [categoryServ, setCat] = useState([]);
+  const [categories, setCats] = useState([]);
 
   useEffect (() =>{
     async function fetchData(){
@@ -32,35 +27,36 @@ export default function EditServiceForm() {
       console.log("Consulta por ID: ", dataPost);
       setService(dataPost);
       setImage(dataPost.images);
-      console.log(dataPost._category);
-      const dataCategory = await Cat_GetOne(dataPost._category)
-      const dataAllCategory = await Cat_GetAll()
-      console.log(dataCategory.name)
+      //console.log(dataPost._category);
+      const dataAllCategory = await Cat_GetAll() //trae todas las categorias
       setCats(dataAllCategory);
-      setCat({
-        name: dataCategory.name,
-        _id: dataCategory._id
-      });
-      const dataPriceList = await Price_GetByPost(dataPost._id)
-      console.log(dataPriceList)
-      setPrice({
-        _id: dataPriceList[0]._id,
-        name: dataPriceList[0].name,
-        description: dataPriceList[0].description,
-        price: dataPriceList[0].price
-      })
-      setPrice2({
-        _id: dataPriceList[1]._id,
-        name: dataPriceList[1].name,
-        description: dataPriceList[1].description,
-        price: dataPriceList[1].price
-      })
-      setPrice3({
-        _id: dataPriceList[2]._id,
-        name: dataPriceList[2].name,
-        description: dataPriceList[2].description,
-        price: dataPriceList[2].price
-      })
+
+      const dataCategory = await Cat_GetOne(dataPost._category); //trae id
+      console.log("trae ge¿¿cat get one", dataCategory[0]);
+      setCat(dataCategory);
+
+      console.log("se setoe", categoryServ)
+
+      // const dataPriceList = await Price_GetByPost(dataPost._id)
+      // console.log(dataPriceList)
+      // setPrice({
+      //   _id: dataPriceList[0]._id,
+      //   name: dataPriceList[0].name,
+      //   description: dataPriceList[0].description,
+      //   price: dataPriceList[0].price
+      // })
+      // setPrice2({
+      //   _id: dataPriceList[1]._id,
+      //   name: dataPriceList[1].name,
+      //   description: dataPriceList[1].description,
+      //   price: dataPriceList[1].price
+      // })
+      // setPrice3({
+      //   _id: dataPriceList[2]._id,
+      //   name: dataPriceList[2].name,
+      //   description: dataPriceList[2].description,
+      //   price: dataPriceList[2].price
+      // })
     }
 
     fetchData();
@@ -73,16 +69,20 @@ export default function EditServiceForm() {
     if (event.target.files && event.target.files[0]) {
       //setImage(URL.createObjectURL(event.target.files[0]));
       setImage(event.target.files[0]);
+      setService({
+        ...service,
+        images: event.target.files[0],
+      });
     }
   }
 
 
 
   const handleChange = (event) => {
-    setCat({
-      ...categoryServ,
-      name: event.target.value,
-    });
+    console.log("lo que se acaba de setear" , event.target.value);
+
+    setCat(event.target.value);
+
     setService({
       ...service,
       _category: event.target.value,
@@ -203,7 +203,6 @@ export default function EditServiceForm() {
   const onSubmitEditService = async (event) => {
     event.preventDefault();
    
-    service.images = image;
     //service._user = '62819a5f9eb9bc87516154a9';
     service._category = categoryServ._id;
     console.log("post form ", id);
@@ -211,16 +210,16 @@ export default function EditServiceForm() {
 
     console.log("my object0:", obj);
   
-    console.log("paquete 1", price);
-    console.log("paquete 2", price2);
-    console.log("paquete 3", price3); 
+  //   console.log("paquete 1", price);
+  //   console.log("paquete 2", price2);
+  //   console.log("paquete 3", price3); 
     
-      navigate('/');
+  //     navigate('/');
    
     
-   await Price_Update(price._id, price);
-   await Price_Update(price2._id, price2);
-   await Price_Update(price3._id, price3);
+  //  await Price_Update(price._id, price);
+  //  await Price_Update(price2._id, price2);
+  //  await Price_Update(price3._id, price3);
 
   };
 
@@ -266,8 +265,8 @@ export default function EditServiceForm() {
                     sx={{ flexGrow: 1, color: "#ffffff" }}
                     required
                   >
-                     {categoriesServ.map((cat, index)=>(
-                    <MenuItem key={index} value={cat.name}>{cat.name}</MenuItem>
+                     {categories.map((cat, index)=>(
+                    <MenuItem key={index} value={cat._id}>{cat.name}</MenuItem>
                     ))}
                   </Select>
                 </Box>
