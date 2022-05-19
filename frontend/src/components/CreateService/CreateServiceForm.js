@@ -57,7 +57,7 @@ export default function CreateServiceForm() {
 
   const handleChange = (event) => {
 
-    setCat(event.target.value);
+    setCat({ _id: event.target.value});
     console.log("cateogri d", event.target.value)
     setService({
       ...service,
