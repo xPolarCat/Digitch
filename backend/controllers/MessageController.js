@@ -22,7 +22,7 @@ exports.message_register = async (req, res) =>{
         if(receiverdb){
             // Validación de información 
             let message = new Message(body); // Creo un objeto tipo message basado en mi modelo Message.
-
+            message.created_at = Date.now(); 
             await message
             .save() // si message es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
             .then((message) => console.log("New message succesfully registered!", message))
@@ -108,12 +108,12 @@ exports.message_getByUsers = async (req, res) =>{
     console.log("usuarios:", users);
     
     const data = await Message.find( 
-        { $or: [{_receiver: users._receiver}, {_sender: users._sender}]}// Donde mi usuario 1 es el que envía y el 2 el que recibe 
-        ) // Donde mi usuario 2 es el que envía y el 1 el que recibe
+        { $or: [{_receiver: users._receiver}, {_sender: users._sender}], sort:{created_at: -1}}// Donde mi usuario 1 es el que envía y el 2 el que recibe 
+        ,) // Donde mi usuario 2 es el que envía y el 1 el que recibe
 
 
     const data2 = await Message.find(
-        {$or: [{_receiver: users._sender}, {_sender: users._receiver}]}
+        {$or: [{_receiver: users._sender}, {_sender: users._receiver}], sort:{created_at: -1}}
     )
 
   console.log(data,data2);

@@ -1,6 +1,7 @@
 const User = require("../models/UserSchema"); // Traigo mi modelo User.
 const {Storage} = require("@google-cloud/storage");
 const jwt = require("jsonwebtoken");
+const {protect} = require('../middleware/authMiddleware');
 
 const storage = new Storage({
     projectId: process.env.GCLOUD_PROJECT_ID,
