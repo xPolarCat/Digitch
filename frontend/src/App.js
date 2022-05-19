@@ -39,7 +39,7 @@ function App() {
         <Route exact path="/chat" element={<Chat/>}/>
         <Route exact path="/register" element={<Register/>}/>
         <Route exact path="/payment/:id" element={<Payment/>} /> 
-        <Route exact path="/editprofile" element= {<EditProfile />}/>  
+        <Route exact path="/editprofile/:id" element= {<EditProfile />}/>  
         <Route exact path="/" element= {<Home />}/>  
       </Routes>
      <Footer/>

@@ -48,13 +48,14 @@ const Register=()=>{
     
     const handleOnSubmitRegister = async (event) => { // Este event es un parámetro que se puede recibir en todas las funciones que sean desencadenadas por un evento de React.
         event.preventDefault() // Lo que hace es evitar el refresh que hace el form.
+        user.photo = image;
         console.log(user);
         const us = await User_Register(user);
         console.log("my object:", us);
-        if(us != null){
-            navigate('/');
-          }else{
-          }
+        // if(us != null){
+        //     navigate('/');
+        //   }else{
+        //   }
     }
 
     const handleOnChangeInput = (event) => { // Esto se agrega porque al utilizar un valor como user.name, este no puede cambiar. Hay que utilizar el onChange para poder cambiar el valor de mi variable name

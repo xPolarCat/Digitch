@@ -1,4 +1,12 @@
 const User = require("../models/UserSchema"); // Traigo mi modelo User.
+const {Storage} = require("@google-cloud/storage");
+
+
+const storage = new Storage({
+    projectId: process.env.GCLOUD_PROJECT_ID,
+    keyFilename: process.env.GCLOUD_APPLICATION_CREDENTIALS,
+});
+
 
 // Obtener todos los usuarios 
 exports.user_getall = async (req, res) =>{
@@ -10,41 +18,41 @@ exports.user_getall = async (req, res) =>{
 // Mi método para registrar usuarios 
 exports.user_register = async (req, res) =>{
     const { body, file } = req; // Obtenemos la info del body.
-    console.log("Body user: ", body); 
-    
-    if(!file){
-        res.status(400).send({code: "400", message: "File does not exist"});
-    }
+    console.log("Body user: ", req); 
+    const us = req.body;
+    // if(!file){
+    //     res.status(400).send({code: "400", message: "File does not exist"});
+    // }
 
-    const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
-            const blob = bucket.file(file.originalname);
-            const blobStream = blob.createWriteStream({
-                metadata:{
-                    contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
-                },
-            });
+    // const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
+    //         const blob = bucket.file(file.originalname);
+    //         const blobStream = blob.createWriteStream({
+    //             metadata:{
+    //                 contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
+    //             },
+    //         });
     
-            blobStream.on("error", (err) => next(err));
+    //         blobStream.on("error", (err) => next(err));
             
-            blobStream.on("finish", async ()  =>{
-                const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
-                body.photo = publicUrl;
-                // Validación de información 
-                let newUser = new User(body); // Creo un objeto tipo User basado en mi modelo User.
+    //         blobStream.on("finish", async ()  =>{
+    //             const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
+    //             body.photo = publicUrl;
+    //             // Validación de información 
+    //             let newUser = new User(body); // Creo un objeto tipo User basado en mi modelo User.
             
-                await newUser
-                .save() // si newUser es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
-                .then((newUser) => console.log("New user succesfully registered!", newUser))
-                .catch((err) => {
-                    console.error("An error in the User register has occurred.", err)
-                    res.send(err.errors);
-                }); // Aquí guardo el nuevo usuario.
+    //             await newUser
+    //             .save() // si newUser es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+    //             .then((newUser) => console.log("New user succesfully registered!", newUser))
+    //             .catch((err) => {
+    //                 console.error("An error in the User register has occurred.", err)
+    //                 res.send(err.errors);
+    //             }); // Aquí guardo el nuevo usuario.
 
-                res.send(newUser); // Regreso el objeto creado.
-                return newUser;
+    //             res.send(newUser); // Regreso el objeto creado.
+    //             return newUser;
                 
-            });
-            blobStream.end(file.buffer);
+    //         });
+    //         blobStream.end(file.buffer);
 }
 
 // Update

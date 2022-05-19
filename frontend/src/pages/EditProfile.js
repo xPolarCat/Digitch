@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useState } from "react";
+import React, { Component, Fragment, useState, useEffect } from "react";
 import {
   Grid,
   Paper,
@@ -17,9 +17,26 @@ import BackgroundImage from "../resources/login-background.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../resources/logo.png";
 import Image from "mui-image";
+import { useParams } from 'react-router';
+import { User_GetOne, User_Update } from "../services/User";
+
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
 const EditProfile = () => {
+  const {id} = useParams();
+
+  useEffect (() =>{
+    async function fetchData(){
+      const dataUser = await User_GetOne(id);
+      console.log("Consulta por ID: ", dataUser);
+      setUser(dataUser);
+      setPass({confirmPassword: dataUser.password})
+    }
+
+    fetchData();
+   }, []);
+
+
   //opacity: 0.7
   const backgroundStyle = {
     minHeight: "100vh",
@@ -46,6 +63,7 @@ const EditProfile = () => {
     description: "",
     password: "",
     updated_at: new Date().toString(),
+    photo: ""
   });
   const [pass, setPass] = useState({confirmPassword: ""});
 
@@ -64,11 +82,14 @@ const EditProfile = () => {
     });
   }
 
-  const onSubmitEdit= (event)=>{
+  const onSubmitEdit= async (event)=>{
       if(user.password == pass.confirmPassword){
         event.preventDefault();
         console.log("Contraseñas correctas")
-          console.log(user)
+        console.log(user)
+        const resp = await User_Update(id, user)
+        console.log(resp);
+
       }else{
         console.log("Contraseñas no correctas")
 

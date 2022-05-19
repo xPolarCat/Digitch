@@ -30,11 +30,15 @@ export const User_Register = async (user) => {
     }
 }
 
-export const User_Update = async (id) => {
+export const User_Update = async (id, user) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.put("/user/:id", {id})
-        //console.log("data", data);
+        const response = await axios.put(`/user/${id}`, user)
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return {}
+          }
     }catch(err){
         console.error(err);
         return err;
