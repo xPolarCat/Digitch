@@ -5,7 +5,7 @@ const {protect} = require('../middleware/authMiddleware');
 
 const PostController = require("../controllers/PostController");
 
-router.use(protect);
+// router.use(protect);
 
 router.get("/post",  PostController.post_getall); // Ruta para ver todos los posts.
 router.post("/post", uploader.single("images"), PostController.post_register); // Mi ruta para el registro de posts tipo POST. "images" es el nombre del campo donde guardaremos la imagen.
