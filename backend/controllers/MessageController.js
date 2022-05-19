@@ -108,7 +108,8 @@ exports.message_getByUsers = async (req, res) =>{
     console.log("usuarios:", users);
     
     const data = await Message.find( 
-        { $or: [{_receiver: users._receiver}, {_sender: users._sender}], $or: [{_receiver: users._sender}, {_sender: users._receiver}]}, // Donde mi usuario 1 es el que envía y el 2 el que recibe 
+        { $or: [{_receiver: users._receiver}, {_sender: users._receiver}],}
+         // Donde mi usuario 1 es el que envía y el 2 el que recibe 
         ) // Donde mi usuario 2 es el que envía y el 1 el que recibe
     if(data){
         res.send(data);
