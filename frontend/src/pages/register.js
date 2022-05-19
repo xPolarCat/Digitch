@@ -28,12 +28,12 @@ const Register=()=>{
     const [ouser, setUser] = useState({  // Inicializo estas variables de estado con valores vacíos 
         name: "",
         email: "",
-        desc: "",
+        description: "",
         password: "",
         photo: "https://penworthy.com/Image/Getimage?id=ContactUs\Penworthy%20Group%20Photo.jpg",
 
     });
-    const [image, setImage] = useState(null)
+    const [image, setImage] = useState("")
 
     const onImageChange = (event) => {
         console.log("selected file: ", event.target.files[0]);
@@ -82,7 +82,7 @@ const Register=()=>{
     const onChangeDesc = (event) => {
         setUser({
             ...ouser,
-            desc: event.target.value,
+            description: event.target.value,
         });
     };
     const onChangePass = (event) => {
@@ -91,6 +91,14 @@ const Register=()=>{
             password: event.target.value,
         });
     };
+    const [pass, setPass] = useState({confirmPassword: ""});
+
+    const onChangePassword = (event) =>{
+      setPass({
+          ...pass,
+          confirmPassword : event.target.value
+      });
+    }
     // const onChangeEmail = (event) => { // Podría hacer esto uno por uno, pero es mejor utilizar la opción anterior 
     //     setUser({
     //         ...user,
@@ -117,13 +125,14 @@ const Register=()=>{
                     <TextField  inputProps={{ style: { color: 'white'}}} id="email" name="email" value={ouser.email} onChange={onChangeEmail} InputLabelProps= {textFieldStyle} label='Correo electrónico' placeholder='Ingresa tu correo electrónico' type='email' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} id="desc" name="desc" value={ouser.desc} onChange={onChangeDesc} InputLabelProps= {textFieldStyle} label='Descripción' placeholder='Habla un poco de ti...'  fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} id="description" name="description" value={ouser.description} onChange={onChangeDesc} InputLabelProps= {textFieldStyle} label='Descripción' placeholder='Habla un poco de ti...'  fullWidth required/>
                     </Grid>
                     <Grid item>
                     <TextField  inputProps={{ style: { color: 'white'}}} id="password" name="password" value={ouser.password} onChange={onChangePass} minLength={8} maxLength={30} InputLabelProps= {textFieldStyle} label='Contraseña' placeholder='Ingresa tu contraseña' type='password' fullWidth required/>
                     </Grid>
                     <Grid item>
-                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Confirmar contraseña' minLength={8} maxLength={30} placeholder='Confirma tu contraseña' type='password' fullWidth required/>
+                    <TextField  inputProps={{ style: { color: 'white'}}} InputLabelProps= {textFieldStyle} label='Confirmar contraseña'                 value={pass.confirmPassword}
+                onChange={onChangePassword}  minLength={8} maxLength={30} placeholder='Confirma tu contraseña' type='password' fullWidth required/>
                     </Grid>
                    
                     {/*<Grid item style= {{color : 'white'}}>
@@ -154,7 +163,7 @@ const Register=()=>{
                     </FormControl>
                     </Grid>
                     <Grid item fullWidth sx={{my:1}} >
-                        <img style={{display: "flex", margin: "auto" }} width="250px" src={ouser.photo}/>
+                        <img style={{display: "flex", margin: "auto" }} width="250px" src={image}/>
                     </Grid>
                     <Grid item>
                     <FormControlLabel
@@ -182,7 +191,10 @@ const Register=()=>{
                                     required
                     />
                     </Grid>
-                
+                    {ouser.password != pass.confirmPassword || pass.confirmPassword == null ? (
+          <div id="Error"style={{textAlign:"center", color: "red"}}>
+              Las contraseñas no coinciden
+          </div> ) : ""}
                 </Grid>
                 <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Registrarse</Button>
                 </form>

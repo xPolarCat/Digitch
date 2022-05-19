@@ -20,62 +20,87 @@ exports.user_register = async (req, res) =>{
     const { body, file } = req; // Obtenemos la info del body.
     console.log("Mi controlador:", body, file, "mi req", req.body);
     const us = req.body;
-    // if(!file){
-    //     res.status(400).send({code: "400", message: "File does not exist"});
-    // }
+    if(!file){
+        res.status(400).send({code: "400", message: "File does not exist"});
+    }
 
-    // const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
-    //         const blob = bucket.file(file.originalname);
-    //         const blobStream = blob.createWriteStream({
-    //             metadata:{
-    //                 contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
-    //             },
-    //         });
+    const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
+            const blob = bucket.file(file.originalname);
+            const blobStream = blob.createWriteStream({
+                metadata:{
+                    contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
+                },
+            });
     
-    //         blobStream.on("error", (err) => next(err));
+            blobStream.on("error", (err) => next(err));
             
-    //         blobStream.on("finish", async ()  =>{
-    //             const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
-    //             body.photo = publicUrl;
-    //             // Validación de información 
-    //             let newUser = new User(body); // Creo un objeto tipo User basado en mi modelo User.
+            blobStream.on("finish", async ()  =>{
+                const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
+                body.photo = publicUrl;
+                // Validación de información 
+                let newUser = new User(body); // Creo un objeto tipo User basado en mi modelo User.
             
-    //             await newUser
-    //             .save() // si newUser es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
-    //             .then((newUser) => console.log("New user succesfully registered!", newUser))
-    //             .catch((err) => {
-    //                 console.error("An error in the User register has occurred.", err)
-    //                 res.send(err.errors);
-    //             }); // Aquí guardo el nuevo usuario.
+                await newUser
+                .save() // si newUser es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
+                .then((newUser) => console.log("New user succesfully registered!", newUser))
+                .catch((err) => {
+                    console.error("An error in the User register has occurred.", err)
+                    res.send(err.errors);
+                }); // Aquí guardo el nuevo usuario.
 
-    //             res.send(newUser); // Regreso el objeto creado.
-    //             return newUser;
+                res.send(newUser); // Regreso el objeto creado.
+                return newUser;
                 
-    //         });
-    //         blobStream.end(file.buffer);
+            });
+            blobStream.end(file.buffer);
 }
 
 // Update
 exports.user_update = async (req, res) => {
     const { id } = req.params; // Los params son los que se envían en el URL.
-    const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
+    const { body, file } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
+
+    if(!file){
+        res.status(400).send({code: "400", message: "File does not exist"});
+    }
 
     try{
-        const userdb = await User.findById(id); // Hago una consulta basándome en el id. 
 
-        if(userdb){
-            // Actualizar el contenido de mi fila.
-            const data = await User.findOneAndUpdate(  
-            // El id en mi base de datos se guarda con un _
-                {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
-                body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
-                {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
+        const bucket = storage.bucket(process.env.GCLOUD_BUCKET_URL);
+        const blob = bucket.file(file.originalname);
+        const blobStream = blob.createWriteStream({
+            metadata:{
+                contentType: file.mimeType, // Especificamos el tipo de dato que queremos mandar. 
+            },
+        });
+
+        blobStream.on("error", (err) => next(err));
+        
+        blobStream.on("finish", async ()  =>{
+            const publicUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURI(blob.name)}?alt=media`
+            body.photo = publicUrl;
+            const userdb = await User.findById(id); // Hago una consulta basándome en el id. 
+
+            if(userdb){
+                // Actualizar el contenido de mi fila.
+                const data = await User.findOneAndUpdate(  
+                // El id en mi base de datos se guarda con un _
+                    {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
+                    body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
+                    {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
+                
+                res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
+                return data;
+            }else{
+                // Regresar un mensaje de error. 
+                res.send({message: "The id does not exists"});
+            }
             
-            res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
-        }else{
-            // Regresar un mensaje de error. 
-            res.send({message: "The id does not exists"});
-        }
+            
+        });
+        blobStream.end(file.buffer);
+
+       
     }catch(err){
         res.send(err);
     }
