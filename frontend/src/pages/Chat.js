@@ -106,7 +106,7 @@ export default function Chat() {
   const params = useParams();
   
  //Aqui guardamos info del usuario
- const [user, setUser]= useState([]);
+ const [user1, setUser]= useState([]);
  //Aqui guardamos info de todos los usuarios
  const [users, setUsers]= useState([]);
 
@@ -145,29 +145,29 @@ useEffect(()=>{
                         <ListItemIcon>
                         <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/6.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary={user.name}></ListItemText>
+                        <ListItemText primary={user1.name}></ListItemText>
                     </ListItem>
                 </List>
                 <Divider style={{backgroundColor: "white"}}/>
                 <List>
                 {users.map((user, index)=>(
-                    <ListItem button key={index} value={user._id}>
+                     <ListItem button key={index} value={user._id}>
                         <ListItemIcon>
                             <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
                         <ListItemText primary={user.name}>{user.name}</ListItemText>
-                    </ListItem>
+                     </ListItem>
                 ))}
                 </List>
             </Grid>
             <Grid item xs={12} md={9} style={{ width: '100%', color: "white", border: '1px solid white'}}>
-                <List >
-                <ListItem button key={user.name} >
+                <List >    
+                <ListItem button key={user1.name} >
                         <ListItemIcon>
-                            <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={user1.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary={user.name}>{user.name}</ListItemText>
-                    </ListItem>
+                        <ListItemText primary={user1.name}>{user1.name}</ListItemText>
+                </ListItem>
                 </List>
                 <Divider  style={{backgroundColor: "white"}}/>
                 <List className={classes.messageArea} >
@@ -194,30 +194,6 @@ useEffect(()=>{
                                 </Grid>
                             </Grid>
                         </Box>
-                    </ListItem>
-                    <ListItem key="3">
-                            <Grid container justifyContent="flex-end">
-                            <Box style={BoxMessageOneStyle}>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Si recibi la informacion."></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="10:30"></ListItemText>
-                                </Grid>
-                            </Box>
-                            </Grid>
-                    </ListItem>
-                    <ListItem key="4">
-                            <Grid container justifyContent="flex-end">
-                            <Box style={BoxMessageOneStyle}>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="La contactare en el tiempo acordado."></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="10:31"></ListItemText>
-                                </Grid>
-                            </Box>
-                            </Grid>
                     </ListItem>
                 </List>
                 <Divider />

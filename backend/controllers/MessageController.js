@@ -116,7 +116,7 @@ exports.message_getByUsers = async (req, res) =>{
         {$or: [{_receiver: users._sender}, {_sender: users._receiver}]}
     )
 
-  
+  console.log(data,data2);
 
     if(data || data2){
         res.json({
