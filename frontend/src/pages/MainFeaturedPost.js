@@ -67,11 +67,10 @@ export default function MainFeaturedPost(props) {
     async function fetchData(){
       
    //Tuve que convertir el objeto a string
-   const myJSON = JSON.stringify(params.id);
+   const idFinal = (params.id);
 
    //Despues separarlo para que solo me quedara el numero y no exista un error
   
-   const idFinal= myJSON.slice(2,26);
   //Me traigo la info de ese post con ese id
   const data= await Post_GetById(idFinal);
   setPost(data);

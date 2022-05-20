@@ -15,7 +15,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { Avatar } from '@mui/material';
 import Cookie from 'cookie-universal';
 
-const LoginStyle = {marginTop: '5px',marginBottom: "5px", marginLeft:"0px", marginRight:"10px", color: 'white', fontSize:"12.5px"};
+const LoginStyle = {marginTop: '5px',marginBottom: "5px", marginLeft:"0px", marginRight:"10px", color: 'white', fontSize:"13px", textDecoration:"none"};
 
 const cookies = Cookie();
 const user_id = cookies.get('user_id');

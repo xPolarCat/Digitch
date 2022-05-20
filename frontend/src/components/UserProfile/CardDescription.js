@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import {Typography, Avatar, Button, Box, Divider} from "@mui/material"; 
 import StarIcon from '@mui/icons-material/Star';
 import {User_GetOne} from "../../services/User"
+import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
     root: {
@@ -29,6 +30,8 @@ const useStyles = makeStyles({
     const classes = useStyles();  
     //Aqui guardamos info del usuario
     const [user, setUser]= useState([]);
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user_id'); 
 
     
 useEffect(()=>{
@@ -66,7 +69,7 @@ useEffect(()=>{
             Calificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Typography>
           <Box textAlign='center' sx={{m: 1}} >
-            <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/${user._id}`}>
+            <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/${cookieTemp}`}>
               Enviar mensaje
             </Button>
           </Box>

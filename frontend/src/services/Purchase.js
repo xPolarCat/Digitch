@@ -21,14 +21,18 @@ export const Purchase_GetAll = async () => {
 export const Purchase_Register = async (data) => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
+    console.log("Purchase service", data)
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/purchase", {data}, {
+        const response = await axios.post("/purchase", data, {
             headers: {
                 "Authorization": "Bearer " + cookieTemp
             }
         })
-        console.log("",data);
+
+        console.log("Purchase service",response);
+        return response;
+
     }catch(err){
         console.error(err);
         return err;

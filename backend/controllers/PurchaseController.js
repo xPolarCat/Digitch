@@ -12,6 +12,8 @@ exports.purchase_getall = async (req, res) =>{
 // Mi método para registrar compras 
 exports.purchase_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
+    console.log("Controlador id post", body._post);
+    console.log("Controlador id user", body._user);
 
     const userdb = await User.findById(body._user); // Esto me sirve para revisar si existe un usuario con el id que recibo
     const postdb = await Post.findById(body._post);
@@ -32,7 +34,7 @@ exports.purchase_register = async (req, res) =>{
 
             res.send(purchase); // Regreso el objeto creado.
         }else{
-            res.send({message: "The user/sender does not exists"});
+            res.send({message: "The post does not exists"});
         }
     }else{
         res.send({message: "The user/receiver does not exists"});
