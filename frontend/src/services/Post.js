@@ -1,4 +1,5 @@
 import { axiosBase as axios } from "./Config";
+import Cookie from 'cookie-universal';
 
 export const Post_GetAll = async () => {
     try{
@@ -27,11 +28,17 @@ export const Post_Register = async (post) => {
         data.set('_category', "6281864dea063144676f6195");
         data.set('created_at', post.created_at);
         data.set('images', post.images, `${post.images.lastModified}.${post.images.name}`);
+        
+        const cookies = Cookie()
+        const cookieTemp = cookies.get('user');
+
+        console.log("Mi cookie en el post: ", cookieTemp);
 
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/post", post, {
             headers:{
                 "Content-Type": "multipart/form-data",
+                "Authorization": "Bearer " + cookieTemp
             },
         });
         console.log("My response: ", response); //trae objeto creado
@@ -43,10 +50,15 @@ export const Post_Register = async (post) => {
 }
 
 export const Post_Update = async (id, post) => {
+    console.log("post service 2 ", post);
+    console.log("id", id);
     try{
-        console.log("post service ", id);
         //Respuesta de un await con la ruta del api
-        const response = await axios.put(`/post/${id}`, post)
+        const response = await axios.put(`/post/${id}`, post, {
+            headers:{
+                "Content-Type": "multipart/form-data",
+            },
+        });
         if(response.status==200) {
             return response.data;
           }else{
