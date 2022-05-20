@@ -33,6 +33,7 @@ const GridStyle = {
 };
 const BorderStyle = {
   borderBottom: "2px solid white",
+  paddingTop: "20px"
 };
 const IconStyle = {
   width: "100px",
@@ -75,6 +76,7 @@ const ImagesStyle = {
 };
 const PaddingStyle = {
   padding: 10,
+  width: '80%'
 };
 const buyButtonStyle = {
   align: "right",
@@ -93,6 +95,8 @@ const background = {
 export default function Payment() {
   const params = useParams();
 
+  const [total, setTotal] = useState({t: 40 + 40})
+
   const [oPurchase, setPurchase] = useState({
     _user: "",
     _post: ""
@@ -101,19 +105,21 @@ export default function Payment() {
   const handleOpen = async() => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user_id'); 
+    const myJSON = JSON.stringify(params.id);
 
+  //Despues separarlo para que solo me quedara el numero y no exista un error
+  const idFinal= myJSON.slice(2,26);
+    console.log("cookie ",cookieTemp)
     setPurchase({
-      ...oPurchase,
-      _user : cookieTemp
+      _user : cookieTemp,
+      _post: idFinal
     });
-    setPurchase({
-      ...oPurchase,
-      _post: params.id
-    });
-
-    console.log("Purchase ",oPurchase);
-    //const obj = await Purchase_Register()
-    setOpen(true);
+   
+    console.log("Purchase ", oPurchase);
+    const obj = await Purchase_Register(oPurchase);
+    console.log("Purchase out", obj)
+    if(obj != null)
+      setOpen(true);
   }
   const handleClose = () => setOpen(false);
 
@@ -150,21 +156,14 @@ const [post, setPost]= useState([]);
       spacing={0}
       direction="column"
       alignItems="center"
-      style={{ backgroundImage: `url(${BackgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      height='90vh'
+      style={{ backgroundImage: `url(${BackgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', paddingBottom: "30px" }}
     >
     
       <Container style={{ paddingTop: "30px" }}>
         <Grid item xs={12} style={GridStyle}>
-          <Container maxWidth="sm" style={BorderStyle}>
-            <Toolbar>
-              <Box spacing={1} style={PaddingStyle}>
-                <img
-                  src="https://www.latevaweb.com/diseno-web/programacion-web-para-cuando-el-html5.jpg"
-                  style={ImagesStyle}
-                />
-              </Box>
-              <h4 style={TextStyle}>{post.name}</h4>
-            </Toolbar>
+          <Container style={BorderStyle}>       
+            <h1 style={TextStyle}>{post.name}</h1>
           </Container>
           <Container maxWidth="sm" style={BorderStyle}>
             <table>
@@ -186,7 +185,7 @@ const [post, setPost]= useState([]);
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>{price.price}MXN$</p>
+                    <p style={TextStyle}>${price.price}.00 MXN</p>
                   </td>
                 </tr>
                 <tr>
@@ -198,7 +197,7 @@ const [post, setPost]= useState([]);
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>80MXN$</p>
+                    <p style={TextStyle}>$ 40.00 MXN</p>
                   </td>
                 </tr>
               </tbody>
@@ -209,49 +208,62 @@ const [post, setPost]= useState([]);
               <tbody>
                 <tr>
                   <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                   <td>
                     <p style={TextStyle}>Total del pedido.</p>
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>({price.price}+80) MXN$</p>
+                    <p style={TextStyle}>${total.t} MXN</p>
                   </td>
                 </tr>
               </tbody>
             </table>
           </Container>
+
+          <Container style={{ paddingTop: "30px" , paddingBottom: "30px"}}>
+            <Grid container>
+              <Grid item xs={12}>
+                <Container maxWidth="sm">
+                  <Toolbar>
+                    <CreditScoreIcon style={IconStyle} />
+                    <Box sx={{ flexGrow: 0.3 }} />
+                    <h1 style={TextStyle}>Opción de Pago</h1>
+                  </Toolbar>
+                </Container>
+                <Box textAlign="center">
+                  <p style={TextStyle}>
+                    ¡Hola! Gracias por elegirnos, a continuacion realizaras el pago
+                    mediante PayPal.
+                  </p>
+                  <p style={TextStyle}>
+                    {" "}
+                    Da click al boton, ingresa a tu cuenta y paga el monto acordado
+                    en la informacion del servicio.
+                  </p>
+                </Box>
+                <Box sx={{ flexGrow: 0.3, p: 2 }} />
+                <Box textAlign="center">
+                  <Button variant="contained" style={PaypalStyle} onClick={handleOpen}>
+                    PAYPAL
+                  </Button>
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
+
+
         </Grid>
       </Container>
-      <Container style={{ paddingTop: "30px" , paddingBottom: "30px"}}>
-        <Grid container>
-          <Grid item xs={12} style={GridPayStyle}>
-            <Container maxWidth="sm" style={BorderStyle}>
-              <Toolbar>
-                <CreditScoreIcon style={IconStyle} />
-                <Box sx={{ flexGrow: 0.3 }} />
-                <h1 style={TextStyle}>Opción de Pago</h1>
-              </Toolbar>
-            </Container>
-            <Box textAlign="center">
-              <p style={TextStyle}>
-                ¡Hola! Gracias por elegirnos, a continuacion realizaras el pago
-                mediante PayPal.
-              </p>
-              <p style={TextStyle}>
-                {" "}
-                Da click al boton, ingresa a tu cuenta y paga el monto acordado
-                en la informacion del servicio.
-              </p>
-            </Box>
-            <Box sx={{ flexGrow: 0.3, p: 2 }} />
-            <Box textAlign="center">
-              <Button variant="contained" style={PaypalStyle} onClick={handleOpen}>
-                PAYPAL
-              </Button>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
+     
       <Modal
         open={open}
         onClose={handleClose}

@@ -11,7 +11,7 @@ const PurchaseSchema = new mongoose.Schema({
         required: true
     },
     _post:{
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
         ref:"posts",
         required: true
     },
