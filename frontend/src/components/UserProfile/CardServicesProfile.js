@@ -9,6 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
 import {Price_GetByPost} from "../../services/Price"
+import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +31,8 @@ const useStyles = makeStyles({
 export default function CardServices(props) {
   const cardActionStyle= {backgroundColor: "#001B2E"}
   const classes = useStyles();
+  const cookies = Cookie();
+  const cookieTemp = cookies.get('user_id'); 
 
   const [post,setPost]= useState([]);
   //Aqui guardamos info del usuario
@@ -93,6 +96,11 @@ useEffect(()=>{
           <FavoriteIcon />
         </IconButton>
       </CardActions>
+      { user._id == cookieTemp &&
+              <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
+              <Button variant="contained" style={cardActionStyle} fullWidth href={`../editService/${post._id}`}>Editar</Button>
+            </CardActions>
+      }
     </Card>
   );
 }
