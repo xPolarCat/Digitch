@@ -20,6 +20,7 @@ import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User";
 import {User_GetAll} from "../services/User";
 import {Mssg_GetByUsers} from "../services/Message";
+import {Mssg_Register} from "../services/Message";
 
 
 const useStyles = makeStyles({
@@ -107,6 +108,7 @@ export default function Chat() {
   const classes = useStyles();
   const params = useParams();
   const isFirst = useRef(false);
+  const isFirstM = useRef(false);
   
  //Aqui guardamos info del usuario
  const [user1, setUser]= useState([]);
@@ -117,25 +119,23 @@ export default function Chat() {
      _sender:"",
      _receiver:""
  });
- 
  const [message, setContent] = useState({
   content: "",
   _sender: "",
   _receiver: ""
 });
-
  //Obtengo los mensajes de la conversacion
  const [messages, setMessage]= useState([]);
  //Aqui guardo la info del usuario con el que quiere chatearon
  const [userS, setUserS]=useState([]);
+ //Variable para saber si sube mensajes 
+ const [newMessage, setNew]= useState({valor:""});
 
 useEffect(()=>{
       
    //Tuve que convertir el objeto a string
    const idFinal = params.id;
    //Despues separarlo para que solo me quedara el numero y no exista un error
-  
-
     
     setChat ( 
         {
@@ -159,8 +159,7 @@ useEffect(()=>{
     
    }, []);
     
-   useEffect(()=>{
-
+useEffect(()=>{
 
     if(isFirst.current){
     
@@ -173,7 +172,6 @@ useEffect(()=>{
 
     async function fetchData(){
         
-    console.log(chat);
     //Obtengo los mensajes de ese chat
     const dataMessage = await Mssg_GetByUsers(chat);
     setMessage(dataMessage);
@@ -186,8 +184,26 @@ useEffect(()=>{
 
     fetchData();
     }
+
     isFirst.current = true;
    },[chat])
+
+   useEffect(()=>{
+
+    if(isFirstM.current){
+    
+      console.log("jiji")
+    async function fetchData(){
+        
+    //Obtengo los mensajes de ese chat
+    const dataMessage = await Mssg_GetByUsers(chat);
+    setMessage(dataMessage);
+    }
+    fetchData();
+   }
+   
+   isFirstM.current = true;
+  },[newMessage])
 
    function handleClick(value){
 
@@ -205,14 +221,22 @@ useEffect(()=>{
     });
   }
 
-  
-  const onSubmitRate=(event)=>{
+  const onSubmitRate= async (event)=>{
     event.preventDefault();
     setContent({
       ...message,
       _sender: chat._sender
     })
-    console.log(message)
+    const us = await Mssg_Register(message);
+     
+    setNew({
+      valor: us
+    })
+    
+    console.log(newMessage)
+
+    
+
   }
 
   return (
@@ -289,25 +313,23 @@ useEffect(()=>{
                 
                 </List>
                 <Divider />
-                <Grid container style={{padding: '10px'}}>
-                  
                 <form onSubmit={onSubmitRate}>
-                    <FormControl fullWidth
-                    onChange={onChangeRate}
+                    <FormControl fullWidth 
+                     onChange={onChangeRate}
                     value={message.content}
-                    >
-                    <Grid item xs={11}>
-
+                    > 
+                    <Grid container style={{padding: '10px'}}>
+                   <Grid item xs={11}>
                         <TextField id="outlined-basic-email" InputLabelProps= {textFieldStyle}
                         InputProps={textFieldStyle} label="Escribe tu mensaje..." fullWidth />
-                    
                     </Grid>
                     <Grid xs={1} align="right">
                         <Fab color="primary" aria-label="add"  type="submit"><SendIcon /></Fab>
                     </Grid>
-                    </FormControl>
-                    </form>
+                  
                 </Grid>
+                </FormControl>
+                </form>
             </Grid>
         </Grid>
         </Grid>
