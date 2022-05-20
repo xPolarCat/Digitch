@@ -152,50 +152,70 @@ function returnFontSize_login(e) {
             <h6 style={ColorStyle4}>VENDE TUS SERVICIOS</h6>
           </Box> */}
           <Box sx={{ flexGrow: .8 }} />
+          
+          { user_id ?
           <IconButton 
               style = {{ marginRight: "10px"}}
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="Búsqueda"
               color="inherit"
               href="/search"
             >
                 <SearchIcon />
           </IconButton>
+
+          : ""
+          }
+
+          { user_id ? 
           <IconButton 
               style = {{marginRight: "10px"}}
               size="large"
-              aria-label="show 17 new notifications"
+              aria-label="Crear servicio"
               color="inherit"
               href="/createService"
             >
                 <AddCircleIcon />
           </IconButton>
-          
-          
-          <Button href="/UserProfile">
-            <Avatar>
+          : ""
+          }
 
-            </Avatar>
-          </Button>
+          {user_id ?
+                    <Button href={`../userProfile/${user_id}`}>
+                    <Avatar>
+        
+                    </Avatar>
+                  </Button>
+          : ""}
 
-          <IconButton 
-              style = {{marginRight: "10px"}}
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-              href="/"
-            >
-                <LogoutIcon />
-          </IconButton>
+          {!user_id ?
           <Box sx={{ display:'flex'}}>
             
           <Link onMouseOver={changeFontSize_login} onMouseLeave={returnFontSize_login} href="/login" style={LoginStyle}>
                             Iniciar sesión
                     </Link>
           </Box>
+          : "" }
           <Box sx={{ flexGrow: .05 }} />
           <Box sx={{ display: 'flex'}}>
+          
+          {!user_id ?
           <Button href="/register" variant="contained" style={ColorStyle2}>Regístrate</Button>
+          : ""}
+          
+          {user_id ?
+          <IconButton 
+              style = {{marginRight: "10px"}}
+              size="large"
+              aria-label="Logout"
+              color="inherit"
+              href="/"
+            >
+                <LogoutIcon />
+          </IconButton>
+          : ""
+          }
+
           </Box>
         </Toolbar>
       </AppBar>
