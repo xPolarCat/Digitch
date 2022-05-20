@@ -87,7 +87,7 @@ export const User_GetOne = async (id) => {
 export const User_Login = async (data) => {
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/user", data)
+        const response = await axios.post("/user/login", data)
         if(response.status==200) {
             return response.data;
           }else{

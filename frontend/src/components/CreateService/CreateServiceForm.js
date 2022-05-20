@@ -19,6 +19,7 @@ import {Price_Register} from '../../services/Price'
 import {Post_Register} from '../../services/Post'
 import { useNavigate } from 'react-router'
 import { Cat_GetAll } from "../../services/Category";
+import Cookie from 'cookie-universal';
 
 export default function CreateServiceForm() {
   let navigate = useNavigate();
@@ -172,16 +173,18 @@ export default function CreateServiceForm() {
   //----------Submit state-------
   const onSubmitCreateService = async (event) => {
     event.preventDefault();
-   
+    const cookies = Cookie()
+    const user_id = cookies.get('user_id');
+
     setService({
       ...service,
-      _user: '628685001f953e041bb3a9d8',
+      _user: user_id,
     });
 
     console.log("service in", service)
     const obj = await Post_Register(service);
 
-    console.log("my object0:", obj.data);
+    //console.log("my object0:", obj.data);
   
     price._post = obj.data._id;
     price2._post = obj.data._id;
@@ -191,7 +194,7 @@ export default function CreateServiceForm() {
     console.log("paquete 2", price2);
     console.log("paquete 3", price3); 
     if(obj.data != null){
-      navigate('/');
+      //navigate('/');
     }else{
     }
     

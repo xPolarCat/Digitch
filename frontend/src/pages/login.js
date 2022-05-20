@@ -4,7 +4,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 // import PersonIcon from '@material-ui/icons/Person';
 import BackgroundImage from '../resources/login-background.jpg';
 import { User_Login } from '../services/User';
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router';
+import Cookie from 'cookie-universal';
 
 //import { makeStyles } from "@material-ui/core/styles";
 // import logo from '../resources/logo.png';
@@ -46,7 +47,20 @@ const Login=()=>{
     const onSubmitLogin = async (event) =>{
         event.preventDefault();
         console.log(oUser);
-        const user = User_Login(oUser);
+        const user = await User_Login(oUser);
+       
+        if(user.token){
+            const cookies = Cookie()
+            cookies.set('user', user.token);
+            cookies.set('user_id', user._id )
+
+            const cookieTemp = cookies.get('user');
+            console.log("Mi cookie síiiii: ", cookieTemp, 'Mi id: ', user._id);
+        }else{
+            console.log("No hay token");
+        }
+        
+
         if(user != null){
             navigate('/');
         }
