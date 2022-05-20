@@ -94,40 +94,27 @@ const background = {
 
 export default function Payment() {
   const params = useParams();
-
-
   const [oPurchase, setPurchase] = useState({
     _user: "",
-    _post: ""
+    _post: "",
+    cost: 0
   })
   const [open, setOpen] = useState(false);
-  const handleOpen = async() => {
-    const cookies = Cookie();
-    const cookieTemp = cookies.get('user_id'); 
-    const myJSON = JSON.stringify(params.id);
 
-  //Despues separarlo para que solo me quedara el numero y no exista un error
-  const idFinal= myJSON.slice(2,26);
-    console.log("cookie ",cookieTemp)
-    setPurchase({
-      _user : cookieTemp,
-      _post: idFinal
-    });
-   
+  const handleOpen = async() => {
     console.log("Purchase ", oPurchase);
     const obj = await Purchase_Register(oPurchase);
     console.log("Purchase out", obj)
-    if(obj != null)
-      setOpen(true);
+    //if(obj != null)
+     // setOpen(true);
   }
   const handleClose = () => setOpen(false);
 
   //Aqui guardaremos info del paquete
- const [price, setPrice]= useState([]);
- //Aqui guardaremos info del post
-const [post, setPost]= useState([]);
-
-const [total, setTotal] = useState();
+  const [price, setPrice]= useState([]);
+  //Aqui guardaremos info del post
+  const [post, setPost]= useState([]);
+  const [total, setTotal] = useState();
 
  useEffect(()=>{
    async function fetchData(){
@@ -149,6 +136,16 @@ const [total, setTotal] = useState();
   console.log("post", post)
   console.log("to",total)
 
+  const cookies = Cookie();
+  const cookieTemp = cookies.get('user_id'); 
+  console.log("cookie ",cookieTemp)
+  console.log("idFinal ",idFinal)
+  console.log("Total ",total)
+  setPurchase({
+    _user : cookieTemp,
+    _post: data._post,
+    cost: total
+  });
   }
   
    fetchData();
