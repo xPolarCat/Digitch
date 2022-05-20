@@ -5,7 +5,7 @@ const {protect} = require('../middleware/authMiddleware');
 
 const UserController = require("../controllers/UserController");
 
-router.use(protect);
+//router.use(protect);
 
 router.get("/user", UserController.user_getall); // Ruta para ver todos los usuarios.
 router.post("/user", uploader.single("photo"), UserController.user_register); // Mi ruta para el registro de usuarios tipo POST.

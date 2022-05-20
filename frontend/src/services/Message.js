@@ -58,3 +58,22 @@ export const Mssg_GetByIUser = async (id) => {
         return err;
     }
 }
+
+export const Mssg_GetByUsers = async (data)=> {
+    try{
+        console.log("M", data)
+
+        const response = await axios.post("/message/users", {data});
+        
+        if(response.status==200) {
+            console.log(response.data);
+            return response.data;
+          }else{
+              return []
+          }
+
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}

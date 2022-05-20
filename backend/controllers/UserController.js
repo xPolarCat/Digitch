@@ -119,7 +119,6 @@ exports.user_delete = async (req, res) => {
     }
 }
 
-
 exports.user_getById = async (req, res) =>{
     const { id } = req.params;
     // Método optimizado para buscar por ids.

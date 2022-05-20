@@ -103,9 +103,13 @@ exports.message_getById = async (req, res) =>{
 }
 
 exports.message_getByUsers = async (req, res) =>{
-    const users  = req.body;
+  
+    const users  = req.body.data;
     
-    console.log("usuarios:", users);
+    console.log("u",users);
+    // console.log("usuarios:", users.body);
+     console.log("RECEIVER", users._receiver);
+     console.log("SENDER", users._sender);
     
     const data = await Message.find( 
         { $or: [{_receiver: users._receiver, _sender: users._sender}, {_receiver: users._sender, _sender: users._receiver}], sort:{created_at: -1}}// Donde mi usuario 1 es el que envía y el 2 el que recibe 
@@ -113,9 +117,7 @@ exports.message_getByUsers = async (req, res) =>{
         console.log(data);
 
         if(data){
-            res.json({
-                Messages: data, 
-            });
+            res.send(data);
         }else{
             res.send({message: "Message does not exists."})
         }
