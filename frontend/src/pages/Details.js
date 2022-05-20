@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import MainFeaturedPost from './MainFeaturedPost';
 import Info from './Info';
 import Grid from '@mui/material/Grid';
-import BackImage from '../images/fondo_UserProfile_.png';
+import BackImage from '../resources/details-background.jpg';
 import { useParams } from "react-router-dom";
 import {Post_GetById} from "../services/Post"
 import {
@@ -85,7 +85,7 @@ const mainFeaturedPost = {
   return (
     <React.Fragment>
       <CssBaseline />
-      <Grid container sx={{ backgroundColor : '#294C60',
+      <Grid container sx={{ backgroundImage: `url(${BackImage})`, backgroundPosition: 'center',
       height: "100%", 
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover"}}>

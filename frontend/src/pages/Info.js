@@ -25,7 +25,7 @@ import {Post_GetById} from "../services/Post";
 import {User_GetOne} from "../services/User"
 import {Price_GetByPostAll} from "../services/Price"
 import {Comm_GetByPost} from "../services/Comment"
-
+import BackImage from "../resources/details-background.jpg"
 
 const Spacing={margin: '30px'}
 const IconStyle2={
@@ -162,7 +162,7 @@ export default function Pricing() {
       <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
       <CssBaseline />
 
-      <Grid container spacing={2} columnSpacing={2}>
+      <Grid container spacing={2} columnSpacing={2} >
         <Grid>  
         <Container disableGutters maxWidth="lg" component="main" sx={{ margin:"20px" }}>
             <Typography
@@ -193,7 +193,7 @@ export default function Pricing() {
               <Typography variant="body2" color="text.secondary" sx={{color:"white"}}>
               {user.description}
               </Typography>
-              <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#001B2E", marginTop: "15px", borderRadius: "10px"}} href={`../userProfile/${user._id}`}> Contáctame</Button>
+              <Button contained fullWidth style={{height: "35px", color: "white", backgroundColor: "#294C60", marginTop: "15px", borderRadius: "10px"}} href={`../userProfile/${user._id}`}> Contáctame</Button>
              
         </Box>
         </Grid>
@@ -236,7 +236,7 @@ export default function Pricing() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="text.primary" sx={{color: 'white'}}>
-                      ${price.price}
+                      ${price.price}50
                     </Typography>
                   </Box>
                   <ul>
@@ -246,7 +246,7 @@ export default function Pricing() {
                         align="center"
                         sx={{color: 'white'}}
                       >
-                        {price.description}
+                        {price.description}esta es la descripcion del precio
                       </Typography>
                   </ul>
                 </CardContent>
