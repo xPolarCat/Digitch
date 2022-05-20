@@ -75,9 +75,11 @@ useEffect(()=>{
           </Box>
 
           <Box textAlign='center' sx={{m: 1}} >
-          <Button variant='contained'style={{backgroundColor: "#294C60"}} href="/editProfile">
-              Editar perfil
-            </Button>
+          { user._id == cookieTemp &&
+              <Button variant='contained'style={{backgroundColor: "#294C60"}} href="/editProfile">
+               Editar perfil
+             </Button>
+          }
           </Box>
 
           <Divider sx={{m:2}}/>

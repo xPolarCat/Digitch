@@ -181,7 +181,7 @@ function returnFontSize_login(e) {
           }
 
           {user_id ?
-                    <Button href="/UserProfile">
+                    <Button href={`../userProfile/${user_id}`}>
                     <Avatar>
         
                     </Avatar>
