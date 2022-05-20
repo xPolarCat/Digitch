@@ -18,7 +18,7 @@ export default function EditServiceForm() {
   const dividerStyle = { backgroundColor: "white" };
   const {id} = useParams();
 
-  const [categoryServ, setCat] = useState([]);
+  const [categoryServ, setCat] = useState({_id: ""});
   const [categories, setCats] = useState([]);
 
   useEffect (() =>{
@@ -27,40 +27,40 @@ export default function EditServiceForm() {
       console.log("Consulta por ID: ", dataPost);
       setService(dataPost);
       setImage(dataPost.images);
-      //console.log(dataPost._category);
+      console.log(dataPost._category);
       const dataAllCategory = await Cat_GetAll() //trae todas las categorias
       setCats(dataAllCategory);
 
       const dataCategory = await Cat_GetOne(dataPost._category); //trae id
-      console.log("trae ge¿¿cat get one", dataCategory[0]);
-      setCat(dataCategory);
+      console.log("trae gcat get one", dataCategory._id);
+      setCat({_id: dataCategory._id});
 
-      console.log("se setoe", categoryServ)
-
-      // const dataPriceList = await Price_GetByPost(dataPost._id)
-      // console.log(dataPriceList)
-      // setPrice({
-      //   _id: dataPriceList[0]._id,
-      //   name: dataPriceList[0].name,
-      //   description: dataPriceList[0].description,
-      //   price: dataPriceList[0].price
-      // })
-      // setPrice2({
-      //   _id: dataPriceList[1]._id,
-      //   name: dataPriceList[1].name,
-      //   description: dataPriceList[1].description,
-      //   price: dataPriceList[1].price
-      // })
-      // setPrice3({
-      //   _id: dataPriceList[2]._id,
-      //   name: dataPriceList[2].name,
-      //   description: dataPriceList[2].description,
-      //   price: dataPriceList[2].price
-      // })
+      const dataPriceList = await Price_GetByPost(dataPost._id)
+      console.log(dataPriceList)
+      setPrice({
+        _id: dataPriceList[0]._id,
+        name: dataPriceList[0].name,
+        description: dataPriceList[0].description,
+        price: dataPriceList[0].price
+      })
+      setPrice2({
+        _id: dataPriceList[1]._id,
+        name: dataPriceList[1].name,
+        description: dataPriceList[1].description,
+        price: dataPriceList[1].price
+      })
+      setPrice3({
+        _id: dataPriceList[2]._id,
+        name: dataPriceList[2].name,
+        description: dataPriceList[2].description,
+        price: dataPriceList[2].price
+      })
     }
 
     fetchData();
    }, []);
+
+   console.log("se setea", categoryServ._id)
 
    const [image, setImage] = useState(null)
 
@@ -250,7 +250,7 @@ export default function EditServiceForm() {
                   onChange={onChangeTitulo}
                 />
               </FormControl>
-              <FormControl fullWidth sx={{ my: 1 }}>
+              {/* <FormControl fullWidth sx={{ my: 1 }}>
                 <FormLabel id="labelTituloService" style={textFieldStyle.style}>
                   {" "}
                   Categoría
@@ -270,7 +270,7 @@ export default function EditServiceForm() {
                     ))}
                   </Select>
                 </Box>
-              </FormControl>
+              </FormControl> */}
               <FormControl fullWidth sx={{ my: 1 }}>
                 <FormLabel id="labelTituloService" style={textFieldStyle.style}>
                   Descripción del servicio

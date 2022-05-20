@@ -73,14 +73,12 @@ exports.post_register = async (req, res) =>{
 // Update
 exports.post_update = async (req, res) => {
     const { id } = req.params; // Los params son los que se envían en el URL.
-    const { body } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
+    const { body, file } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
     console.log("post controller Id: ", id);
     console.log("Body: ", body);
     const userdb = await body._user; // Valio si mandé un usuario como parámetro
 
     try{
-        const { body, file } = req; // Obtenemos la info del body.
-
         console.log("Mi controlador:", body, file);
 
         if(!file){
