@@ -105,7 +105,7 @@ useEffect(()=>{
       </CardContent>
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
-        <Button onMouseOver={changeBackground_details} onMouseLeave={returnBackground_details} variant="contained" style={cardActionStyle} fullWidth href={`../details/ ${post._id}`} >Ver detalle</Button>
+        <Button onMouseOver={changeBackground_details} onMouseLeave={returnBackground_details} variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`} >Ver detalle</Button>
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>

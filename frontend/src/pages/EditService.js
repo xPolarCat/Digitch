@@ -8,7 +8,7 @@ import BackgroundImage from '../resources/login-background.jpg';
 const useStyles = makeStyles({
     boxCSS: {
         width: "70%",
-        backgroundColor: "#001B2E",
+        backgroundColor: "rgba(0,27,46,0.9)",
         padding:"20px",
         minWidth: '40vh'
     }

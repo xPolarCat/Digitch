@@ -8,6 +8,7 @@ import Review from '../components/UserProfile/Review'
 import FavoriteUsers from '../components/UserProfile/FavoriteUsers'
 import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User"
+import {Post_GetByUser} from "../services/Post"
 import BackgroundImage from '../resources/mac.png';
 import CardServicesProfile from '../components/UserProfile/CardServicesProfile'
 
@@ -16,23 +17,27 @@ export default function UserProfile() {
     const params = useParams();
     //Aqui guardamos info del usuario
     const [user, setUser]= useState([]);
+    const [posts, setPosts]=useState([]);
 
 
     useEffect(()=>{
         async function fetchData(){
-         
        //Tuve que convertir el objeto a string
-       const myJSON = JSON.stringify(params.id);
+       const idFinal = (params.id);
        //Despues separarlo para que solo me quedara el numero y no exista un error
-       const idFinal= myJSON.slice(2,26);
       //Me traigo la info de ese post con ese id
       console.log(idFinal);
        
         //Obtengo la info del usuario que subio ese post
         const dataUser= await User_GetOne(idFinal);
         setUser(dataUser);
-        console.log("infosi",dataUser);
-         }
+
+        //Obtengo todos los servicios que ha subido el usuario del perfil
+        const dataPosts= await Post_GetByUser(idFinal);
+        setPosts(dataPosts);
+        console.log("posts", dataPosts);
+        
+    }
        
         fetchData();
        }, []);
@@ -54,16 +59,11 @@ export default function UserProfile() {
                 Servicios de {user.name}
                 </Typography>
                 <Grid item spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{display: "flex"}}>
-                    <Grid sx={{margin: "15px"}}>
-                        <CardServicesProfile/>
+                {posts.map((post, index)=>(
+                    <Grid sx={{margin: "15px"}} key={index}>
+                        <CardServicesProfile info={post._id}/>
                     </Grid >
-                    <Grid sx={{margin: "15px"}}>
-                        <CardServicesProfile/>
-                    </Grid>
-                    <Grid sx={{margin: "15px"}}>
-                        <CardServicesProfile/>
-                    </Grid>
-                    
+                ))}
                 </Grid>
             </Grid>
                
