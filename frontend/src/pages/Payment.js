@@ -141,12 +141,14 @@ export default function Payment() {
   console.log("cookie ",cookieTemp)
   console.log("idFinal ",idFinal)
   console.log("Total ",total)
+
+  }
+
   setPurchase({
     _user : cookieTemp,
     _post: data._post,
     cost: total
   });
-  }
   
    fetchData();
 
