@@ -173,7 +173,7 @@ exports.post_getByName = async (req, res) =>{
 }
 
 exports.post_getByUser = async (req, res) =>{
-    const { user } = req.params;
+    const  user  = req.params.id;
 
     const data = await Post.find({_user: user, sort: { created_at: -1 }}); 
 

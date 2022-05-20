@@ -161,3 +161,27 @@ export const Post_GetByName= async (name) => {
         return err;
     }
 }
+
+export const Post_GetByUser= async (id) => {
+
+    const cookies = Cookie()
+    const cookieTemp = cookies.get('user');
+    
+    try{
+        //Respuesta de un await con la ruta del api
+        console.log(id);
+        const response = await axios.get(`/posts/user/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}
