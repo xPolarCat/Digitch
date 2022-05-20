@@ -241,7 +241,7 @@ export default function CreateServiceForm() {
                 id="inputSelect"
                 name="inputSelect"
                 displayEmpty
-                value={categoryServ.name}
+                defaultValue={categoryServ[0]}
                 onChange={handleChange}
                 sx={{ flexGrow: 1, color: "#ffffff" }}
                 required

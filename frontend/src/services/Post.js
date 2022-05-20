@@ -43,10 +43,15 @@ export const Post_Register = async (post) => {
 }
 
 export const Post_Update = async (id, post) => {
+    console.log("post service 2 ", post);
+    console.log("id", id);
     try{
-        console.log("post service ", id);
         //Respuesta de un await con la ruta del api
-        const response = await axios.put(`/post/${id}`, post)
+        const response = await axios.put(`/post/${id}`, post, {
+            headers:{
+                "Content-Type": "multipart/form-data",
+            },
+        });
         if(response.status==200) {
             return response.data;
           }else{
