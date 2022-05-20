@@ -13,12 +13,18 @@ export const Comm_GetAll = async () => {
         return err;
     }
 }
-export const Comm_Register = async () => {
+export const Comm_Register = async (comm) => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/comment")
+        const response = await axios.post("/comment", comm, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        });
+        console.log(response);
+        return response;
     }catch(err){
         console.error(err);
         return err;

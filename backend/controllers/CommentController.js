@@ -32,6 +32,7 @@ exports.comment_register = async (req, res) =>{
             }); // Aquí guardo el nuevo usuario.
 
             res.send(comment); // Regreso el objeto creado.
+            return comment;
         }
     }
 }
