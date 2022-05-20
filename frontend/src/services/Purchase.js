@@ -15,7 +15,11 @@ export const Purchase_Register = async (data) => {
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/purchase", {data})
-        console.log("",data);
+        if(response.status==200) {
+            return response.data;
+        }else{
+            return[]
+        }
     }catch(err){
         console.error(err);
         return err;
