@@ -110,8 +110,9 @@ useEffect(()=>{
         <form >
           <FormControl fullWidth sx={{ my: 2 }}>
             <Grid container alignItems="center">
-              <Grid item xs={10}>
-                <TextField style={{backgroundColor:"#203C4C", boxShadow: "0 0px 11px #5794B7", borderRadius: "5px"}}
+              <Grid item lg={2}></Grid>
+              <Grid item xs={10} lg={7}>
+                <TextField style={{backgroundColor:"#203C4C", boxShadow: "0 0px 11px #5794B7", borderRadius: "5px", height:"100%"}}
                   id="inputSearch"
                   name="inputSearch"
                   InputLabelProps={textFieldStyle}
@@ -123,7 +124,7 @@ useEffect(()=>{
                   onChange={onChangeSearch}
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} lg={1}>
                 <IconButton
                   style={{
                     marginLeft:"10px",
@@ -142,10 +143,13 @@ useEffect(()=>{
           </FormControl>
         </form>
       </div>
-      <div id="resultLegend">
-        <Typography variant="h4" style={{ padding: "10px", color: "white", backgroundColor:"#001B2E", borderRadius:"12px", marginRight:"66%", fontSize:"2.5vw" }}>
+      <div id="resultLegend" >
+        <Grid container style={{backgroundColor:"#001B2E", borderRadius:"12px", width:"fit-content"}}>
+        <Typography variant="h4" style={{ padding: "10px", color: "white", borderRadius:"12px", fontSize:"25px" }}>
           Resultados para: Diseño
         </Typography>
+
+        </Grid>
       </div>
       <div style={{ marginTop: "30px", marginBottom: "30px" }}>
 

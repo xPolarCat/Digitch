@@ -17,16 +17,23 @@ export const Mssg_GetAll = async () => {
         return err;
     }
 }
-export const Mssg_Register = async () => {
+export const Mssg_Register = async (message) => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
+    console.log(message)
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/message", {
+        const response = await axios.post("/message", message, {
             headers: {
                 "Authorization": "Bearer " + cookieTemp
             }
         })
+        console.log(response)
+        if(response.status==200) {
+            return true;
+          }else{
+              return false;
+          }
     }catch(err){
         console.error(err);
         return err;
