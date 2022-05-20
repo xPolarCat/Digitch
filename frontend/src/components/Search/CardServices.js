@@ -66,6 +66,7 @@ useEffect(()=>{
   //Me traigo la info de ese post con ese id
    const data= await Post_GetById(idFinal);
    setPost(data);
+   console.log(post);
 
   //Obtengo la info del usuario que subio ese post
    const dataUser= await User_GetOne(data._user);
@@ -84,12 +85,12 @@ useEffect(()=>{
 }, [props]);
 
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image="https://cdn.forbes.com.mx/2019/04/blackrrock-invertir-1-640x360.jpg"
-        title="aa"
-      />
+    <Card className={classes.root}>  
+        <CardMedia
+          className={classes.media}
+          image={post.images[0]}
+          title="aa"
+        />
       <CardContent style={{padding: "0px"}}>
         <Typography gutterBottom variant="h6" component="h2" style={{padding: "10px", margin: "0px", color: "white"}}>
           {post.name}
