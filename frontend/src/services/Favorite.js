@@ -1,9 +1,16 @@
 import { axiosBase as axios } from "./Config";
+import Cookie from 'cookie-universal';
 
 export const Fav_GetAll = async () => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/favorite")
+        const response = await axios.get("/favorite", {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log("respuesta: ", response);
     }catch(err){
         console.error(err);
@@ -11,18 +18,30 @@ export const Fav_GetAll = async () => {
     }
 }
 export const Fav_Register = async () => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/favorite")
+        const response = await axios.post("/favorite", {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
     }catch(err){
         console.error(err);
         return err;
     }
 }
 export const Fav_Delete = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.delete("/favorite/:id", {id})
+        const response = await axios.delete("/favorite/:id", {id}, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log("respuesta: ", response);
     }catch(err){
         console.error(err);
@@ -30,9 +49,15 @@ export const Fav_Delete = async (id) => {
     }
 }
 export const Fav_GetOne = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/favorite/:id", {id})
+        const response = await axios.get("/favorite/:id", {id}, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log("respuesta: ", response);
     }catch(err){
         console.error(err);
