@@ -12,8 +12,7 @@ import {Price_GetByPost} from "../../services/Price"
 
 const useStyles = makeStyles({
   root: {
-    width: "250",
-    height: "350",
+    width: "250px",
     backgroundColor: "#001B2E"
   },
   media: {
