@@ -6,6 +6,7 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import FormControl from '@material-ui/core/FormControl';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
@@ -117,7 +118,11 @@ export default function Chat() {
      _receiver:""
  });
  
- const chatMutable = useRef();
+ const [message, setContent] = useState({
+  content: "",
+  _sender: "",
+  _receiver: ""
+});
 
  //Obtengo los mensajes de la conversacion
  const [messages, setMessage]= useState([]);
@@ -158,11 +163,17 @@ useEffect(()=>{
 
 
     if(isFirst.current){
-    console.log(chat);
+    
+      setContent({
+        ...message,
+        _sender: chat._sender,
+        _receiver: chat._receiver
+    })
+
+
     async function fetchData(){
         
     console.log(chat);
-
     //Obtengo los mensajes de ese chat
     const dataMessage = await Mssg_GetByUsers(chat);
     setMessage(dataMessage);
@@ -185,9 +196,24 @@ useEffect(()=>{
         _receiver: value
     })
 
-    console.log(chat)
-
    }
+
+   const onChangeRate=(event)=>{
+    setContent({
+      ...message,
+      content : event.target.value
+    });
+  }
+
+  
+  const onSubmitRate=(event)=>{
+    event.preventDefault();
+    setContent({
+      ...message,
+      _sender: chat._sender
+    })
+    console.log(message)
+  }
 
   return (
       <div>
@@ -230,7 +256,7 @@ useEffect(()=>{
 
                   if(message._sender === params.id){
                     return(
-                      <ListItem key="1">
+                      <ListItem key={index}>
                                 <Grid container justifyContent="flex-end">
                                 <Box style={BoxMessageOneStyle}>
                                     <Grid item xs={12}>
@@ -245,7 +271,7 @@ useEffect(()=>{
                     )
                   } else {
                     return(
-                      <ListItem key="2">
+                      <ListItem key={index}>
                       <Box style={BoxMessageTwoStyle} justifyContent="flex-end">
                           <Grid container>
                               <Grid item xs={12}>
@@ -264,13 +290,23 @@ useEffect(()=>{
                 </List>
                 <Divider />
                 <Grid container style={{padding: '10px'}}>
+                  
+                <form onSubmit={onSubmitRate}>
+                    <FormControl fullWidth
+                    onChange={onChangeRate}
+                    value={message.content}
+                    >
                     <Grid item xs={11}>
+
                         <TextField id="outlined-basic-email" InputLabelProps= {textFieldStyle}
-                    InputProps={textFieldStyle} label="Escribe tu mensaje..." fullWidth />
+                        InputProps={textFieldStyle} label="Escribe tu mensaje..." fullWidth />
+                    
                     </Grid>
                     <Grid xs={1} align="right">
-                        <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                        <Fab color="primary" aria-label="add"  type="submit"><SendIcon /></Fab>
                     </Grid>
+                    </FormControl>
+                    </form>
                 </Grid>
             </Grid>
         </Grid>

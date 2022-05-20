@@ -127,6 +127,8 @@ export default function Payment() {
  //Aqui guardaremos info del post
 const [post, setPost]= useState([]);
 
+const [total, setTotal] = useState();
+
  useEffect(()=>{
    async function fetchData(){
     
@@ -140,10 +142,12 @@ const [post, setPost]= useState([]);
   setPrice(data);
   console.log(data);
 
+  setTotal(data.price+40);
   //Me traigo la info de el post con ese paquete de precio
   const data2= await Post_GetById(data._post);
   setPost(data2);
   console.log("post", post)
+  console.log("to",total)
 
   }
   
@@ -151,7 +155,6 @@ const [post, setPost]= useState([]);
 
   }, []);
 
-  const [total, setTotal] = useState({t: price.price + 40})
 
   return (
     <Grid
@@ -225,7 +228,7 @@ const [post, setPost]= useState([]);
                   </td>
                   <td width="100px"></td>
                   <td>
-                    <p style={TextStyle}>${total.t} MXN</p>
+                    <p style={TextStyle}>${total} MXN</p>
                   </td>
                 </tr>
               </tbody>
