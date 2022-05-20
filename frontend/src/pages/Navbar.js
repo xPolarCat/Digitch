@@ -121,7 +121,7 @@ export default function Navbar() {
   );
 
   const ColorStyle= {backgroundColor:"#001B2E", }
-  const ColorStyle2= {backgroundColor:"#294C60", width:"9vw", fontSize:"11px"}
+  const ColorStyle2= {backgroundColor:"#294C60", width:"120%", fontSize:"11px"}
   const ColorStyle3= {backgroundColor:"#ADB6C4", height:"55px"}
   const ColorStyle4= {color:"#EDEDED"}
 
@@ -135,6 +135,14 @@ function changeFontSize_login(e) {
 function returnFontSize_login(e) {
     e.target.style.color = '#FFFFFF';
   
+}
+
+function changeBackground_register(e){
+  e.target.style.backgroundColor = "#234153";
+}
+
+function returnBackground_register (e){
+  e.target.style.backgroundColor = "#294C60";
 }
 
   return (
@@ -200,7 +208,7 @@ function returnFontSize_login(e) {
           <Box sx={{ display: 'flex'}}>
           
           {!user_id ?
-          <Button href="/register" variant="contained" style={ColorStyle2}>Regístrate</Button>
+          <Button onMouseOver={changeBackground_register} onMouseLeave={returnBackground_register} href="/register" variant="contained" style={ColorStyle2}>Regístrate</Button>
           : ""}
           
           {user_id ?

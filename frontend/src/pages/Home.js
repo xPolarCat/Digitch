@@ -57,6 +57,15 @@ const Home = () => {
 
 	const textStyle = {margin: '2vh', textAlign: 'justify', textJustify: 'inter-word'}
 
+//funciones para hover
+function changeBackground_discover (e){
+	e.target.style.backgroundColor = "#203C4C";
+}
+
+function returnBackground_discover (e){
+	e.target.style.backgroundColor = "rgb(41, 76, 96, .8)";
+}
+
 	return (
         <Fragment>
 		<section className={classes.root}>
@@ -80,7 +89,7 @@ const Home = () => {
 					<Typography variant="h3" component="h1" className={classes.title}>
                         <Image  sx={{ boxShadow: 2 }} src={logo} />
 					</Typography>
-					<Button href="/Login" style={btnstyle} color="primary" variant="contained" size="large">
+					<Button onMouseOver={changeBackground_discover} onMouseLeave={returnBackground_discover} href="/Login" style={btnstyle} color="primary" variant="contained" size="large">
 						Descubre más
 					</Button>
 				</Box>
