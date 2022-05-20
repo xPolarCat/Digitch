@@ -1,8 +1,7 @@
 import React,{ Fragment, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import BackImage from "../images/backImagePay.jpg";
-import Container from "@mui/material/Container";
+import {Typography, Container}  from '@material-ui/core'
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import CreditScoreIcon from "@mui/icons-material/CreditScore";
@@ -13,9 +12,13 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import { useParams } from "react-router-dom";
 import {Price_GetById} from "../services/Price"
 import {Post_GetById} from "../services/Post"
+import BackgroundImage from '../resources/lap.png';
+import Modal from "@mui/material/Modal";
+import { Purchase_Register } from "../services/Purchase";
+import Cookie from 'cookie-universal';
 
 const GridPayStyle = {
-  backgroundColor: "#001B2E",
+  backgroundColor: "rgb(0,27,46, 0.9)",
   maxHeight: "30vh",
   minHeight: "30vh",
   minWidth: "30vh",
@@ -23,8 +26,7 @@ const GridPayStyle = {
   marginBottom: "0px",
 };
 const GridStyle = {
-  backgroundColor: "#001B2E",
-
+  backgroundColor: "rgb(0,27,46, 0.9)",
   minHeight: "55vh",
   minWidth: "30vh",
   borderRadius: "10px",
@@ -51,6 +53,18 @@ const PaypalStyle = {
 const theme = createTheme({
   spacing: 4,
 });
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
+
 const Spacing = { 
   margin: "50px" 
 };
@@ -75,10 +89,33 @@ const background = {
   },
 };
 
+
 export default function Payment() {
- 
-  
   const params = useParams();
+
+  const [oPurchase, setPurchase] = useState({
+    _user: "",
+    _post: ""
+  })
+  const [open, setOpen] = useState(false);
+  const handleOpen = async() => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user_id'); 
+
+    setPurchase({
+      ...oPurchase,
+      _user : cookieTemp
+    });
+    setPurchase({
+      ...oPurchase,
+      _post: params.id
+    });
+
+    console.log("Purchase ",oPurchase);
+    //const obj = await Purchase_Register()
+    setOpen(true);
+  }
+  const handleClose = () => setOpen(false);
 
   //Aqui guardaremos info del paquete
  const [price, setPrice]= useState([]);
@@ -113,7 +150,7 @@ const [post, setPost]= useState([]);
       spacing={0}
       direction="column"
       alignItems="center"
-      style={background.style}
+      style={{ backgroundImage: `url(${BackgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
     >
     
       <Container style={{ paddingTop: "30px" }}>
@@ -208,13 +245,28 @@ const [post, setPost]= useState([]);
             </Box>
             <Box sx={{ flexGrow: 0.3, p: 2 }} />
             <Box textAlign="center">
-              <Button variant="contained" style={PaypalStyle}>
+              <Button variant="contained" style={PaypalStyle} onClick={handleOpen}>
                 PAYPAL
               </Button>
             </Box>
           </Grid>
         </Grid>
       </Container>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            ¡Pago hecho!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Su pago ha sido exitoso
+          </Typography>
+        </Box>
+      </Modal>
     </Grid>
   );
 }
