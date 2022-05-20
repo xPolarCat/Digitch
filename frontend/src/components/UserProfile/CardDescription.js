@@ -68,11 +68,16 @@ useEffect(()=>{
           <Typography variant="body2" color="textSecondary" style={{padding: "5px", color: "white"}} textAlign="center">
             Calificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Typography>
+          { 
+            user._id != cookieTemp ? (
           <Box textAlign='center' sx={{m: 1}} >
             <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/${cookieTemp}`}>
               Enviar mensaje
             </Button>
+           
           </Box>
+           ) : ""
+          }
 
           <Box textAlign='center' sx={{m: 1}} >
           { user._id == cookieTemp &&
