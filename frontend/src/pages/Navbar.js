@@ -13,8 +13,12 @@ import Link from '@mui/material/Link';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Avatar } from '@mui/material';
+import Cookie from 'cookie-universal';
 
 const LoginStyle = {marginTop: '5px',marginBottom: "5px", marginLeft:"0px", marginRight:"10px", color: 'white', fontSize:"12.5px"};
+
+const cookies = Cookie();
+const user_id = cookies.get('user_id');
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -166,11 +170,14 @@ function returnFontSize_login(e) {
             >
                 <AddCircleIcon />
           </IconButton>
+          
+          
           <Button href="/UserProfile">
             <Avatar>
 
             </Avatar>
           </Button>
+
           <IconButton 
               style = {{marginRight: "10px"}}
               size="large"
