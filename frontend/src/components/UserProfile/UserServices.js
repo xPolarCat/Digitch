@@ -8,19 +8,19 @@ export default function UserServices() {
     <Fragment>
      
         <Grid container spacing={2}>
-          <Grid item md={3} lg={4}>
+          <Grid item>
             <CardServicesProfile/>
           </Grid>
-          <Grid item md={3} lg={4}>
+          <Grid item>
             <CardServicesProfile/>
           </Grid>
-          <Grid item md={3} lg={4}>
+          <Grid item>
             <CardServicesProfile/>
           </Grid>
-          <Grid item md={3} lg={4}>
+          <Grid item>
             <CardServicesProfile/>
           </Grid>
-          <Grid item md={3} lg={4}>
+          <Grid item>
             <CardServicesProfile/>
           </Grid>
         </Grid>

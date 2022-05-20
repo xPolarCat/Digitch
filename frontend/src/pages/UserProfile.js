@@ -8,6 +8,8 @@ import Review from '../components/UserProfile/Review'
 import FavoriteUsers from '../components/UserProfile/FavoriteUsers'
 import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User"
+import BackgroundImage from '../resources/mac.png';
+import CardServicesProfile from '../components/UserProfile/CardServicesProfile'
 
 export default function UserProfile() {
     const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
@@ -41,17 +43,28 @@ export default function UserProfile() {
   return (
     <Grid container spacing={0} style={background.style}>
             
-        <Grid container spacing={2} sx={{paddingRight: "0px"}}>
-            <Grid item lg={6} xs={12} sx={{marginTop: "50px", marginBottom: "50px" }}>
+        <Grid container spacing={2} sx={{paddingRight: "0px", backgroundImage: `url(${BackgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+            <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px"}}>
                 <Box sx={{justifyContent: "center", display: 'flex' }}>
                     <CardDescription id={user._id} />
                 </Box>
             </Grid>
-            <Grid item lg={5.9} xs={12} sx={{marginTop: "50px", marginBottom: "50px", marginLeft: "10px"}}>
-                <Typography variant="h5" style={{color: "white"}}>
+            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "10px", backgroundColor:"rgb(0,0,0, 0.5)"}}>
+                <Typography textAlign='center' variant="h5" style={{color: "white"}}>
                 Servicios de {user.name}
                 </Typography>
-                <UserServices/>
+                <Grid item spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{display: "flex"}}>
+                    <Grid sx={{margin: "15px"}}>
+                        <CardServicesProfile/>
+                    </Grid >
+                    <Grid sx={{margin: "15px"}}>
+                        <CardServicesProfile/>
+                    </Grid>
+                    <Grid sx={{margin: "15px"}}>
+                        <CardServicesProfile/>
+                    </Grid>
+                    
+                </Grid>
             </Grid>
                
             <Grid item xs={12} direction="column" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
@@ -67,7 +80,7 @@ export default function UserProfile() {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} sx={{marginTop: "50px", marginBottom: "50px", marginLeft: "20px", marginRight: "20px"}}>
+            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "20px",paddingRight: "20px", backgroundColor:"rgb(0,0,0, 0.5)"}}>
 
                 <Container style={{padding: "0px"}}>
                 <Typography variant="h5" style={{color : 'white'}}>
