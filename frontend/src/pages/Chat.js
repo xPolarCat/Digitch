@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -18,6 +18,7 @@ import { styled } from '@mui/material/styles';
 import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User";
 import {User_GetAll} from "../services/User";
+import {Mssg_GetByUsers} from "../services/Message";
 
 
 const useStyles = makeStyles({
@@ -104,37 +105,90 @@ const textFieldStyle = {style: {color : 'white'} }
 export default function Chat() {
   const classes = useStyles();
   const params = useParams();
+  const isFirst = useRef(false);
   
  //Aqui guardamos info del usuario
  const [user1, setUser]= useState([]);
  //Aqui guardamos info de todos los usuarios
  const [users, setUsers]= useState([]);
+ //Aqui guardamos los dos usuarios del chat 
+ const [chat, setChat]= useState({
+     _sender:"",
+     _receiver:""
+ });
+ 
+ const chatMutable = useRef();
+
+ //Obtengo los mensajes de la conversacion
+ const [messages, setMessage]= useState([]);
+ //Aqui guardo la info del usuario con el que quiere chatearon
+ const [userS, setUserS]=useState([]);
 
 useEffect(()=>{
-    async function fetchData(){
-     
+      
    //Tuve que convertir el objeto a string
-   const myJSON = JSON.stringify(params.id);
+   const idFinal = params.id;
    //Despues separarlo para que solo me quedara el numero y no exista un error
-   const idFinal= myJSON.slice(2,26);
-  //Me traigo la info de ese post con ese id
-  console.log(idFinal);
-   
+  
+
+    
+    setChat ( 
+        {
+            _sender: idFinal,
+            _receiver: idFinal
+        }
+    )
+    
+
+    async function fetchData(){
     //Obtengo la info del usuario que subio ese post
     const dataUser= await User_GetOne(idFinal);
     setUser(dataUser);
-    console.log("infosi",dataUser);
 
     //Obtengo la info de todos los usuarios
     const dataUsers= await User_GetAll(idFinal);
     setUsers(dataUsers);
-    console.log("usuarios", dataUsers)
      }
 
     fetchData();
     
    }, []);
     
+   useEffect(()=>{
+
+
+    if(isFirst.current){
+    console.log(chat);
+    async function fetchData(){
+        
+    console.log(chat);
+
+    //Obtengo los mensajes de ese chat
+    const dataMessage = await Mssg_GetByUsers(chat);
+    setMessage(dataMessage);
+
+    //Obtengo el nombre del otro usuario.
+    const dataUserM= await User_GetOne(chat._receiver);
+    setUserS(dataUserM);
+    console.log("info del chismos",dataUserM);
+    }
+
+    fetchData();
+    }
+    isFirst.current = true;
+   },[chat])
+
+   function handleClick(value){
+
+    setChat({
+        ...chat,
+        _receiver: value
+    })
+
+    console.log(chat)
+
+   }
+
   return (
       <div>
         <Grid container style={BackgroundStyle}>
@@ -151,7 +205,7 @@ useEffect(()=>{
                 <Divider style={{backgroundColor: "white"}}/>
                 <List>
                 {users.map((user, index)=>(
-                     <ListItem button key={index} value={user._id}>
+                     <ListItem button key={index} onClick={()=>{handleClick(user._id)}}>
                         <ListItemIcon>
                             <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
@@ -162,39 +216,51 @@ useEffect(()=>{
             </Grid>
             <Grid item xs={12} md={9} style={{ width: '100%', color: "white", border: '1px solid white'}}>
                 <List >    
-                <ListItem button key={user1.name} >
+                <ListItem button key={userS.name} >
                         <ListItemIcon>
-                            <Avatar alt={user1.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={userS.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
                         </ListItemIcon>
-                        <ListItemText primary={user1.name}>{user1.name}</ListItemText>
+                        <ListItemText primary={userS.name}>{userS.name}</ListItemText>
                 </ListItem>
                 </List>
                 <Divider  style={{backgroundColor: "white"}}/>
                 <List className={classes.messageArea} >
-                    <ListItem key="1">
-                            <Grid container justifyContent="flex-end">
-                            <Box style={BoxMessageOneStyle}>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Hola, que tal?"></ListItemText>
+
+                {messages.map((message, index)=> {
+
+                  if(message._sender === params.id){
+                    return(
+                      <ListItem key="1">
+                                <Grid container justifyContent="flex-end">
+                                <Box style={BoxMessageOneStyle}>
+                                    <Grid item xs={12}>
+                                        <ListItemText align="left" primary={message.content}></ListItemText>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        <ListItemText align="right" secondary="09:30"></ListItemText>
+                                    </Grid>
+                                </Box>
                                 </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="right" secondary="09:30"></ListItemText>
-                                </Grid>
-                            </Box>
-                            </Grid>
-                    </ListItem>   
-                    <ListItem key="2">
-                        <Box style={BoxMessageTwoStyle} justifyContent="flex-end">
-                            <Grid container>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" primary="Hola, realice la compra de un servicio."></ListItemText>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <ListItemText align="left" secondary="09:31"></ListItemText>
-                                </Grid>
-                            </Grid>
-                        </Box>
-                    </ListItem>
+                        </ListItem>   
+                    )
+                  } else {
+                    return(
+                      <ListItem key="2">
+                      <Box style={BoxMessageTwoStyle} justifyContent="flex-end">
+                          <Grid container>
+                              <Grid item xs={12}>
+                                  <ListItemText align="left" primary={message.content}></ListItemText>
+                              </Grid>
+                              <Grid item xs={12}>
+                                  <ListItemText align="left" secondary="09:31"></ListItemText>
+                              </Grid>
+                          </Grid>
+                      </Box>
+                      </ListItem>
+                    )
+                  }    
+                })}
+                
                 </List>
                 <Divider />
                 <Grid container style={{padding: '10px'}}>

@@ -66,7 +66,7 @@ useEffect(()=>{
             Calificación: 4 <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
           </Typography>
           <Box textAlign='center' sx={{m: 1}} >
-            <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/ ${user._id}`}>
+            <Button variant='contained'style={{backgroundColor: "#294C60"}} href={`../chat/${user._id}`}>
               Enviar mensaje
             </Button>
           </Box>

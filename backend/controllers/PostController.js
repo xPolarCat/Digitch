@@ -169,3 +169,15 @@ exports.post_getByName = async (req, res) =>{
         res.send({message: "Category does not exists."})
     }
 }
+
+exports.post_getByUser = async (req, res) =>{
+    const { user } = req.params;
+
+    const data = await Post.find({_user: user, sort: { created_at: -1 }}); 
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "No posts for this user."});
+    }
+}

@@ -5,7 +5,8 @@ const {protect} = require('../middleware/authMiddleware');
 
 const PostController = require("../controllers/PostController");
 
-//router.use(protect);
+
+router.use(protect);
 
 router.get("/post",  PostController.post_getall); // Ruta para ver todos los posts.
 router.post("/post", protect, uploader.single("images"), PostController.post_register); // Mi ruta para el registro de posts tipo POST. "images" es el nombre del campo donde guardaremos la imagen.
@@ -14,5 +15,6 @@ router.delete("/post/:id", PostController.post_delete); // Ruta para borrar un p
 router.get("/post/:id", PostController.post_getById); // Búsqueda por Id
 router.get("/posts/category/:id", PostController.post_getByCategory) // Búsqueda por Categoría
 router.get("/posts/search/:name", PostController.post_getByName) // Búsqueda por Nombre
+router.get("/posts/user/:id", protect, PostController.post_getByUser); // Búsqueda por usuario
 
 module.exports = router;
