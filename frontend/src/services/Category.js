@@ -1,4 +1,5 @@
 import { axiosBase as axios } from "./Config";
+import Cookie from 'cookie-universal';
 
 export const Cat_GetAll = async () => {
     try{
@@ -15,33 +16,52 @@ export const Cat_GetAll = async () => {
     }
 }
 export const Cat_Register = async () => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/category")
+        const response = await axios.post("/category", {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
     }catch(err){
         console.error(err);
         return err;
     }
 }
 export const Cat_Update = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.put("/category/:id", {id})
+        const response = await axios.put("/category/:id", {id}, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
     }catch(err){
         console.error(err);
         return err;
     }
 }
 export const Cat_Delete = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.delete("/category/:id", {id})
+        const response = await axios.delete("/category/:id", {id}, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
     }catch(err){
         console.error(err);
         return err;
     }
 }
 export const Cat_GetOne = async (id) => {
+
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get(`/category/${id}`)

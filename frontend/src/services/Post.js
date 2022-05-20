@@ -52,11 +52,18 @@ export const Post_Register = async (post) => {
 export const Post_Update = async (id, post) => {
     console.log("post service 2 ", post);
     console.log("id", id);
+
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
+
+    console.log("Mi cookie en el post: ", cookieTemp);
+
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.put(`/post/${id}`, post, {
             headers:{
                 "Content-Type": "multipart/form-data",
+                "Authorization": "Bearer " + cookieTemp
             },
         });
         if(response.status==200) {
@@ -72,9 +79,17 @@ export const Post_Update = async (id, post) => {
 }
 
 export const Post_Delete = async (id) => {
+
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
+
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.delete("/post/:id",  id)
+        const response = await axios.delete("/post/:id",  id,{
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log("post");
     }catch(err){
         console.error(err);
@@ -83,9 +98,17 @@ export const Post_Delete = async (id) => {
 }
 
 export const Post_GetById = async (id) => {
+
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
+    
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get(`/post/${id}`)
+        const response = await axios.get(`/post/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        });
         if(response.status==200) {
           return response.data;
         }else{
@@ -99,9 +122,15 @@ export const Post_GetById = async (id) => {
 }
 
 export const Post_GetByCategory= async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/posts/category/:id", id)
+        const response = await axios.get("/posts/category/:id", id, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log(response);
     }catch(err){
         console.error(err);
@@ -110,10 +139,18 @@ export const Post_GetByCategory= async (id) => {
 }
 
 export const Post_GetByName= async (name) => {
+
+    const cookies = Cookie()
+    const cookieTemp = cookies.get('user');
+    
     try{
         //Respuesta de un await con la ruta del api
         console.log(name);
-        const response = await axios.get(`/posts/search/${name}`)
+        const response = await axios.get(`/posts/search/${name}`, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         if(response.status==200) {
             return response.data;
           }else{

@@ -1,9 +1,16 @@
 import { axiosBase as axios } from "./Config";
+import Cookie from 'cookie-universal';
 
 export const User_GetAll = async () => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/user")
+        const response = await axios.get("/user", {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         if(response.status==200) {
             return response.data;
           }else{
@@ -40,11 +47,14 @@ export const User_Register = async (ouser) => {
 }
 
 export const User_Update = async (id, user) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.put(`/user/${id}`, user, {
             headers:{
                 "Content-Type": "multipart/form-data",
+                "Authorization": "Bearer " + cookieTemp
             },
         });
         if(response.status==200) {
@@ -59,9 +69,15 @@ export const User_Update = async (id, user) => {
 }
 
 export const User_Delete = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.delete("/user/:id", {id})
+        const response = await axios.delete("/user/:id", {id}, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         console.log("adios?", id);
     }catch(err){
         console.error(err);
@@ -70,9 +86,15 @@ export const User_Delete = async (id) => {
 }
 
 export const User_GetOne = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get(`/user/${id}`)
+        const response = await axios.get(`/user/${id}`, {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        })
         if(response.status==200) {
             return response.data;
           }else{
@@ -85,6 +107,7 @@ export const User_GetOne = async (id) => {
 }
 
 export const User_Login = async (data) => {
+
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.post("/user/login", data)
