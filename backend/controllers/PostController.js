@@ -76,7 +76,7 @@ exports.post_update = async (req, res) => {
     const { body, file } = req; // Traigo mi objeto. Al { variable } se le llama destructuring y me sirve para acceder a las partes de mi objeto
     console.log("post controller Id: ", id);
     console.log("Body: ", body);
-    const userdb = await body._user; // Valio si mandé un usuario como parámetro
+    //const userdb = await body._user; // Valio si mandé un usuario como parámetro
 
     try{
         console.log("Mi controlador:", body, file);
@@ -101,21 +101,21 @@ exports.post_update = async (req, res) => {
         console.log("Body: ", body.name);
         body.images= publicUrl;
 
-            if(postdb){
-                // Actualizar el contenido de mi fila.
-                const data = await Post.findOneAndUpdate(  
-                // El id en mi base de datos se guarda con un _
-                    {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
-                    body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
-                    {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
-                
-                res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
-            }else{
-                // Regresar un mensaje de error. 
-                res.send({message: "The id does not exists"});
-                
-            }
-            });
+        if(postdb){
+            // Actualizar el contenido de mi fila.
+            const data = await Post.findOneAndUpdate(  
+            // El id en mi base de datos se guarda con un _
+                {_id: id}, // El primer parámetro es un objeto ya que está entre { }, aquí se guardan los criterios de búsqueda. 
+                body, // El segundo parámetro es un objeto con los campos que se van a actualizar. 
+                {returnOriginal: false}) // Query Options. Este sirve para que me muestre la data nueva y no la anterior.
+            
+            res.send({message: "Data updated correctly", data}); // data: data <-- es ambiguo, por lo tanto es lo mismo solo poner data
+        }else{
+            // Regresar un mensaje de error. 
+            res.send({message: "The id does not exists"});
+            
+        }
+        });
         blobStream.end(file.buffer);
     }catch(err){
         res.send(err);

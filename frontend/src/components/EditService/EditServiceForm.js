@@ -205,21 +205,21 @@ export default function EditServiceForm() {
    
     //service._user = '62819a5f9eb9bc87516154a9';
     service._category = categoryServ._id;
-    console.log("post form ", id);
+    console.log("post form ", service);
     const obj = await Post_Update(id, service);
 
     console.log("my object0:", obj);
   
-  //   console.log("paquete 1", price);
-  //   console.log("paquete 2", price2);
-  //   console.log("paquete 3", price3); 
+  console.log("paquete 1", price);
+  console.log("paquete 2", price2);
+  console.log("paquete 3", price3); 
     
-  //     navigate('/');
-   
-    
-  //  await Price_Update(price._id, price);
-  //  await Price_Update(price2._id, price2);
-  //  await Price_Update(price3._id, price3);
+     
+   await Price_Update(price._id, price);
+   await Price_Update(price2._id, price2);
+   await Price_Update(price3._id, price3);
+
+   navigate('/');
 
   };
 
