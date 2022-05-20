@@ -9,7 +9,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 250,
+    width: "250",
+    height: "350",
     backgroundColor: "#001B2E"
   },
   media: {
