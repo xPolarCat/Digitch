@@ -16,6 +16,7 @@ import SendIcon from "@mui/icons-material/Send";
 import IconButton from "@mui/material/IconButton";
 import {Post_GetByName} from "../services/Post"
 import { useParams } from "react-router-dom";
+import backgroundimage from '../resources/search-background4.jpg';
 import { Post_GetAll} from "../services/Post"; //Obtener todos los post que tenemos
 
 const useStyles = makeStyles(() => ({
@@ -30,8 +31,9 @@ export default function CreateService() {
   const classes = useStyles();
   const background = {
     style: {
-      backgroundColor: "#294C60",
-      backgroundSize: "cover",
+      backgroundImage: `url(${backgroundimage})`, backgroundSize: 'cover',
+      // backgroundColor: "#294C60",
+      // backgroundSize: "cover",
       minHeight: "100vh",
       paddingLeft: "20px",
     },
@@ -109,7 +111,7 @@ useEffect(()=>{
           <FormControl fullWidth sx={{ my: 2 }}>
             <Grid container alignItems="center">
               <Grid item xs={10}>
-                <TextField
+                <TextField style={{backgroundColor:"#203C4C", boxShadow: "0 0px 11px #5794B7", borderRadius: "5px"}}
                   id="inputSearch"
                   name="inputSearch"
                   InputLabelProps={textFieldStyle}
@@ -141,7 +143,7 @@ useEffect(()=>{
         </form>
       </div>
       <div id="resultLegend">
-        <Typography variant="h4" style={{ padding: "10px", color: "white", backgroundColor:"#001B2E", borderRadius:"12px", marginRight:"65%", fontSize:"2.5vw" }}>
+        <Typography variant="h4" style={{ padding: "10px", color: "white", backgroundColor:"#001B2E", borderRadius:"12px", marginRight:"66%", fontSize:"2.5vw" }}>
           Resultados para: Diseño
         </Typography>
       </div>
