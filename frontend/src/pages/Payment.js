@@ -95,7 +95,6 @@ const background = {
 export default function Payment() {
   const params = useParams();
 
-  const [total, setTotal] = useState({t: 40 + 40})
 
   const [oPurchase, setPurchase] = useState({
     _user: "",
@@ -144,11 +143,15 @@ const [post, setPost]= useState([]);
   //Me traigo la info de el post con ese paquete de precio
   const data2= await Post_GetById(data._post);
   setPost(data2);
-  console.log("post",data2)
-    }
+  console.log("post", post)
+
+  }
   
    fetchData();
+
   }, []);
+
+  const [total, setTotal] = useState({t: price.price + 40})
 
   return (
     <Grid
