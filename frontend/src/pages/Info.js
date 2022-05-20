@@ -115,6 +115,7 @@ export default function Pricing() {
  const [prices, setPrice]= useState([]);
  //Aqui guardamos info de los comentarios des servicio
  const [comments, setComment]= useState([]);
+
  const [rates, setRate]=useState([]);
  //Aqui guardo la suma de las calificaciones
  const [sum, setSum]=useState();
@@ -123,10 +124,10 @@ export default function Pricing() {
    async function fetchData(){
     
   //Tuve que convertir el objeto a string
-  const myJSON = JSON.stringify(params.id);
+  const idFinal = (params.id);
+  console.log("aver",idFinal);
 
   //Despues separarlo para que solo me quedara el numero y no exista un error
-  const idFinal= myJSON.slice(2,26);
  //Me traigo la info de ese post con ese id
  const data= await Post_GetById(idFinal);
  setPost(data);
@@ -146,7 +147,7 @@ export default function Pricing() {
     //Obtengo la info de los comentarios
     const dataComments= await Comm_GetByPost(idFinal);
     setComment(dataComments);
-    console.log("comm", comments);
+    console.log("comm", dataComments);
 
     }
   

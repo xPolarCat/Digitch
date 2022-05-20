@@ -136,7 +136,9 @@ exports.post_delete = async (req, res) => {
 
 
 exports.post_getById = async (req, res) =>{
-    const { id } = req.params;
+    const  id  = req.params.id;
+
+    console.log("c", id)
     // Método optimizado para buscar por ids.
     const data = await Post.findById(id); // Encuentra el primer registro que coincide con la condición. 
     //const data = await Post.findOne({_id: id}); // Es lo mismo que hacer lo de arriba

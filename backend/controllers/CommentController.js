@@ -110,10 +110,13 @@ exports.comment_getByPost = async (req, res) =>{
      const splitString2= splitString[1].split("}");
      const splitString3 = splitString2[0].split(' " ');
      const idFinal= splitString3[0].slice(1,25);
+
+     console.log("comments",idFinal)
     // Método optimizado para buscar por ids.
     const data = await Comment.find({_post: idFinal}); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
 
+    console.log("data",data)
     if(data){
         res.send(data);
     }else{

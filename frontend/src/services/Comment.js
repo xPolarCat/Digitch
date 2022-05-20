@@ -63,15 +63,10 @@ export const Comm_GetById = async (id) => {
     }
 }
 export const Comm_GetByPost = async (id) => {
-    const cookies = Cookie();
-    const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get(`/comment/post/${id}`, {
-            headers: {
-                "Authorization": "Bearer " + cookieTemp
-            }
-        })
+        const response = await axios.get(`/comment/post/${id}`)
+        console.log(response.data)
         if(response.status==200) {
             return response.data;
           }else{
