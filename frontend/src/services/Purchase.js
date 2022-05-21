@@ -78,11 +78,16 @@ export const Purchase_GetOne = async (id) => {
     const cookieTemp = cookies.get('user');
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.get("/purchase/:id", {id}, {
+        const response = await axios.get(`/purchase/${id}`, {
             headers: {
                 "Authorization": "Bearer " + cookieTemp
             }
         })
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
         console.log("id: ", id);
     }catch(err){
         console.error(err);
@@ -92,6 +97,7 @@ export const Purchase_GetOne = async (id) => {
 export const Purchase_GetByUser = async (id) => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
+    console.log("pur", id)
     try{
         //Respuesta de un await con la ruta del api
         const response = await axios.get(`/purchase/user/${id}` , {
@@ -99,7 +105,11 @@ export const Purchase_GetByUser = async (id) => {
                 "Authorization": "Bearer " + cookieTemp
             }
         });
-        return response;
+        if(response.status==200) {
+            return response.data;
+          }else{
+              return []
+          }
     }catch(err){
         console.error(err);
         return err;

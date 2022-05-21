@@ -93,10 +93,12 @@ exports.purchase_delete = async (req, res) => {
 
 exports.purchase_getById = async (req, res) =>{
     const { id } = req.params;
+
     // Método optimizado para buscar por ids.
     const data = await Purchase.findById(id); // Encuentra el primer registro que coincide con la condición. 
     //const data = await User.findOne({_id: id}); // Es lo mismo que hacer lo de arriba
 
+   console.log(data)
     if(data){
         res.send(data);
     }else{
@@ -106,8 +108,10 @@ exports.purchase_getById = async (req, res) =>{
 
 exports.purchase_getByUser = async (req, res) =>{
     const id  = req.params.id;
+    console.log("CONTROLADOR",id)
 
-    const data = await Purchase.find({id: id}); 
+    const data = await Purchase.find({_user: id}); 
+    console.log(data)
 
     if(data){
         res.send(data);
