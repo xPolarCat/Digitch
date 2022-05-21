@@ -9,6 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
 import {Price_GetByPost} from "../../services/Price"
+import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +33,8 @@ export default function CardServices(props) {
   const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
   const textFieldStyle = {style: {color : 'white'} }
   const cardActionStyle= {backgroundColor: "#001B2E"}
+  const cookies = Cookie();
+  const cookieTemp = cookies.get('user_id'); 
 
   const classes = useStyles();
 
@@ -51,8 +54,18 @@ function changeBackground_details(e) {
  const [user, setUser]= useState([]);
  //Aqui guardamos info de los precios de los servicios
  const [prices, setPrice]= useState([]);
+ //Aqui guardo la informacion de favoritos 
+ const [favorite, setFavorite]= useState({
+   _user: "",
+   _favorite: ""
+ });
 
 useEffect(()=>{
+
+  setFavorite({
+    ...favorite,
+    _user: cookieTemp
+})
  async function fetchData(){
    //Tuve que convertir el objeto a string
    const myJSON = JSON.stringify(props);
@@ -84,6 +97,14 @@ useEffect(()=>{
  fetchData();
 }, [props]);
 
+function handleClick(value){
+
+  setFavorite({
+    ...favorite,
+    _favorite: value
+})
+  console.log(favorite);
+ }
   return (
     <Card className={classes.root}>  
     
@@ -110,9 +131,14 @@ useEffect(()=>{
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
         <Button onMouseOver={changeBackground_details} onMouseLeave={returnBackground_details} variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`} >Ver detalle</Button>
-        <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
+        
+        {user._id!=cookieTemp &&
+        
+        <IconButton aria-label="delete" style={{color: "pink", margin:"0"}} onClick={()=>{handleClick(post._id)}}>
           <FavoriteIcon />
         </IconButton>
+    }
+        
       </CardActions>
     </Card>
   );

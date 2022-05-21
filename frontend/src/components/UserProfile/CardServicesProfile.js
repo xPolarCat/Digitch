@@ -94,9 +94,12 @@ useEffect(()=>{
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
         <Button variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`}>Ver detalle</Button>
+        {user._id!=cookieTemp &&
+        
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>
+    }
       </CardActions>
       { user._id == cookieTemp &&
               <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
