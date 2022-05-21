@@ -24,7 +24,7 @@ exports.favorite_register = async (req, res) =>{
 
     if(userdb){
         if(favoritedb){
-            if(validateAlreadyExists){
+            if(!validateAlreadyExists){
             // Validación de información 
             let favorite = new Favorite(body); // Creo un objeto tipo Favorite basado en mi modelo Favorite.
 
