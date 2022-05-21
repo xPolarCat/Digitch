@@ -60,8 +60,9 @@ useEffect(()=>{
     return (
       <Card className={classes.root} variant="outlined" >
         <CardContent style={{ padding: "30px"}} >
+
           <Avatar style={{margin: "auto", height:"100px", width:"100px"}} 
-          src="https://cdn.forbes.com.mx/2019/04/blackrrock-invertir-1-640x360.jpg" /> 
+          src={user.photo} /> 
           <Typography variant="h4" style={{padding: "10px", margin: "0px", color: "white"}} textAlign="center">
             {user.name}
           </Typography>

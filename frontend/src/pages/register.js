@@ -52,10 +52,9 @@ const Register=()=>{
         console.log("CONSOLE LGO", ouser);
         const us = await User_Register(ouser);
         console.log("my object:", us);
-        // if(us != null){
-        //     navigate('/');
-        //   }else{
-        //   }
+        if(us != null){
+            navigate('/login');
+        }
     }
 
     const handleOnChangeInput = (event) => { // Esto se agrega porque al utilizar un valor como user.name, este no puede cambiar. Hay que utilizar el onChange para poder cambiar el valor de mi variable name
@@ -196,7 +195,7 @@ const Register=()=>{
               Las contraseñas no coinciden
           </div> ) : ""}
                 </Grid>
-                <Button type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>Registrarse</Button>
+                <Button type='submit' color='primary' variant="contained" style={btnstyle}  fullWidth>Registrarse</Button>
                 </form>
                 <Typography style={loginTextStyle} > ¿Ya tienes una cuenta? 
                     <Link href="/login" style={registerStyle}>

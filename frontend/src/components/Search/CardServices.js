@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia"
@@ -9,6 +9,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
 import {Price_GetByPost} from "../../services/Price"
+import {Fav_Register} from "../../services/Favorite"
+import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +34,9 @@ export default function CardServices(props) {
   const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
   const textFieldStyle = {style: {color : 'white'} }
   const cardActionStyle= {backgroundColor: "#001B2E"}
+  const cookies = Cookie();
+  const cookieTemp = cookies.get('user_id'); 
+  const isFirst = useRef(false);
 
   const classes = useStyles();
 
@@ -51,8 +56,14 @@ function changeBackground_details(e) {
  const [user, setUser]= useState([]);
  //Aqui guardamos info de los precios de los servicios
  const [prices, setPrice]= useState([]);
+ //Aqui guardo la informacion de favoritos 
+ const [favorite, setFavorite]= useState({
+   _user: "",
+   _favorite: ""
+ });
 
 useEffect(()=>{
+
  async function fetchData(){
    //Tuve que convertir el objeto a string
    const myJSON = JSON.stringify(props);
@@ -84,6 +95,33 @@ useEffect(()=>{
  fetchData();
 }, [props]);
 
+useEffect(()=>{
+  if(isFirst.current){
+ async function fetchData(){
+  //Creo que el post se convierta en su favorite
+  const dataFav= await Fav_Register(favorite);
+ }
+ 
+
+ fetchData();
+  }
+  
+ isFirst.current = true;
+},[favorite])
+
+
+
+function handleClick(value){
+
+
+  setFavorite({
+    ...favorite,
+    _user: cookieTemp,
+    _favorite: value
+})
+  console.log(favorite);
+ }
+
   return (
     <Card className={classes.root}>  
     
@@ -99,7 +137,7 @@ useEffect(()=>{
           {post.name}
         </Typography>
         <CardHeader style={{paddingLeft: "10px", paddingRight: "10px", paddingTop: "0px", paddingBottom: "0px", color: "white"}}
-          avatar={<Avatar style={{marginBottom: "5px"}}>R</Avatar>}
+          avatar={<Avatar style={{marginBottom: "5px"}} src={user.photo}>R</Avatar>}
           title={user.name}
         />
         <Typography component="p" textAlign="center" className={classes.costo}>
@@ -110,9 +148,14 @@ useEffect(()=>{
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
         <Button onMouseOver={changeBackground_details} onMouseLeave={returnBackground_details} variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`} >Ver detalle</Button>
-        <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
+        
+        {user._id!=cookieTemp &&
+        
+        <IconButton aria-label="delete" style={{color: "pink", margin:"0"}} onClick={()=>{handleClick(post._id)}}>
           <FavoriteIcon />
         </IconButton>
+    }
+        
       </CardActions>
     </Card>
   );

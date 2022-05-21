@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ChatIcon from '@mui/icons-material/Chat';
 import { Avatar } from '@mui/material';
 import Cookie from 'cookie-universal';
 
@@ -145,6 +146,10 @@ function returnBackground_register (e){
   e.target.style.backgroundColor = "#294C60";
 }
 
+function logout(){
+  cookies.removeAll();
+}
+
   return (
     <Box sx={{ flexGrow: 1}} >
       <AppBar position="static" style={ColorStyle} >
@@ -172,6 +177,19 @@ function returnBackground_register (e){
                 <SearchIcon />
           </IconButton>
 
+          : ""
+          }
+
+          {user_id ?
+          <IconButton 
+              style = {{marginRight: "10px"}}
+              size="large"
+              aria-label="Logout"
+              color="inherit"
+              href={`../chat/${user_id}`}
+            >
+                <ChatIcon />
+          </IconButton>
           : ""
           }
 
@@ -218,6 +236,7 @@ function returnBackground_register (e){
               aria-label="Logout"
               color="inherit"
               href="/"
+              onClick={logout}
             >
                 <LogoutIcon />
           </IconButton>

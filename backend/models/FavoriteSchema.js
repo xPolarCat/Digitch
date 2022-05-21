@@ -8,7 +8,7 @@ const FavoriteSchema = new mongoose.Schema({
     },
     _favorite:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"vendors",
+        ref:"posts",
         required: true
     },
     created_at:{

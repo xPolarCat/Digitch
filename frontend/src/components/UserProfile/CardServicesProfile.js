@@ -72,17 +72,19 @@ useEffect(()=>{
 
   return (
     <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image="https://cdn.forbes.com.mx/2019/04/blackrrock-invertir-1-640x360.jpg"
-        title="aa"
-      />
+        {post.images &&
+        <CardMedia
+          className={classes.media}
+          image={post.images[0]}
+          title="aa"
+        />
+    }
       <CardContent style={{padding: "0px"}}>
         <Typography gutterBottom variant="h6" component="h2" style={{padding: "10px", margin: "0px", color: "white"}}>
           {post.name}
         </Typography>
         <CardHeader style={{paddingLeft: "10px", paddingRight: "10px", paddingTop: "0px", paddingBottom: "0px", color: "white"}}
-          avatar={<Avatar style={{marginBottom: "5px"}}>R</Avatar>}
+          avatar={<Avatar style={{marginBottom: "5px"}} src={user.photo}>R</Avatar>}
           title={user.name}
         />
         <Typography component="p" textAlign="center" className={classes.costo}>
@@ -92,9 +94,12 @@ useEffect(()=>{
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
         <Button variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`}>Ver detalle</Button>
+        {user._id!=cookieTemp &&
+        
         <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
           <FavoriteIcon />
         </IconButton>
+    }
       </CardActions>
       { user._id == cookieTemp &&
               <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>

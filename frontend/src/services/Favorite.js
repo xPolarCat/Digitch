@@ -17,12 +17,13 @@ export const Fav_GetAll = async () => {
         return err;
     }
 }
-export const Fav_Register = async () => {
+export const Fav_Register = async (body) => {
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
+    console.log(body)
     try{
         //Respuesta de un await con la ruta del api
-        const response = await axios.post("/favorite", {
+        const response = await axios.post("/favorite", {body}, {
             headers: {
                 "Authorization": "Bearer " + cookieTemp
             }

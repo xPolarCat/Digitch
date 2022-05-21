@@ -1,6 +1,7 @@
 const Favorite = require("../models/FavoriteSchema");
 const User = require("../models/UserSchema");
 const Vendor = require("../models/VendorSchema");
+const Post = require("../models/PostSchema");
 
 
 // Obtener todos los vendedores favoritos 
@@ -12,14 +13,18 @@ exports.favorite_getall = async (req, res) =>{
 
 // Mi método para registrar vendedores favoritos 
 exports.favorite_register = async (req, res) =>{
-    const { body } = req; // Obtenemos la info del body.
+    const { body } = req.body; // Obtenemos la info del body.
+    console.log("h",req.body)
+    
+    const userdb = await User.findById(body._user); // Esto me sirve para revisar si existe un usuario con el id que recibo
+    const favoritedb = await Post.findById(body._favorite);// Esto me sirve para revisar si existe un vendedor con el id que recibo
+    console.log(body._favorite)
 
-    const userdb = await User.findById(body._sender); // Esto me sirve para revisar si existe un usuario con el id que recibo
-    const favoritedb = await Vendor.findById(body._receiver);
-    // Esto me sirve para revisar si existe un vendedor con el id que recibo
+    const validateAlreadyExists = await Favorite.find({_user: body._user, _favorite: body._favorite});
 
     if(userdb){
         if(favoritedb){
+            if(!validateAlreadyExists){
             // Validación de información 
             let favorite = new Favorite(body); // Creo un objeto tipo Favorite basado en mi modelo Favorite.
 
@@ -32,6 +37,9 @@ exports.favorite_register = async (req, res) =>{
             }); // Aquí guardo el nuevo vendedor favorito.
 
             res.send(favorite); // Regreso el objeto creado.
+            }else{
+                res.send({message: "Ya se ha agregado a favoritos"});
+            }
         }else{
             res.send({message: "The user does not exists"});
         }
@@ -63,5 +71,17 @@ exports.favorite_getById = async (req, res) =>{
         res.send(data);
     }else{
         res.send({message: "Favorite does not exists."})
+    }
+}
+
+exports.favorite_getUserFavorites = async (req, res) =>{
+    const  user  = req.params.id;
+
+    const data = await Favorite.find({_user: user}); 
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "No favorites for this user."});
     }
 }

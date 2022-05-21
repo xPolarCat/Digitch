@@ -146,7 +146,7 @@ useEffect(()=>{
       <div id="resultLegend" >
         <Grid container style={{backgroundColor:"#001B2E", borderRadius:"12px", width:"fit-content"}}>
         <Typography variant="h4" style={{ padding: "10px", color: "white", borderRadius:"12px", fontSize:"25px" }}>
-          Resultados para: Diseño
+          Resultados.
         </Typography>
 
         </Grid>
