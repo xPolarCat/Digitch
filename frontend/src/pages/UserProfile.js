@@ -8,9 +8,10 @@ import Review from '../components/UserProfile/Review'
 import FavoriteUsers from '../components/UserProfile/FavoriteUsers'
 import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User"
-import {Post_GetByUser} from "../services/Post"
+import {Post_GetById, Post_GetByUser} from "../services/Post"
 import BackgroundImage from '../resources/mac.png';
 import CardServicesProfile from '../components/UserProfile/CardServicesProfile'
+import { Purchase_GetByUser } from '../services/Purchase'
 
 export default function UserProfile() {
     const background = {style: {backgroundColor : '#294C60', backgroundSize: 'cover', minHeight: '100vh'} }
@@ -18,7 +19,8 @@ export default function UserProfile() {
     //Aqui guardamos info del usuario
     const [user, setUser]= useState([]);
     const [posts, setPosts]=useState([]);
-
+    const [purchases, setPurchases]=useState([]);
+    const [purchasesPost, setPP] = useState([]); 
 
     useEffect(()=>{
         async function fetchData(){
@@ -26,7 +28,7 @@ export default function UserProfile() {
        const idFinal = (params.id);
        //Despues separarlo para que solo me quedara el numero y no exista un error
       //Me traigo la info de ese post con ese id
-      console.log(idFinal);
+        console.log(idFinal);
        
         //Obtengo la info del usuario que subio ese post
         const dataUser= await User_GetOne(idFinal);
@@ -36,13 +38,26 @@ export default function UserProfile() {
         const dataPosts= await Post_GetByUser(idFinal);
         setPosts(dataPosts);
         console.log("posts", dataPosts);
-        
+
+        const dataPurchase = await Purchase_GetByUser(idFinal);
+        setPurchases(dataPurchase);
+        console.log("compras", dataPurchase.data);
+        const array = dataPurchase.data;
+
+        let pArrays = [];
+        const data = array.map(async(item) => {
+            console.log("no se que es esto", item._post)
+            const dataTemp = await Post_GetById(item._post);
+            console.log("Hola",dataTemp);
+            pArrays.push(dataTemp);
+        });
+        setPP(pArrays)
+        console.log("post comprados por id", purchasesPost);
     }
-       
-        fetchData();
-       }, []);
 
+    fetchData();
 
+    }, []);
 
 
   return (
@@ -54,6 +69,7 @@ export default function UserProfile() {
                     <CardDescription id={user._id} />
                 </Box>
             </Grid>
+
             <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "10px", backgroundColor:"rgb(0,0,0, 0.5)"}}>
                 <Typography textAlign='center' variant="h5" style={{color: "white"}}>
                 Servicios de {user.name}
@@ -80,7 +96,20 @@ export default function UserProfile() {
                 </Grid>
             </Grid>
 
-            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "20px",paddingRight: "20px", backgroundColor:"rgb(0,0,0, 0.5)"}}>
+            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "10px", backgroundColor:"rgb(0,0,0, 0.5)"}}>
+                <Typography textAlign='center' variant="h5" style={{color: "white"}}>
+                Comprados por {user.name}
+                </Typography>
+                <Grid item spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{display: "flex"}}>
+                {purchasesPost.map((item, index)=>(
+                    <Grid sx={{margin: "15px"}} key={index}>
+                        <CardServicesProfile info={item._id}/>
+                    </Grid >
+                ))}
+                </Grid>
+            </Grid>
+
+            <Grid item xs={12} sx={{paddingTop: "50px", paddingBottom: "50px", paddingLeft: "20px",paddingRight: "20px", backgroundColor: "#00121f"}}>
 
                 <Container style={{padding: "0px"}}>
                 <Typography variant="h5" style={{color : 'white'}}>
