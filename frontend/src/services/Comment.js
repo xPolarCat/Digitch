@@ -24,7 +24,11 @@ export const Comm_Register = async (comm) => {
             }
         });
         console.log(response);
-        return response;
+        if(response.status==200) {
+            return true;
+          }else{
+              return false;
+          }
     }catch(err){
         console.error(err);
         return err;

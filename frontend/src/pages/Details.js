@@ -92,43 +92,6 @@ const mainFeaturedPost = {
         <main >
           <MainFeaturedPost post={mainFeaturedPost} />
           <Info id={post._id} />
-
-          {
-            user_id != post._user ?
-            (
-            <form onSubmit={onSubmitComment}>
-            <FormControl fullWidth>
-              <TextField
-                id="outlined-multiline-static"
-                label="Escribe tu comentario aquí"
-                fullWidth
-                multiline
-                rows={3}
-                sx={{ mb: 2 }}
-                InputLabelProps={textFieldStyle}
-                InputProps={textFieldStyle}
-                value={cmm.description}
-                onChange={onChangeCmm}
-                required
-              />
-              <Typography
-                component="legend"
-                style={{ color: "white", textAlign: "center"}}
-              >
-                Califica el servicio
-              </Typography>
-              <Button
-                type="submit"
-                variant="contained"
-                style={{ backgroundColor: "#001B2E", color: "white", marginBottom: '10px'}}
-              >
-                Enviar
-              </Button>
-            </FormControl>
-          </form>
-            ) : <p></p>
-          }
-
         </main>
       </Container>
 

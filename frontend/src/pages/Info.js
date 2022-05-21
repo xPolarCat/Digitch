@@ -1,11 +1,14 @@
 
-import React,{ Fragment, useEffect, useState } from 'react';
+import React,{ Fragment, useEffect, useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import { Comm_Register } from '../services/Comment';import {
+  FormControl,
+  TextField} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
 import LinearProgress from '@mui/material/LinearProgress';
 import Grid from '@mui/material/Grid';
@@ -26,6 +29,7 @@ import {User_GetOne} from "../services/User"
 import {Price_GetByPostAll} from "../services/Price"
 import {Comm_GetByPost} from "../services/Comment"
 import BackImage from "../resources/details-background.jpg"
+import Cookie from 'cookie-universal';
 
 const Spacing={margin: '30px'}
 const IconStyle2={
@@ -45,6 +49,8 @@ const tiers = [
     buttonVariant: 'contained',
   }
 ];
+
+const textFieldStyle = { style: { color: "white" } };
 const cardGrid= {
     paddingTop:"8px",
     paddingBottom: "8px"
@@ -107,6 +113,9 @@ function LinearProgressWithLabel(props) {
 
 export default function Pricing() {
    //Aqui guardaremos info del post
+   
+const cookies = Cookie();
+const user_id = cookies.get('user_id');
   const params = useParams();
  const [post, setPost]= useState([]);
  //Aqui guardamos info del usuario
@@ -155,7 +164,55 @@ export default function Pricing() {
 
   }, []);
 
+  
+ //Variable para saber si sube comentarios 
+ const [newMessage, setNew]= useState({valor:""});
 
+  const [cmm, setCmm] = useState({
+    description : "",
+    _user: user_id,
+    _post: params.id
+   })
+
+   
+  const isFirstM = useRef(false);
+
+   useEffect(()=>{
+
+    if(isFirstM.current){
+    
+    async function fetchData(){
+        
+    //Obtengo la info de los comentarios
+    const dataComments= await Comm_GetByPost(params.id);
+    setComment(dataComments);
+    console.log("comm", dataComments);
+    }
+    fetchData();
+   }
+   
+   isFirstM.current = true;
+  },[newMessage])
+
+
+  const onSubmitComment= async(event)=>{
+    event.preventDefault();
+
+    console.log(cmm)
+
+    const obj = await Comm_Register(cmm);
+    setNew({
+      valor: obj
+    })
+
+
+  }
+
+  const onChangeCmm= (event) => {
+    setCmm({ 
+      ...cmm, 
+      description: event.target.value})
+  }
   return (
 
     <React.Fragment>
@@ -236,7 +293,7 @@ export default function Pricing() {
                     }}
                   >
                     <Typography component="h2" variant="h3" color="text.primary" sx={{color: 'white'}}>
-                      ${price.price}50
+                      ${price.price}
                     </Typography>
                   </Box>
                   <ul>
@@ -289,6 +346,42 @@ export default function Pricing() {
         <CardReview key={index} prop={comment._id}/>  
       ))}
        </Grid>
+
+       {
+            user_id != post._user ?
+            (
+            <form onSubmit={onSubmitComment}>
+            <FormControl fullWidth>
+              <TextField
+                id="outlined-multiline-static"
+                label="Escribe tu comentario aquí"
+                fullWidth
+                multiline
+                rows={3}
+                sx={{ mb: 2 }}
+                InputLabelProps={textFieldStyle}
+                InputProps={textFieldStyle}
+                value={cmm.description}
+                onChange={onChangeCmm}
+                required
+              />
+              <Typography
+                component="legend"
+                style={{ color: "white", textAlign: "center"}}
+              >
+                Califica el servicio
+              </Typography>
+              <Button
+                type="submit"
+                variant="contained"
+                style={{ backgroundColor: "#001B2E", color: "white", marginBottom: '10px'}}
+              >
+                Enviar
+              </Button>
+            </FormControl>
+          </form>
+            ) : <p></p>
+          }
 
     </React.Fragment>
   )
