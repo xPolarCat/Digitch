@@ -101,6 +101,7 @@ export const Post_GetById = async (id) => {
 
     const cookies = Cookie();
     const cookieTemp = cookies.get('user');
+    console.log(id)
     
     try{
         //Respuesta de un await con la ruta del api

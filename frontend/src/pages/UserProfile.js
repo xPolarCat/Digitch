@@ -1,6 +1,7 @@
 import React,{ Fragment, useEffect, useState } from 'react'
 import {Container, Grid, AppBar, Box, Typography} from "@mui/material"
 import CardDescription from '../components/UserProfile/CardDescription'
+import CardPurchases from '../components/UserProfile/cardPurchases'
 //import Subnavbar from '../Search/components/Subnavbar'
 import UserServices from '../components/UserProfile/UserServices'
 import CardReview from '../components/UserProfile/CardReview'
@@ -24,8 +25,7 @@ export default function UserProfile() {
     const [favs, setFavs]=useState([]);
 
     const [purchases, setPurchases]=useState([]);
-    const [purchasesPost, setPP] = useState([]); 
-
+    
     useEffect(()=>{
         async function fetchData(){
        //Tuve que convertir el objeto a string
@@ -50,18 +50,8 @@ export default function UserProfile() {
  
         const dataPurchase = await Purchase_GetByUser(idFinal);
         setPurchases(dataPurchase);
-        console.log("compras", dataPurchase.data);
-        const array = dataPurchase.data;
+        console.log("comprados",purchases)
 
-        let pArrays = [];
-        const data = array.map(async(item) => {
-            console.log("no se que es esto", item._post)
-            const dataTemp = await Post_GetById(item._post);
-            console.log("Hola",dataTemp);
-            pArrays.push(dataTemp);
-        });
-        setPP(pArrays)
-        console.log("post comprados por id", purchasesPost);
     }
 
     fetchData();
@@ -114,9 +104,9 @@ export default function UserProfile() {
                 Comprados por {user.name}
                 </Typography>
                 <Grid item spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{display: "flex"}}>
-                {purchasesPost.map((item, index)=>(
+                {purchases.map((item, index)=>(
                     <Grid sx={{margin: "15px"}} key={index}>
-                        <CardServicesProfile info={item._id}/>
+                        <CardPurchases info={item._id}/>
                     </Grid >
                 ))}
                 </Grid>

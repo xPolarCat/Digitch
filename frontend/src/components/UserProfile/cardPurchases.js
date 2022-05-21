@@ -9,6 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
 import {Price_GetByPost} from "../../services/Price"
+import {Purchase_GetOne} from "../../services/Purchase"
 import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
@@ -39,6 +40,8 @@ export default function CardServices(props) {
   const [user, setUser]= useState([]);
   //Aqui guardamos info de los precios de los servicios
   const [prices, setPrice]= useState([]);
+  //Aqui guardo la compras
+  const [purchase, setPurchase]= useState([]);
 
 useEffect(()=>{
   async function fetchData(){
@@ -50,11 +53,15 @@ useEffect(()=>{
     const splitString2= splitString[1].split("}");
     const splitString3 = splitString2[0].split(' " ');
     const idFinal= splitString3[0].slice(1,25);
+
+    //Me traigo la info de la compra
+    const dataPurchase = await Purchase_GetOne(idFinal);
+    setPurchase(dataPurchase);
  
      //Me traigo la info de ese post con ese id
-    const data= await Post_GetById(idFinal);
+    const data= await Post_GetById(dataPurchase._post);
     setPost(data);
-    console.log("info",data)
+    console.log("info purchases",idFinal)
 
     
   //Obtengo la info del usuario que subio ese post
@@ -87,19 +94,11 @@ useEffect(()=>{
           avatar={<Avatar style={{marginBottom: "5px"}} src={user.photo}>R</Avatar>}
           title={user.name}
         />
-        <Typography component="p" textAlign="center" className={classes.costo}>
-          <b>Desde {prices.price} MXN</b> 
-        </Typography>
       </CardContent>
 
       <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
         <Button variant="contained" style={cardActionStyle} fullWidth href={`../details/${post._id}`}>Ver detalle</Button>
-        {user._id!=cookieTemp &&
         
-        <IconButton aria-label="delete" style={{color: "pink", margin:"0"}}>
-          <FavoriteIcon />
-        </IconButton>
-    }
       </CardActions>
       { user._id == cookieTemp &&
               <CardActions style={{padding: "0px", backgroundColor: "#001B2E"}}>
