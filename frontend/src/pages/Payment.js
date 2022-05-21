@@ -15,6 +15,7 @@ import {Post_GetById} from "../services/Post"
 import BackgroundImage from '../resources/lap.png';
 import Modal from "@mui/material/Modal";
 import { Purchase_Register } from "../services/Purchase";
+import { useNavigate } from 'react-router';
 import Cookie from 'cookie-universal';
 
 const GridPayStyle = {
@@ -93,6 +94,8 @@ const background = {
 
 
 export default function Payment() {
+
+  let navigate = useNavigate();
   const params = useParams();
   const [oPurchase, setPurchase] = useState({
     _user: "",
@@ -102,11 +105,14 @@ export default function Payment() {
   const [open, setOpen] = useState(false);
 
   const handleOpen = async() => {
+    
+
     console.log("Purchase ", oPurchase);
     const obj = await Purchase_Register(oPurchase);
     console.log("Purchase out", obj)
     //if(obj != null)
      // setOpen(true);
+     navigate('/');
   }
   const handleClose = () => setOpen(false);
 
@@ -261,7 +267,7 @@ export default function Payment() {
                 </Box>
                 <Box sx={{ flexGrow: 0.3, p: 2 }} />
                 <Box textAlign="center">
-                  <Button variant="contained" style={PaypalStyle} onClick={handleOpen}>
+                  <Button variant="contained" style={PaypalStyle} onClick={handleOpen} >
                     PAYPAL
                   </Button>
                 </Box>

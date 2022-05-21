@@ -241,7 +241,7 @@ const user_id = cookies.get('user_id');
             <CardMedia
               component="img"
               height="140"
-              image="https://images.ecestaticos.com/DGokxoLjR8N_3GIdyO5vuCBd68I=/0x88:1694x1039/1600x900/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2F1fe%2F160%2Fe7d%2F1fe160e7dd58d20124b71fb653c66c1d.jpg"
+              image="https://www.hint.mx/hubfs/Imported_Blog_Media/Hint_P2020_49-2.jpg"
             />
     
               <Typography gutterBottom variant="h5" component="div" style={{color:"white", marginTop: "15px"}}>
