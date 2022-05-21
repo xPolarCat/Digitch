@@ -84,7 +84,7 @@ useEffect(()=>{
           {post.name}
         </Typography>
         <CardHeader style={{paddingLeft: "10px", paddingRight: "10px", paddingTop: "0px", paddingBottom: "0px", color: "white"}}
-          avatar={<Avatar style={{marginBottom: "5px"}}>R</Avatar>}
+          avatar={<Avatar style={{marginBottom: "5px"}} src={user.photo}>R</Avatar>}
           title={user.name}
         />
         <Typography component="p" textAlign="center" className={classes.costo}>

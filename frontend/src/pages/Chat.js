@@ -247,7 +247,7 @@ useEffect(()=>{
                 <List>
                     <ListItem button key="RemySharp">
                         <ListItemIcon>
-                        <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/6.jpg" />
+                        <Avatar alt="Remy Sharp" src={user1.photo} />
                         </ListItemIcon>
                         <ListItemText primary={user1.name}></ListItemText>
                     </ListItem>
@@ -257,7 +257,7 @@ useEffect(()=>{
                 {users.map((user, index)=>(
                      <ListItem button key={index} onClick={()=>{handleClick(user._id)}}>
                         <ListItemIcon>
-                            <Avatar alt={user.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={user.name} src={user.photo} />
                         </ListItemIcon>
                         <ListItemText primary={user.name}>{user.name}</ListItemText>
                      </ListItem>
@@ -268,7 +268,7 @@ useEffect(()=>{
                 <List >    
                 <ListItem button key={userS.name} >
                         <ListItemIcon>
-                            <Avatar alt={userS.name} src="https://material-ui.com/static/images/avatar/5.jpg" />
+                            <Avatar alt={userS.name} src={userS.photo} />
                         </ListItemIcon>
                         <ListItemText primary={userS.name}>{userS.name}</ListItemText>
                 </ListItem>
