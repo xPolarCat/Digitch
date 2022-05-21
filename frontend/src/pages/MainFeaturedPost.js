@@ -108,7 +108,7 @@ export default function MainFeaturedPost(props) {
             <List>
                         <ListItem button key="RemySharp">
                             <ListItemIcon>
-                            <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/6.jpg" />
+                            <Avatar alt="Remy Sharp" src={user.photo} />
                             </ListItemIcon>
                             <ListItemText style={TextStyle} primary={user.name}></ListItemText>
                         </ListItem>            
