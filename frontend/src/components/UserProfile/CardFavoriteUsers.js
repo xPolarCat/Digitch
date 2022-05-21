@@ -12,7 +12,7 @@ import {User_GetOne} from "../../services/User"
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 250,
+    width: "250px",
     backgroundColor: "#001B2E"
   },
   media: {

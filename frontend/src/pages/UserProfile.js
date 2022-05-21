@@ -83,15 +83,15 @@ export default function UserProfile() {
             </Grid>
                
             <Grid item xs={12} direction="column" sx={{paddingTop: "50px", paddingBottom: "50px", backgroundColor: "#00121f"}}>
-                <Grid item lg={6} >
-                    <Typography variant="h5" textAlign="center" style={{color : 'white', paddingBottom: "10px" }}>
-                        Favoritos de {user.name}
-                    </Typography>   
-                </Grid>
-                <Grid item lg={6} container spacing={1} direction="row" alignItems="center" justifyContent="center">
+                
+                <Typography variant="h5" textAlign="center" style={{color : 'white', paddingBottom: "10px" }}>
+                    Favoritos de {user.name}
+                </Typography>   
+
+                <Grid item container spacing={2} direction="row" alignItems="center" justifyContent="center" sx={{display: "flex"}}>
                 {favs.map((fav, index)=>(
                     <Grid >
-                    <Box sx={{display: 'flex' }} key={index}>
+                    <Box sx={{margin: "15px"}} key={index}>
                         <CardFavoriteUsers info={fav._id}/>
                     </Box>
                     </Grid>
