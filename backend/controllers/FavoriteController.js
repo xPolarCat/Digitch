@@ -69,7 +69,7 @@ exports.favorite_getById = async (req, res) =>{
 exports.favorite_getUserFavorites = async (req, res) =>{
     const  user  = req.params.id;
 
-    const data = await Post.find({_user: user}); 
+    const data = await Favorite.find({_user: user}); 
 
     if(data){
         res.send(data);
