@@ -5,7 +5,7 @@ import SendIcon from '@mui/icons-material/Send';
 import BackgroundImage from '../../resources/login-background.jpg';
 import { Post_GetById } from '../../services/Post';
 import { useParams } from 'react-router';
-import { Price_GetById, Price_GetByPost, Price_Update } from '../../services/Price';
+import { Price_GetById, Price_GetByPost, Price_Update, Price_GetByPostAll } from '../../services/Price';
 import { Cat_GetAll, Cat_GetOne } from '../../services/Category';
 import {Price_Register} from '../../services/Price';
 import {Post_Update} from '../../services/Post';
@@ -35,7 +35,7 @@ export default function EditServiceForm() {
       console.log("trae gcat get one", dataCategory._id);
       setCat({_id: dataCategory._id});
 
-      const dataPriceList = await Price_GetByPost(dataPost._id)
+      const dataPriceList = await Price_GetByPostAll(dataPost._id)
       console.log(dataPriceList)
       setPrice({
         _id: dataPriceList[0]._id,

@@ -103,3 +103,15 @@ exports.purchase_getById = async (req, res) =>{
         res.send({message: "Message does not exists."})
     }
 }
+
+exports.purchase_getByUser = async (req, res) =>{
+    const id  = req.params.id;
+
+    const data = await Purchase.find({id: id}); 
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "No posts for this user."});
+    }
+}

@@ -89,4 +89,20 @@ export const Purchase_GetOne = async (id) => {
         return err;
     }
 }
+export const Purchase_GetByUser = async (id) => {
+    const cookies = Cookie();
+    const cookieTemp = cookies.get('user');
+    try{
+        //Respuesta de un await con la ruta del api
+        const response = await axios.get(`/purchase/user/${id}` , {
+            headers: {
+                "Authorization": "Bearer " + cookieTemp
+            }
+        });
+        return response;
+    }catch(err){
+        console.error(err);
+        return err;
+    }
+}
 
