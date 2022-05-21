@@ -9,7 +9,9 @@ import FavoriteUsers from '../components/UserProfile/FavoriteUsers'
 import { useParams } from "react-router-dom";
 import {User_GetOne} from "../services/User"
 import {Post_GetByUser} from "../services/Post"
+import {Fav_GetUser} from "../services/Favorite"
 import BackgroundImage from '../resources/mac.png';
+import CardFavoriteUsers from '../components/UserProfile/CardFavoriteUsers'
 import CardServicesProfile from '../components/UserProfile/CardServicesProfile'
 
 export default function UserProfile() {
@@ -18,6 +20,7 @@ export default function UserProfile() {
     //Aqui guardamos info del usuario
     const [user, setUser]= useState([]);
     const [posts, setPosts]=useState([]);
+    const [favs, setFavs]=useState([]);
 
 
     useEffect(()=>{
@@ -36,7 +39,12 @@ export default function UserProfile() {
         const dataPosts= await Post_GetByUser(idFinal);
         setPosts(dataPosts);
         console.log("posts", dataPosts);
-        
+
+        //Obtengo todos los posts a los que le dio favorito
+        const dataFav= await Fav_GetUser(idFinal);
+        setFavs(dataFav);
+        console.log("favs", dataFav);
+ 
     }
        
         fetchData();
@@ -73,10 +81,14 @@ export default function UserProfile() {
                         Favoritos de {user.name}
                     </Typography>   
                 </Grid>
-                <Grid item lg={6} >
+                <Grid item lg={6} container spacing={1} direction="row" alignItems="center" justifyContent="center">
+                {favs.map((fav, index)=>(
+                    <Grid >
                     <Box sx={{display: 'flex' }}>
-                        <FavoriteUsers/>
+                        <CardFavoriteUsers info={fav._id}/>
                     </Box>
+                    </Grid>
+                ))}
                 </Grid>
             </Grid>
 

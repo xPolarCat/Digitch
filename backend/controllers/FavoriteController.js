@@ -15,7 +15,7 @@ exports.favorite_getall = async (req, res) =>{
 exports.favorite_register = async (req, res) =>{
     const { body } = req.body; // Obtenemos la info del body.
     console.log("h",req.body)
-    
+
     const userdb = await User.findById(body._user); // Esto me sirve para revisar si existe un usuario con el id que recibo
     const favoritedb = await Post.findById(body._favorite);// Esto me sirve para revisar si existe un vendedor con el id que recibo
     console.log(body._favorite)
