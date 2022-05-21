@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useRef } from "react";
 import { makeStyles } from "@mui/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia"
@@ -9,6 +9,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import {Post_GetById} from "../../services/Post"
 import {User_GetOne} from "../../services/User"
 import {Price_GetByPost} from "../../services/Price"
+import {Fav_Register} from "../../services/Favorite"
 import Cookie from 'cookie-universal';
 
 const useStyles = makeStyles({
@@ -35,6 +36,7 @@ export default function CardServices(props) {
   const cardActionStyle= {backgroundColor: "#001B2E"}
   const cookies = Cookie();
   const cookieTemp = cookies.get('user_id'); 
+  const isFirst = useRef(false);
 
   const classes = useStyles();
 
@@ -62,10 +64,6 @@ function changeBackground_details(e) {
 
 useEffect(()=>{
 
-  setFavorite({
-    ...favorite,
-    _user: cookieTemp
-})
  async function fetchData(){
    //Tuve que convertir el objeto a string
    const myJSON = JSON.stringify(props);
@@ -97,14 +95,33 @@ useEffect(()=>{
  fetchData();
 }, [props]);
 
+useEffect(()=>{
+  if(isFirst.current){
+ async function fetchData(){
+  //Creo que el post se convierta en su favorite
+  const dataFav= await Fav_Register(favorite);
+ }
+ 
+
+ fetchData();
+  }
+  
+ isFirst.current = true;
+},[favorite])
+
+
+
 function handleClick(value){
+
 
   setFavorite({
     ...favorite,
+    _user: cookieTemp,
     _favorite: value
 })
   console.log(favorite);
  }
+
   return (
     <Card className={classes.root}>  
     
