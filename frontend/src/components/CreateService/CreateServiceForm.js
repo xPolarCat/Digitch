@@ -482,7 +482,7 @@ export default function CreateServiceForm() {
               component="label"
               sx={{ backgroundColor: "#294C60" }}
             >
-              Cambiar imagen
+              Agregar imagen
               <input
                 type="file"
                 hidden
