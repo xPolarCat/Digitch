@@ -53,9 +53,9 @@ export default function CardReview(props) {
             <Typography variant="h6" style={{color: "white"}}>
                 {user.name}
             </Typography>
-            <Typography  style={{color: "white"}}>
+            {/* <Typography  style={{color: "white"}}>
                 Calificación: {rateFinal}  <StarIcon style={{verticalAlign:"middle", color: "orange"}}/>
-            </Typography>
+            </Typography> */}
             <Typography style={{color: "white"}}>
                {comment.description}
             </Typography>
