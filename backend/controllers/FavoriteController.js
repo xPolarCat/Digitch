@@ -19,8 +19,11 @@ exports.favorite_register = async (req, res) =>{
     const favoritedb = await Post.findById(body._favorite);
     // Esto me sirve para revisar si existe un vendedor con el id que recibo
 
+    const validateAlreadyExists = await Favorite.find({_user: body._user, _favorite: body._favorite});
+
     if(userdb){
         if(favoritedb){
+            if(validateAlreadyExists){
             // Validación de información 
             let favorite = new Favorite(body); // Creo un objeto tipo Favorite basado en mi modelo Favorite.
 
@@ -33,6 +36,9 @@ exports.favorite_register = async (req, res) =>{
             }); // Aquí guardo el nuevo vendedor favorito.
 
             res.send(favorite); // Regreso el objeto creado.
+            }else{
+                res.send({message: "Ya se ha agregado a favoritos"});
+            }
         }else{
             res.send({message: "The user does not exists"});
         }
