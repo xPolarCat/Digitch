@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.grey[800],
     color: theme.palette.common.white,
     marginBottom: theme.spacing(4),
-    backgroundImage: 'url(https://source.unsplash.com/random)',
+    backgroundImage: "",
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center',
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MainFeaturedPost(props) {
   const classes = useStyles();
-  const { post } = props;
+  const { post1 } = props;
   const params = useParams();
   //Aqui guardaremos info del post
  const [posts, setPost]= useState([]);
@@ -78,8 +78,8 @@ export default function MainFeaturedPost(props) {
   //Obtengo la info del usuario que subio ese post
   const dataUser= await User_GetOne(data._user);
   setUser(dataUser);
-
    
+  console.log(posts)
      }
    
     fetchData();
@@ -88,15 +88,17 @@ export default function MainFeaturedPost(props) {
 
 
   return (
-    <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/image/2015/06/108191-webassembly-pretende-ser-nuevo-estandar-programacion-web.jpg?itok=NvuuYPF-)`, opacity: 1}}>
-      {/* Increase the priority of the hero background image */}
-      {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+
+    <Grid>
+      {posts.images && 
+    <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${posts.images[0]})`}}>
+      <img style={{ display: 'none' }}/>
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>
           <div className={classes.mainFeaturedPostContent}>
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              {post.title}
+              {posts.name}
             </Typography>
             <Grid container spacing={2}>
             <Toolbar>
@@ -122,9 +124,13 @@ export default function MainFeaturedPost(props) {
         </Grid>
       </Grid>
     </Paper>
+     }
+    </Grid>
+      
+
   );
 }
 
 MainFeaturedPost.propTypes = {
-  post: PropTypes.object,
+  post1: PropTypes.object,
 };

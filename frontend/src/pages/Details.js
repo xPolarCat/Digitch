@@ -47,7 +47,6 @@ const mainFeaturedPost = {
   title: post.name,
   description:
     post.content,
-  image: 'https://source.unsplash.com/random',
   imgText: 'main image description',
   linkText: '',
   id: post._id
