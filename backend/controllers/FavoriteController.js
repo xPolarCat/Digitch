@@ -14,20 +14,22 @@ exports.favorite_getall = async (req, res) =>{
 // Mi método para registrar vendedores favoritos 
 exports.favorite_register = async (req, res) =>{
     const { body } = req.body; // Obtenemos la info del body.
-    console.log("h",req.body)
+    console.log("h",body._user)
+
 
     const userdb = await User.findById(body._user); // Esto me sirve para revisar si existe un usuario con el id que recibo
     const favoritedb = await Post.findById(body._favorite);// Esto me sirve para revisar si existe un vendedor con el id que recibo
     console.log(body._favorite)
 
     const validateAlreadyExists = await Favorite.find({_user: body._user, _favorite: body._favorite});
+    console.log(validateAlreadyExists)
 
     if(userdb){
         if(favoritedb){
-            if(!validateAlreadyExists){
+            if(validateAlreadyExists){
             // Validación de información 
             let favorite = new Favorite(body); // Creo un objeto tipo Favorite basado en mi modelo Favorite.
-
+                console.log("favorite11", favorite);
             await favorite
             .save() // si favorite es un objeto de un modelo ya existentem lo actualiza y si es nuevo, lo inserta. 
             .then((favorite) => console.log("New favorite succesfully registered!", favorite))

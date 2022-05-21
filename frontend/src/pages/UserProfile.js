@@ -101,7 +101,7 @@ export default function UserProfile() {
                 <Grid item lg={6} container spacing={1} direction="row" alignItems="center" justifyContent="center">
                 {favs.map((fav, index)=>(
                     <Grid >
-                    <Box sx={{display: 'flex' }}>
+                    <Box sx={{display: 'flex' }} key={index}>
                         <CardFavoriteUsers info={fav._id}/>
                     </Box>
                     </Grid>
