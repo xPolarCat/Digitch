@@ -65,3 +65,15 @@ exports.favorite_getById = async (req, res) =>{
         res.send({message: "Favorite does not exists."})
     }
 }
+
+exports.favorite_getUserFavorites = async (req, res) =>{
+    const  user  = req.params.id;
+
+    const data = await Post.find({_user: user}); 
+
+    if(data){
+        res.send(data);
+    }else{
+        res.send({message: "No favorites for this user."});
+    }
+}

@@ -194,7 +194,7 @@ export default function CreateServiceForm() {
     console.log("paquete 2", price2);
     console.log("paquete 3", price3); 
     if(obj.data != null){
-      //navigate('/');
+      navigate('/search');
     }else{
     }
     

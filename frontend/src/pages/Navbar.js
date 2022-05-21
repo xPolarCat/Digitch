@@ -145,6 +145,10 @@ function returnBackground_register (e){
   e.target.style.backgroundColor = "#294C60";
 }
 
+function logout(){
+  cookies.removeAll();
+}
+
   return (
     <Box sx={{ flexGrow: 1}} >
       <AppBar position="static" style={ColorStyle} >
@@ -218,6 +222,7 @@ function returnBackground_register (e){
               aria-label="Logout"
               color="inherit"
               href="/"
+              onClick={logout}
             >
                 <LogoutIcon />
           </IconButton>

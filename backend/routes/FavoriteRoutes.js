@@ -8,4 +8,6 @@ router.get("/favorite", protect, FavoriteController.favorite_getall); // Ruta pa
 router.post("/favorite", protect, FavoriteController.favorite_register); // Mi ruta para el registro de vendedores favoritos tipo POST.
 router.delete("/favorite/:id", protect, FavoriteController.favorite_delete); // Ruta para eliminar un vendedor favorito.
 router.get("/favorite/:id", protect, FavoriteController.favorite_getById); // Búsqueda por Id
+router.get("/favorite/user/:id", protect, FavoriteController.favorite_getUserFavorites); // Favoritos por usuario
+
 module.exports = router;

@@ -17,14 +17,14 @@ import BackgroundImage from "../resources/login-background.jpg";
 import { makeStyles } from "@material-ui/core/styles";
 import logo from "../resources/logo.png";
 import Image from "mui-image";
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import { User_GetOne, User_Update } from "../services/User";
 
 //import FormControlLabel from '@material-ui/core/FormControlLabel';
 //import Checkbox from '@material-ui/core/Checkbox';
 const EditProfile = () => {
   const {id} = useParams();
-
+  let navigate = useNavigate();
   useEffect (() =>{
     async function fetchData(){
       const dataUser = await User_GetOne(id);
@@ -92,6 +92,7 @@ const EditProfile = () => {
         const resp = await User_Update(id, user)
         console.log("info pa recibir",resp);
 
+        navigate('/');
       }else{
         console.log("Contraseñas no correctas")
 

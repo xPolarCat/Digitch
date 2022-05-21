@@ -53,6 +53,7 @@ exports.user_register = async (req, res) =>{
                 return newUser;
                 
             });
+            console.log("Limpio el buffer");
             blobStream.end(file.buffer);
 }
 

@@ -219,7 +219,7 @@ export default function EditServiceForm() {
    await Price_Update(price2._id, price2);
    await Price_Update(price3._id, price3);
 
-   navigate('/');
+   navigate('/search');
 
   };
 
