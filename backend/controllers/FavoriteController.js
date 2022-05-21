@@ -1,6 +1,7 @@
 const Favorite = require("../models/FavoriteSchema");
 const User = require("../models/UserSchema");
 const Vendor = require("../models/VendorSchema");
+const Post = require("../models/PostSchema");
 
 
 // Obtener todos los vendedores favoritos 
@@ -14,8 +15,8 @@ exports.favorite_getall = async (req, res) =>{
 exports.favorite_register = async (req, res) =>{
     const { body } = req; // Obtenemos la info del body.
 
-    const userdb = await User.findById(body._sender); // Esto me sirve para revisar si existe un usuario con el id que recibo
-    const favoritedb = await Vendor.findById(body._receiver);
+    const userdb = await User.findById(body._user); // Esto me sirve para revisar si existe un usuario con el id que recibo
+    const favoritedb = await Post.findById(body._favorite);
     // Esto me sirve para revisar si existe un vendedor con el id que recibo
 
     if(userdb){
